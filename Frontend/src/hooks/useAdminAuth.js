@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { AdminAuthContext } from "../contexts/adminAuth.context";
 import { adminLogin, adminLogout, getAdmin } from "../services/AdminAuth.api";
+import Swal from "sweetalert2";
 
 export const useAdminAuth = () => {
     const context = useContext(AdminAuthContext);
@@ -23,8 +24,20 @@ export const useAdminAuth = () => {
     const handleAdminLogout = async () => {
         setLoading(true);
         try {
-            const confirmed = window.confirm("Are you sure you want to logout?");
-            if (!confirmed) {
+            const result = await Swal.fire({
+                title: "Are you sure?",
+                text: "You will be logged out of your account.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, Logout",
+                cancelButtonText: "Cancel",
+                confirmButtonColor: "#ef4444",
+                cancelButtonColor: "#6b7280",
+                reverseButtons: true,
+                focusCancel: true,
+            });
+
+            if (!result.isConfirmed) {
                 setLoading(false);
                 return;
             }

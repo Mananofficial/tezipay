@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useHomepage } from '../..//hooks/useHomepage'
 import { useAdminCustom } from '../../hooks/useAdminCustom'
+import Sidebar from '../../components/Sidebar'
+import toast, { Toaster } from 'react-hot-toast';
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { homepageData, loading: homepageLoading } = useHomepage();
@@ -43,101 +46,154 @@ const Navbar = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const result = await handleUpdate({ navbar });
-    if (result.success) {
-      alert("Navbar updated successfully!");
+
+    const result = await Swal.fire({
+      title: "Save Changes?",
+      text: "Do you want to save the updated navbar?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Save",
+      cancelButtonText: "Cancel",
+      reverseButtons: true,
+      confirmButtonColor: "#2563eb",
+      cancelButtonColor: "#6b7280",
+    });
+
+    if (!result.isConfirmed) return;
+
+    const response = await handleUpdate({ navbar });
+
+    if (response.success) {
+      toast.success("Navbar updated successfully!");
     } else {
-      alert("Failed to update navbar. Please try again.");
+      toast.error("Failed to update navbar.");
     }
-  };
+  }
 
   if (homepageLoading) {
     return <div>Loading...</div>
   }
 
   return (
-    <main>
-      <div className="flex flex-col justify-start items-start gap-6">
-        <h1 className="text-4xl font-bold">Navbar</h1>
+    <>
+      <div><Toaster
+        position="bottom-right"
+        reverseOrder={false}
+      /></div>
+      <div className="h-full montserrat-font">
+        <div className="grid grid-cols-[250px_1fr]">
+          <aside className="bg-black/90 shadow-lg text-white h-screen p-4 flex flex-col gap-4 sticky top-0 left-0 z-50">
+            <h1 className='text-2xl font-bold '>Admin Dashboard</h1>
+            <Sidebar />
+          </aside>
+          <div className="flex-1 p-8">
+            <main>
+              <div className="flex flex-col justify-start items-start gap-6">
+                <h1 className="text-4xl font-bold">Navbar</h1>
 
-        <form onSubmit={handleSubmit} className="max-w-4xl flex flex-col gap-6 w-full">
+                <form onSubmit={handleSubmit} className="max-w-4xl flex flex-col gap-6 w-full">
 
-          <div className="input-group flex gap-4 justify-start items-center">
-            <div className="bg-black/6 rounded-xl shadow p-6">
-              <h2 className="text-lg font-semibold mb-5">
-                Website Logo
-              </h2>
+                  <div className="input-group flex gap-4 justify-start items-center">
+                    <div className="bg-black/6 rounded-xl shadow p-6">
+                      <h2 className="text-lg font-semibold mb-5">
+                        Website Logo
+                      </h2>
 
-              <div className="flex flex-col md:flex-row gap-6 items-center">
+                      <div className="flex flex-col md:flex-row gap-6 items-center">
 
-                <img
-                  src={navbar.logo}
-                  alt="Logo"
-                  className="w-36 h-36 object-contain rounded-lg border bg-gray-50"
-                />
+                        <img
+                          src={navbar.logo}
+                          alt="Logo"
+                          className="w-36 h-36 object-contain rounded-lg border bg-gray-50"
+                        />
 
-                <div>
+                        <div>
 
-                  <button
-                    type="button"
-                    onClick={() => fileInputRef.current.click()}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg transition"
-                  >
-                    Upload New Logo
-                  </button>
+                          <button
+                            type="button"
+                            onClick={() => fileInputRef.current.click()}
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg transition"
+                          >
+                            Upload New Logo
+                          </button>
 
-                  <p className="text-gray-500 text-sm mt-3">
-                    PNG, SVG or JPG recommended.
-                  </p>
+                          <p className="text-gray-500 text-sm mt-3">
+                            PNG, SVG or JPG recommended.
+                          </p>
 
-                </div>
+                        </div>
 
+                      </div>
+                    </div>
+                    <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
+                  </div>
+
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    {navbar.navbarLinks.map((link, index) => (
+                      <div className="bg-black/6 rounded-xl shadow-md p-5">
+
+                        <h3 className="font-semibold text-lg mb-5">
+                          Navigation Item {index + 1}
+                        </h3>
+                        <div className="flex gap-4 justify-start items-center mb-4">
+
+                          <input className='border p-2 rounded-lg w-full' type="text" name={`navLink${index + 1}`} id={`navLink${index + 1}`} placeholder={`Nav Link ${index + 1}`} value={link.text} onChange={(e) => {
+                            const newLinks = [...navbar.navbarLinks];
+                            newLinks[index].text = e.target.value;
+                            setNavbar({ ...navbar, navbarLinks: newLinks });
+                          }} />
+
+                          <input className='border p-2 rounded-lg w-full' type="text" name={`navLink${index + 1}Url`} id={`navLink${index + 1}Url`} placeholder="URL" value={link.url} onChange={(e) => {
+                            const newLinks = [...navbar.navbarLinks];
+                            newLinks[index].url = e.target.value;
+                            setNavbar({ ...navbar, navbarLinks: newLinks });
+                          }} />
+
+                        </div>
+                        <button type='button' onClick={async () => {
+                          const result = await Swal.fire({
+                            title: "Remove Link?",
+                            text: "Are you sure you want to remove this navbar link?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonText: "Yes, Remove",
+                            cancelButtonText: "Cancel",
+                            confirmButtonColor: "#ef4444",
+                            cancelButtonColor: "#6b7280",
+                            reverseButtons: true,
+                            focusCancel: true,
+                          });
+
+                          if (!result.isConfirmed) return;
+
+                          const newLinks = [...navbar.navbarLinks];
+                          newLinks.splice(index, 1);
+                          setNavbar({
+                            ...navbar,
+                            navbarLinks: newLinks,
+                          });
+
+                          toast.success("Navbar link removed!");
+                        }} className='px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600'>Remove</button>
+                      </div>
+                    ))}
+                    <button onClick={AddNavLink} type="button" className='scale-95 bg-(--primary) text-white rounded-lg hover:bg-(--secondary)'>Add Nav Item</button>
+                  </ul>
+                  <div className="md:col-span-2 flex justify-end">
+                    <button type="submit" disabled={updateLoading} className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg transition disabled:opacity-50">
+                      {updateLoading ? "Updating..." : "Save Changes"}
+                    </button>
+                  </div>
+                </form>
               </div>
-            </div>
-            <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
+            </main>
           </div>
-
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            {navbar.navbarLinks.map((link, index) => (
-              <div className="bg-black/6 rounded-xl shadow-md p-5">
-
-                <h3 className="font-semibold text-lg mb-5">
-                  Navigation Item {index + 1}
-                </h3>
-                <div className="flex gap-4 justify-start items-center mb-4">
-
-                  <input className='border p-2 rounded-lg w-full' type="text" name={`navLink${index + 1}`} id={`navLink${index + 1}`} placeholder={`Nav Link ${index + 1}`} value={link.text} onChange={(e) => {
-                    const newLinks = [...navbar.navbarLinks];
-                    newLinks[index].text = e.target.value;
-                    setNavbar({ ...navbar, navbarLinks: newLinks });
-                  }} />
-
-                  <input className='border p-2 rounded-lg w-full' type="text" name={`navLink${index + 1}Url`} id={`navLink${index + 1}Url`} placeholder="URL" value={link.url} onChange={(e) => {
-                    const newLinks = [...navbar.navbarLinks];
-                    newLinks[index].url = e.target.value;
-                    setNavbar({ ...navbar, navbarLinks: newLinks });
-                  }} />
-
-                </div>
-                <button onClick={() => {
-                  const newLinks = [...navbar.navbarLinks];
-                  newLinks.splice(index, 1);
-                  setNavbar({ ...navbar, navbarLinks: newLinks });
-                }} className='px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600'>Remove</button>
-              </div>
-            ))}
-            <button onClick={AddNavLink} type="button" className='scale-95 bg-(--primary) text-white rounded-lg hover:bg-(--secondary)'>Add Nav Item</button>
-          </ul>
-          <div className="md:col-span-2 flex justify-end">
-            <button type="submit" disabled={updateLoading} className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg transition disabled:opacity-50">
-              {updateLoading ? "Updating..." : "Save Changes"}
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
-    </main>
+
+    </>
   )
 }
 

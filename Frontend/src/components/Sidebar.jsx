@@ -1,8 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import { useAdminAuth } from '../hooks/useAdminAuth';
 
 const Sidebar = ({ setSelectedSection }) => {
     const [open, setOpen] = useState(true);
-    const [active, setActive] = useState("Colors");
+    const [active, setActive] = useState("");
+    const { loading, handleAdminLogout } = useAdminAuth();
+    const navigate = useNavigate();
+
 
     const sections = [
         "Colors",
@@ -16,12 +21,56 @@ const Sidebar = ({ setSelectedSection }) => {
 
     const handleSelect = (section) => {
         setActive(section);
-        setSelectedSection(section);
+        renderSection(section);
     };
+
+    if (loading) {
+        return (
+            <div className="h-screen flex items-center justify-center bg-(--primaryBackground)">
+                <div className="rounded-full h-20 w-20 bg-(--primary) animate-ping"></div>
+            </div>
+        );
+    }
+
+    const renderSection = (section) => {
+        switch (section) {
+            case "Colors":
+                navigate("/admin/dashboard/colors");
+                break;
+
+            case "Navbar":
+                navigate("/admin/dashboard/navbar");
+                break;
+
+            case "Hero Section":
+                navigate("/admin/dashboard/hero-section");
+                break;
+
+            case "Hero Below":
+                navigate("/admin/dashboard/hero-below");
+                break;
+
+            case "Blueprint":
+                navigate("/admin/dashboard/blueprint");
+                break;
+
+            case "Note":
+                navigate("/admin/dashboard/note");
+                break;
+
+            case "Footer":
+                navigate("/admin/dashboard/footer");
+                break;
+
+            default:
+                navigate("/admin/dashboard");
+        }
+    };
+
 
     return (
         <>
-            <div className="pt-4">
+            <div className="pt-4 flex flex-col justify-between h-full">
 
                 <button
                     onClick={() => setOpen(!open)}
@@ -90,6 +139,9 @@ const Sidebar = ({ setSelectedSection }) => {
 
                     </div>
                 )}
+                <button onClick={handleAdminLogout} className="mt-auto bg-black/60 hover:bg-red-800/40 transition-colors ease-in-out text-white font-bold py-2 px-4 rounded">
+                    Logout
+                </button>
             </div>
         </>
     );

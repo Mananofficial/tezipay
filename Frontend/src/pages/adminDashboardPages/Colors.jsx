@@ -1,0 +1,107 @@
+import React, { useState, useEffect } from "react";
+import { useHomepage } from "../../hooks/useHomepage";
+import { useAdminCustom } from "../../hooks/useAdminCustom";
+
+const Colors = () => {
+  const { loading: homepageLoading, homepageData } = useHomepage();
+  const { loading: updateLoading, handleUpdate } = useAdminCustom();
+
+  const [colors, setColors] = useState({
+    primary: "",
+    secondary: "",
+    primaryBackground: "",
+    secondaryBackground: "",
+    primaryForeground: "",
+    secondaryForeground: "",
+  });
+
+  useEffect(() => {
+    if (homepageData?.colors) {
+      setColors(homepageData.colors);
+    }
+  }, [homepageData]);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const result = await handleUpdate({ colors });
+
+    if (result.success) {
+      alert("Colors updated successfully!");
+    } else {
+      alert("Failed to update colors. Please try again.");
+    }
+  }
+
+  if (homepageLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center bg-(--primaryBackground)">
+        <div className="rounded-full h-20 w-20 bg-(--primary) animate-ping"></div>
+      </div>
+    );
+  }
+
+  const fields = [
+    { name: "primary", label: "Primary Color" },
+    { name: "secondary", label: "Secondary Color" },
+    { name: "primaryBackground", label: "Primary Background Color" },
+    { name: "secondaryBackground", label: "Secondary Background Color" },
+    { name: "primaryForeground", label: "Primary Foreground Color" },
+    { name: "secondaryForeground", label: "Secondary Foreground Color" },
+  ];
+
+  return (
+    <main className="p-8">
+      <h1 className="text-2xl font-bold mb-8 lg:text-4xl">
+        Colors
+      </h1>
+
+      <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-6 max-w-4xl">
+        {fields.map((field) => (
+          <div key={field.name} className="rounded-xl shadow-md bg-black/6 p-5">
+            <label htmlFor={field.name} className="block text-lg font-semibold text-gray-700 mb-4">
+              {field.label}
+            </label>
+
+            <input
+              id={field.name}
+              type="color"
+              value={colors[field.name]}
+              onChange={(e) =>
+                setColors({
+                  ...colors,
+                  [field.name]: e.target.value,
+                })
+              }
+              className="hidden"
+            />
+
+            <label htmlFor={field.name} className="cursor-pointer block">
+              <div className="w-full h-16 rounded-lg border shadow-inner" style={{ backgroundColor: colors[field.name] }} />
+            </label>
+
+            <input
+              type="text"
+              value={colors[field.name]}
+              onChange={(e) =>
+                setColors({
+                  ...colors,
+                  [field.name]: e.target.value,
+                })
+              }
+              className="mt-4 w-full border rounded-lg px-3 py-2"
+            />
+          </div>
+        ))}
+
+        <div className="md:col-span-2 flex justify-end">
+          <button type="submit" disabled={updateLoading} className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg transition disabled:opacity-50">
+            {updateLoading ? "Updating..." : "Save Changes"}
+          </button>
+        </div>
+      </form>
+    </main>
+  );
+};
+
+export default Colors;

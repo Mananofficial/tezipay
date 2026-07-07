@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+.montserrat-font {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+button {
+  font-size: 18px;
+  border-radius: 20.5px;
+  padding-inline: 20px;
+  padding-block: 10px;
+  border: none;
+  outline: none;
+}
+
+.primary-button {
+  color: white;
+  background: var(--primary);
+  background: linear-gradient(180deg, var(--secondary), var(--primary));
+}
+
+.primary-button:hover {
+  background: linear-gradient(180deg, var(--primary), var(--secondary));
+  transition: background 1s ease;
+  transform: translateY(-2px);
+  scale: 102%;
+}
+
+.secondary-button {
+  color: var(--primary);
+  background-color: var(--secondaryBackground);
+}
+
+.secondary-button:hover {
+  background-color: rgb(232, 232, 232);
+  transition: background-color 0.3s ease;
+  transform: translateY(-2px);
+  scale: 102%;
+}
+
+.section {
+  padding-block: 100px;
+  padding-inline: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1351px;
+  margin: 0 auto;
+  padding-inline: 20px;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-block: 70px;
+  }
+}

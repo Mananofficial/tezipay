@@ -14,7 +14,11 @@ export const useAdminCustom = () => {
             return { success: true };
         } catch (error) {
             console.error("Error updating data:", error);
-            return { success: false, error };
+            const data = error.response?.data;
+            const message = data?.error || data?.message || 'Something went wrong. Please try again.';
+            const errors = data?.errors || [];
+
+            return { success: false, message, errors };
         } finally {
             setLoading(false);
             console.log("Loading state set to false");

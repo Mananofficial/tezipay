@@ -11,6 +11,7 @@ import HeroBelow from "./pages/adminDashboardPages/HeroBelow";
 import Blueprint from "./pages/adminDashboardPages/Blueprint";
 import Note from "./pages/adminDashboardPages/Note";
 import Footer from "./pages/adminDashboardPages/Footer";
+import SmartPOS from "./pages/SmartPOS";
 
 export const router = createBrowserRouter([
     {
@@ -87,6 +88,12 @@ export const router = createBrowserRouter([
             <Protected>
                 <Footer />
             </Protected>
+        )
+    },
+    {
+        path: "/smart-pos",
+        element: (
+            <SmartPOS />
         )
     }
 ]) 

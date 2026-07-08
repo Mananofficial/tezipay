@@ -15,7 +15,12 @@ export const useAdminAuth = () => {
             return true;
         } catch (error) {
             console.error('Error logging in admin:', error);
-            return false;
+
+            const data = error.response?.data;
+            const message = data?.error || data?.message || 'Something went wrong. Please try again.';
+            const errors = data?.errors || [];
+
+            return { success: false, message, errors };
         } finally {
             setLoading(false);
         }

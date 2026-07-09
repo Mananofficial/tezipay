@@ -1,8 +1,32 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import { Link } from 'react-router'
+import Footer from '../components/Footer';
 
 const SmartPOS = () => {
+
+    const cards = [
+        {
+            number: "01",
+            title: "Amplify Your Earnings",
+            description:
+                "Satisfy your customers' varied payment needs, attract a broader customer base, and expand your business reach.",
+        },
+        {
+            number: "02",
+            title: "Break Free from Financial Constraints",
+            description:
+                "Avoid the need for upfront collateral and ensure your funds are secured.",
+            active: true,
+        },
+        {
+            number: "03",
+            title: "Maintain Peak Business Performance",
+            description:
+                "Stay reliable during peak hours with infrastructure built to keep every transaction running smoothly.",
+        },
+    ];
+
     return (
         <main className='bg-(--primaryBackground) mt-10 montserrat-font relative overflow-hidden'>
             <header>
@@ -14,7 +38,7 @@ const SmartPOS = () => {
                     style={{ top: '-110%', right: '-60%' }}></div>
 
                 <div className="hidden lg:block absolute h-93 w-93 rounded-full bg-(--primary)/14 z-10"
-                    style={{ top: '30%', left: '-22%' }}>
+                    style={{ top: '10%', left: '-28%' }}>
                     <div className="absolute h-30 w-30 rounded-full bg-(--primary)/14 z-10"
                         style={{ bottom: '-4%', right: '-4%' }}></div>
 
@@ -70,39 +94,202 @@ const SmartPOS = () => {
                 </div>
             </section>
 
-            <section className='max-w-337.5 w-full mx-auto px-10 py-20 lg:px-20 lg:py-25 flex flex-col lg:flex-row items-center justify-between gap-10 relative'>
+            <section className="max-w-337.5 w-full mx-auto px-10 py-20 lg:px-20 lg:py-25 relative">
+                <div className="w-full md:max-w-3xl lg:max-w-5xl mx-auto bg-(--primary)/10 rounded-3xl px-8 py-12 lg:px-16 lg:py-14 lg:h-115 relative">
 
-                <div className='w-[80%] h-[30%] bg-(--primary)/10 flex flex-col items-center lg:items-start justify-center gap-4 lg:gap-6 p-6 mr-20 mx-auto rounded-2xl shadow-lg'>
-                    <div className="flex lg:flex-row flex-col items-center lg:items-center justify-center gap-4 lg:gap-6">
-                        <h1 className="text-2xl sm:text-3xl lg:text-[40px] font-bold leading-tight lg:leading-17 text-center lg:text-left lg:relative top-0 -left-40 min-w-2xl">
-                            Simplifying Payments,
-                            Amplifying Profits
-                        </h1>
-                        <p className='mt-4 leading-7 text-wrap text-center lg:text-left lg:text-md text-sm min-w-3xl'>
-                            Empower your business with a Next-Gen POS, fuelled by the latest advancements in financial technology, brought to you by TeziPay.
+                    <div className=" flex flex-col lg:grid lg:grid-cols-2 justify-between gap-8 mb-10 lg:relative left-[-10%] -top-5 lg:w-[110%]">
+                        <h2 className="text-[30px] md:text-[34px] lg:text-[38px] leading-[1.15] font-bold w-full lg:scale-110 text-center lg:text-left">
+                            Simplifying Payments, Amplifying Profits
+                        </h2>
+                        <p className="text-[#555] leading-8 md:pt-3 text-center md:text-center lg:text-left">
+                            Empower your business with a Next-Gen POS, fuelled by the latest
+                            advancements in financial technology, brought to you by TeziPay.
                         </p>
                     </div>
 
-                    <div className="cards flex flex-col lg:flex-row items-center justify-between gap-6 mt-8 w-full">
-                        <div className="card group flex flex-col items-center justify-center gap-4 p-6 max-w-1/3 rounded-lg shadow-lg transition-transform transform hover:scale-105 w-full">
-                            <h1 className='text-2xl lg:text-3xl text-(--primary)'>01</h1>
-                            <h2 className='text-lg lg:text-xl font-bold text-center'>Amplify Your Earnings</h2>
-                            <p className='text-xs lg:text-md text-center'>Avoid the need for upfront collateral and ensure your funds are secured.</p>
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start justify-center max-w-5xl mx-auto lg:mx-0">
+                        {cards.map((card) => (
+                            <div
+                                key={card.number}
+                                className={`group rounded-[28px] p-8 text-center transition-all duration-300 ease-out border-2 cursor-pointer
+                                    ${card.active
+                                        ? "bg-white border-transparent shadow-xl z-10"
+                                        : `
+                                    bg-white border-transparent shadow-xl
+                                    lg:bg-transparent lg:shadow-none
+                                    lg:hover:bg-white lg:hover:rounded-[28px]
+                                    lg:hover:shadow-xl lg:hover:-translate-y-4
+                                    lg:hover:z-10`}`}
+                            >
+                                <h1 className="text-2xl lg:text-3xl font-bold text-(--primary) mb-3">
+                                    {card.number}
+                                </h1>
+                                <h2 className="text-lg lg:text-xl font-bold leading-snug">
+                                    {card.title}
+                                </h2>
+                                <p
+                                    className={`text-sm text-[#666] mt-4 leading-6 overflow-hidden transition-all duration-300 ease-out
+                                    ${card.active
+                                            ? "max-h-40 opacity-100"
+                                            : `
+                                    max-h-40 opacity-100
+                                    lg:max-h-0 lg:opacity-0
+                                    lg:group-hover:max-h-40
+                                    lg:group-hover:opacity-100
+                                    lg:group-hover:mt-4 `}`}
+                                >
+                                    {card.description}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="absolute left-[-20%] top-[50%] grid grid-cols-20 gap-3 opacity-30">
+                    {[...Array(600)].map((_, i) => (
+                        <span
+                            key={i}
+                            className="w-2 h-2 bg-gray-300 rounded-full"
+                        />
+                    ))}
+                </div>
+            </section>
+
+            <section className="max-w-337.5 w-full mx-auto px-10 py-20 lg:px-20 lg:py-25 lg:grid grid-cols-2 min-h-112" >
+                <div className="flex gap-6 lg:gap-8 items-center justify-center max-w-5xl mx-auto lg:mb-0 mb-10 z-10">
+
+                    <div className="rounded-t-[55px] rounded-bl-[55px] bg-(--secondary) lg:w-[60%] lg:h-[70%] w-62.5  relative z-0 flex justify-center items-start p-4">
+                        <h1 className="md:text-xl lg:text-3xl text-lg font-bold text-white text-center py-10 px-4">
+                            Propel Your
+                            Business into
+                            the Future
+                        </h1>
+                        <div className="rounded-t-[55px] rounded-bl-[55px] bg-(--primary)/50 w-[45%] h-[50%] absolute bottom-[-10%] right-[-10%] z-0 flex justify-center items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="90%" height="90%" fill="var(--primary)" className="bi bi-arrow-right-short -rotate-45" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                            </svg>
                         </div>
-                        <div className="card group flex flex-col items-center justify-center gap-4 p-6 max-w-1/3 rounded-lg shadow-lg transition-transform transform hover:scale-105 w-full">
-                            <h1 className='text-2xl lg:text-3xl text-(--primary)'>01</h1>
-                            <h2 className='text-lg lg:text-xl font-bold text-center'>Amplify Your Earnings</h2>
-                            <p className='text-xs lg:text-md text-center'>Avoid the need for upfront collateral and ensure your funds are secured.</p>
+                    </div>
+                </div>
+                <div className='lg:grid grid-cols-2 flex flex-col lg:gap-8 lg:items-start items-center justify-center lg:max-w-5xl max-w-xl gap-4 mx-auto lg:mx-0 z-10'>
+                    <div className="flex-col flex lg:justify-start lg:items-start gap-6 lg:gap-4 lg:mb-0">
+                        <h1 className="text-3xl lg:text-5xl font-bold text-(--primary)/40">Key Feature</h1>
+                        <div className="flex items-center gap-4">
+                            <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
+                            <div>
+                                <h3 className="text-xl font-bold text-black">
+                                    Sales Insights
+                                </h3>
+                                <p className="text-md text-gray-800 leading-tight mt-1">
+                                    Gain vital sales and inventory
+                                    <br />
+                                    insights.
+                                </p>
+                            </div>
                         </div>
-                        <div className="card group flex flex-col items-center justify-center gap-4 p-6 max-w-1/3 rounded-lg shadow-lg transition-transform transform hover:scale-105 w-full">
-                            <h1 className='text-2xl lg:text-3xl text-(--primary)'>01</h1>
-                            <h2 className='text-lg lg:text-xl font-bold text-center'>Amplify Your Earnings</h2>
-                            <p className='text-xs lg:text-md text-center'>Avoid the need for upfront collateral and ensure your funds are secured.</p>
+                        <div className="flex items-center gap-4">
+                            <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
+                            <div>
+                                <h3 className="text-xl font-bold text-black">
+                                    Sales Insights
+                                </h3>
+                                <p className="text-md text-gray-800 leading-tight mt-1">
+                                    Gain vital sales and inventory
+                                    <br />
+                                    insights.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-4">
+                            <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
+                            <div>
+                                <h3 className="text-xl font-bold text-black">
+                                    Sales Insights
+                                </h3>
+                                <p className="text-md text-gray-800 leading-tight mt-1">
+                                    Gain vital sales and inventory
+                                    <br />
+                                    insights.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex-col flex lg:justify-start lg:items-start gap-6 lg:gap-4 lg:mb-0">
+                        <div className="flex items-center gap-4">
+                            <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
+                            <div>
+                                <h3 className="text-xl font-bold text-black">
+                                    Sales Insights
+                                </h3>
+                                <p className="text-md text-gray-800 leading-tight mt-1">
+                                    Gain vital sales and inventory
+                                    <br />
+                                    insights.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-4">
+                            <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
+                            <div>
+                                <h3 className="text-xl font-bold text-black">
+                                    Sales Insights
+                                </h3>
+                                <p className="text-md text-gray-800 leading-tight mt-1">
+                                    Gain vital sales and inventory
+                                    <br />
+                                    insights.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-4">
+                            <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
+                            <div>
+                                <h3 className="text-xl font-bold text-black">
+                                    Sales Insights
+                                </h3>
+                                <p className="text-md text-gray-800 leading-tight mt-1">
+                                    Gain vital sales and inventory
+                                    <br />
+                                    insights.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-4">
+                            <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
+                            <div>
+                                <h3 className="text-xl font-bold text-black">
+                                    Sales Insights
+                                </h3>
+                                <p className="text-md text-gray-800 leading-tight mt-1">
+                                    Gain vital sales and inventory
+                                    <br />
+                                    insights.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
+            <section className="section pb-20 flex justify-center items-center">
+                <div className="container flex justify-center">
+                    <div className="relative flex w-full max-w-5xl flex-col items-center gap-4 rounded-[40px] sm:rounded-full border-2 border-(--primary) px-6 py-8 sm:p-10 text-center">
+
+                        <p className="max-w-3xl text-base sm:text-lg leading-7">
+                            Trust TeziPay to seamlessly elevate your business with our Smart POS
+                        </p>
+
+                        <div className="absolute -bottom-7 sm:-bottom-6 rounded-full bg-(--secondary) px-6 py-3 sm:px-8 sm:py-2">
+                            <p className="text-sm sm:text-lg font-bold text-white text-center">
+                                For more details, feel free to reach out to +91-9811331229
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <Footer />
+            </footer>
         </main>
     )
 }

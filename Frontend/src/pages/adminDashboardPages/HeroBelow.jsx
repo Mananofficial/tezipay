@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHomepage } from "../../hooks/useHomepage";
 import { useAdminCustom } from "../../hooks/useAdminCustom";
-import Sidebar from "../../components/Sidebar";
 import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
 
@@ -42,7 +41,7 @@ const HeroBelow = () => {
     if (response.success) {
       toast.success("Hero Below Section updated successfully!");
     } else {
-      toast.error("Failed to update Hero Below Section.");
+      toast.error(response.errors?.[0]?.message || response.message || "Failed to update Hero Below Section.");
     }
   }
 
@@ -60,17 +59,11 @@ const HeroBelow = () => {
         position="bottom-right"
         reverseOrder={false}
       /></div>
-      <div className="h-full montserrat-font">
-        <div className="grid grid-cols-[250px_1fr]">
-          <aside className="bg-black/90 shadow-lg text-white h-screen p-4 flex flex-col gap-4 sticky top-0 left-0 z-50">
-            <h1 className='text-2xl font-bold '>Admin Dashboard</h1>
-            <Sidebar />
-          </aside>
-          <div className="flex-1 p-8">
-            <main className="p-8">
-              <h1 className="text-4xl font-bold mb-8">
-                Hero Below Section
-              </h1>
+      <div className="p-8">
+        <main className="p-8">
+          <h1 className="text-4xl font-bold mb-8">
+            Hero Below Section
+          </h1>
 
               <form onSubmit={handleSubmit} className="max-w-5xl space-y-6" >
                 <div className="bg-black/5 rounded-xl shadow p-6">
@@ -141,10 +134,8 @@ const HeroBelow = () => {
                       : "Save Changes"}
                   </button>
                 </div>
-              </form>
-            </main>
-          </div>
-        </div>
+          </form>
+        </main>
       </div>
     </>
   );

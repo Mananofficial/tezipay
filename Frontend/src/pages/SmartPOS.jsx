@@ -27,6 +27,40 @@ const SmartPOS = () => {
         },
     ];
 
+    const leftFeatures = [
+        {
+            title: "Sales Insights",
+            description: "Gain vital sales and inventory insights.",
+        },
+        {
+            title: "Inventory Management",
+            description: "Track stock levels and avoid inventory shortages.",
+        },
+        {
+            title: "Customer Analytics",
+            description: "Understand customer behaviour and buying patterns.",
+        },
+    ];
+
+    const rightFeatures = [
+        {
+            title: "Secure Payments",
+            description: "Accept payments securely with advanced encryption.",
+        },
+        {
+            title: "Real-time Reports",
+            description: "Access business reports anytime from anywhere.",
+        },
+        {
+            title: "Staff Management",
+            description: "Monitor employee performance and attendance.",
+        },
+        {
+            title: "Cloud Backup",
+            description: "Keep your business data safe with automatic backups.",
+        },
+    ];
+
     return (
         <main className='bg-(--primaryBackground) mt-10 montserrat-font relative overflow-hidden'>
             <header>
@@ -51,18 +85,16 @@ const SmartPOS = () => {
                     <p className="text-lg lg:text-[20px] max-w-xl">Your Ultimate Digital Payment Terminal with TeziPay</p>
                     <div className="relative flex justify-center items-center mt-8 mb-8 lg:hidden">
 
-                        <div className="absolute top-0 right-2 h-24 w-24 rounded-full bg-linear-to-r from-(--primary)/80 to-(--secondary)"></div>
+                        <div className="absolute top-[6%] left-[60%] h-[30%] w-[23%] rounded-full bg-linear-to-r from-(--primary)/80 to-(--secondary)"></div>
 
-                        <div className="absolute -bottom-8 left-0 h-32 w-32 rounded-full bg-linear-to-tr from-(--secondary) to-(--primary)"></div>
+                        <div className="absolute top-[60%] left-[10%] h-[50%] w-[40%] rounded-full bg-linear-to-tr from-(--secondary) to-(--primary)"></div>
 
-                        <div className="h-72 w-72 rounded-full bg-linear-to-tr from-(--secondary) to-(--primary)/80 z-20">
-                            <img
-                                src="./src/assets/hero.jpg"
-                                alt="hero"
-                                className="relative z-20 w-54 h-54 rounded-full object-cover"
-                                style={{ top: '13%', left: '13%' }}
-                            />
-                        </div>
+                        <img
+                            src="./src/assets/smartpos.png"
+                            alt="Smart POS"
+                            className="relative z-20 rounded-full object-cover select-none"
+                            style={{ top: '13%', left: '0%', width: '100%', height: '100%' }}
+                        />
 
                     </div>
                     <p className='mt-4 text-base leading-7 max-w-lg text-wrap'>Say goodbye to your digital payment terminal concerns with our Universal Smart POS solution. TeziPay's POS terminal is a high-speed, secure Android device equipped with 4G connectivity, designed to cater to all your transaction needs. This all-in-one solution allows for effortless payment acceptance, sales tracking, and settlement processing. Experience the convenience and efficiency of a user-friendly billing machine, complete with a touchscreen interface.</p>
@@ -82,14 +114,13 @@ const SmartPOS = () => {
 
                     <div className="absolute h-48 w-48 rounded-full bg-linear-to-tr from-(--secondary) to-(--primary) z-10" style={{ top: '70%', left: '6%' }}></div>
 
-                    <div className="h-120 w-120 rounded-full bg-linear-to-tr from-(--secondary) to-(--primary)/80 z-20">
-                        <img
-                            src="./src/assets/hero.jpg"
-                            alt="hero"
-                            className="relative z-20 rounded-full object-cover select-none"
-                            style={{ top: '13%', left: '13%', width: '74%', height: '74%' }}
-                        />
-                    </div>
+                    <img
+                        src="./src/assets/smartpos.png"
+                        alt="Smart POS"
+                        className="relative z-20 rounded-full object-cover select-none"
+                        style={{ top: '13%', left: '0%', width: '1020px', height: '500px' }}
+                    />
+
 
                 </div>
             </section>
@@ -154,7 +185,20 @@ const SmartPOS = () => {
                 </div>
             </section>
 
-            <section className="max-w-337.5 w-full mx-auto px-10 py-20 lg:px-20 lg:py-25 lg:grid grid-cols-2 min-h-112" >
+            <section className="max-w-337.5 relative w-full mx-auto px-10 py-20 lg:px-20 lg:py-25 lg:grid grid-cols-2 min-h-112" >
+                <img
+                    src="./src/assets/greyCircle.png"
+                    alt=""
+                    className="absolute top-16 -right-20 w-100 h-auto pointer-events-none select-none"
+                />
+                <div className="absolute right-[-20%] top-[80%] grid grid-cols-20 gap-3 opacity-30 z-0">
+                    {[...Array(600)].map((_, i) => (
+                        <span
+                            key={i}
+                            className="w-2 h-2 bg-gray-300 rounded-full"
+                        />
+                    ))}
+                </div>
                 <div className="flex gap-6 lg:gap-8 items-center justify-center max-w-5xl mx-auto lg:mb-0 mb-10 z-10">
 
                     <div className="rounded-t-[55px] rounded-bl-[55px] bg-(--secondary) lg:w-[60%] lg:h-[70%] w-62.5  relative z-0 flex justify-center items-start p-4">
@@ -170,103 +214,50 @@ const SmartPOS = () => {
                         </div>
                     </div>
                 </div>
-                <div className='lg:grid grid-cols-2 flex flex-col lg:gap-8 lg:items-start items-center justify-center lg:max-w-5xl max-w-xl gap-4 mx-auto lg:mx-0 z-10'>
-                    <div className="flex-col flex lg:justify-start lg:items-start gap-6 lg:gap-4 lg:mb-0">
-                        <h1 className="text-3xl lg:text-5xl font-bold text-(--primary)/40">Key Feature</h1>
-                        <div className="flex items-center gap-4">
-                            <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
-                            <div>
-                                <h3 className="text-xl font-bold text-black">
-                                    Sales Insights
-                                </h3>
-                                <p className="text-md text-gray-800 leading-tight mt-1">
-                                    Gain vital sales and inventory
-                                    <br />
-                                    insights.
-                                </p>
+                <div className="lg:grid grid-cols-2 flex flex-col lg:gap-8 lg:items-start items-center justify-center lg:max-w-5xl max-w-xl gap-4 mx-auto lg:mx-0 z-10">
+
+                    <div className="flex flex-col lg:justify-start lg:items-start gap-6 lg:gap-4">
+
+                        <h1 className="text-3xl lg:text-5xl font-bold text-(--primary)/40">
+                            Key Feature
+                        </h1>
+
+                        {leftFeatures.map((feature, index) => (
+                            <div key={index} className="flex items-center gap-4">
+                                <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
+
+                                <div>
+                                    <h3 className="text-xl font-bold text-black">
+                                        {feature.title}
+                                    </h3>
+
+                                    <p className="text-md text-gray-800 leading-tight mt-1">
+                                        {feature.description}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
-                            <div>
-                                <h3 className="text-xl font-bold text-black">
-                                    Sales Insights
-                                </h3>
-                                <p className="text-md text-gray-800 leading-tight mt-1">
-                                    Gain vital sales and inventory
-                                    <br />
-                                    insights.
-                                </p>
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
-                            <div>
-                                <h3 className="text-xl font-bold text-black">
-                                    Sales Insights
-                                </h3>
-                                <p className="text-md text-gray-800 leading-tight mt-1">
-                                    Gain vital sales and inventory
-                                    <br />
-                                    insights.
-                                </p>
-                            </div>
-                        </div>
+                        ))}
                     </div>
-                    <div className="flex-col flex lg:justify-start lg:items-start gap-6 lg:gap-4 lg:mb-0">
-                        <div className="flex items-center gap-4">
-                            <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
-                            <div>
-                                <h3 className="text-xl font-bold text-black">
-                                    Sales Insights
-                                </h3>
-                                <p className="text-md text-gray-800 leading-tight mt-1">
-                                    Gain vital sales and inventory
-                                    <br />
-                                    insights.
-                                </p>
+
+                    <div className="flex flex-col lg:justify-start lg:items-start gap-6 lg:gap-4">
+
+                        {rightFeatures.map((feature, index) => (
+                            <div key={index} className="flex items-center gap-4">
+                                <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
+
+                                <div>
+                                    <h3 className="text-xl font-bold text-black">
+                                        {feature.title}
+                                    </h3>
+
+                                    <p className="text-md text-gray-800 leading-tight mt-1">
+                                        {feature.description}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
-                            <div>
-                                <h3 className="text-xl font-bold text-black">
-                                    Sales Insights
-                                </h3>
-                                <p className="text-md text-gray-800 leading-tight mt-1">
-                                    Gain vital sales and inventory
-                                    <br />
-                                    insights.
-                                </p>
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
-                            <div>
-                                <h3 className="text-xl font-bold text-black">
-                                    Sales Insights
-                                </h3>
-                                <p className="text-md text-gray-800 leading-tight mt-1">
-                                    Gain vital sales and inventory
-                                    <br />
-                                    insights.
-                                </p>
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
-                            <div>
-                                <h3 className="text-xl font-bold text-black">
-                                    Sales Insights
-                                </h3>
-                                <p className="text-md text-gray-800 leading-tight mt-1">
-                                    Gain vital sales and inventory
-                                    <br />
-                                    insights.
-                                </p>
-                            </div>
-                        </div>
+                        ))}
                     </div>
+
                 </div>
             </section>
 

@@ -12,7 +12,7 @@ export const useAdminAuth = () => {
         try {
             const response = await adminLogin({ email, password });
             setAdmin(response.admin);
-            return true;
+            return { success: true };
         } catch (error) {
             console.error('Error logging in admin:', error);
 

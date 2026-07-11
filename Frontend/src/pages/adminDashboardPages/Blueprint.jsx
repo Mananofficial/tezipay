@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useHomepage } from '../..//hooks/useHomepage'
 import { useAdminCustom } from '../../hooks/useAdminCustom'
-import Sidebar from '../../components/Sidebar'
 import toast, { Toaster } from 'react-hot-toast';
 import Swal from "sweetalert2";
 
@@ -36,6 +35,8 @@ const Blueprint = () => {
         ...prev,
         image: result.url
       }));
+    } else {
+      toast.error(result.error?.response?.data?.error || result.error?.message || 'Only JPEG, PNG, and SVG images are allowed.');
     }
   };
 
@@ -61,7 +62,7 @@ const Blueprint = () => {
     if (response.success) {
       toast.success("Blueprint updated successfully!");
     } else {
-      toast.error("Failed to update blueprint.");
+      toast.error(response.errors?.[0]?.message || response.message || "Failed to update blueprint.");
     }
   }
 
@@ -75,15 +76,9 @@ const Blueprint = () => {
         position="bottom-right"
         reverseOrder={false}
       /></div>
-      <div className="h-full montserrat-font">
-        <div className="grid grid-cols-[250px_1fr]">
-          <aside className="bg-black/90 shadow-lg text-white h-screen p-4 flex flex-col gap-4 sticky top-0 left-0 z-50">
-            <h1 className='text-2xl font-bold '>Admin Dashboard</h1>
-            <Sidebar />
-          </aside>
-          <div className="flex-1 p-8">
-            <main className="p-8">
-              <div className="max-w-5xl">
+      <div className="p-8">
+        <main className="p-8">
+          <div className="max-w-5xl">
 
                 <h1 className="text-4xl font-bold mb-8">
                   Blueprint
@@ -201,7 +196,7 @@ const Blueprint = () => {
                     <input
                       ref={fileInputRef}
                       type="file"
-                      accept="image/*"
+                      accept="image/jpeg,image/png,image/svg+xml,.jpg,.jpeg,.png,.svg"
                       className="hidden"
                       onChange={handleFileChange}
                     />
@@ -225,10 +220,8 @@ const Blueprint = () => {
 
                 </form>
 
-              </div>
-            </main>
           </div>
-        </div>
+        </main>
       </div>
     </>
   )

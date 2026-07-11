@@ -8,7 +8,7 @@ const Navbar = () => {
 
 
     return (
-        <main className='fixed top-0 left-0 z-50 h-20.25 w-full bg-(--primaryBackground) opacity-95 backdrop-blur-md transition-all duration-300 ease-in-out'>
+        <main className='fixed top-0 left-0 z-50 h-20.25 w-full transition-all duration-300 ease-in-out'>
             <div className="container px-5">
                 <nav className='flex h-full items-center justify-between'>
                     <Link to="/" className="mt-2.5">

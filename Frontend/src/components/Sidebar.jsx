@@ -1,28 +1,21 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import { useAdminAuth } from '../hooks/useAdminAuth';
 
 const Sidebar = ({ setSelectedSection }) => {
-    const [open, setOpen] = useState(true);
-    const [active, setActive] = useState("");
+    const [open, setOpen] = useState(false);
     const { loading, handleAdminLogout } = useAdminAuth();
-    const navigate = useNavigate();
 
 
     const sections = [
-        "Colors",
-        "Navbar",
-        "Hero Section",
-        "Hero Below",
-        "Blueprint",
-        "Note",
-        "Footer",
+        { label: "Colors", path: "/admin/dashboard/colors" },
+        { label: "Navbar", path: "/admin/dashboard/navbar" },
+        { label: "Hero Section", path: "/admin/dashboard/hero-section" },
+        { label: "Hero Below", path: "/admin/dashboard/hero-below" },
+        { label: "Blueprint", path: "/admin/dashboard/blueprint" },
+        { label: "Note", path: "/admin/dashboard/note" },
+        { label: "Footer", path: "/admin/dashboard/footer" },
     ];
-
-    const handleSelect = (section) => {
-        setActive(section);
-        renderSection(section);
-    };
 
     if (loading) {
         return (
@@ -32,46 +25,10 @@ const Sidebar = ({ setSelectedSection }) => {
         );
     }
 
-    const renderSection = (section) => {
-        switch (section) {
-            case "Colors":
-                navigate("/admin/dashboard/colors");
-                break;
-
-            case "Navbar":
-                navigate("/admin/dashboard/navbar");
-                break;
-
-            case "Hero Section":
-                navigate("/admin/dashboard/hero-section");
-                break;
-
-            case "Hero Below":
-                navigate("/admin/dashboard/hero-below");
-                break;
-
-            case "Blueprint":
-                navigate("/admin/dashboard/blueprint");
-                break;
-
-            case "Note":
-                navigate("/admin/dashboard/note");
-                break;
-
-            case "Footer":
-                navigate("/admin/dashboard/footer");
-                break;
-
-            default:
-                navigate("/admin/dashboard");
-        }
-    };
-
 
     return (
         <>
             <div className="pt-4 flex flex-col justify-between h-full">
-
                 <button
                     onClick={() => setOpen(!open)}
                     className="w-full flex items-center justify-between rounded-xl px-4 py-3 hover:bg-black/60 transition-all duration-300"
@@ -117,23 +74,21 @@ const Sidebar = ({ setSelectedSection }) => {
 
                         {sections.map((section) => (
 
-                            <button
-                                key={section}
-                                onClick={() => handleSelect(section)}
-                                className={`group flex items-center justify-between rounded-lg px-5 py-3 text-left transition-all duration-300
-
-                                ${active === section
+                            <NavLink
+                                key={section.path}
+                                to={section.path}
+                                className={({ isActive }) => `group flex items-center justify-between rounded-lg px-5 py-3 text-lefttransition-all duration-300 ease-in-out ${
+                                    isActive
                                         ? "bg-black text-white shadow-lg"
                                         : "text-gray-300 hover:bg-gray-800 hover:text-white"
-                                    }`}
+                                }`}
                             >
-                                <span>{section}</span>
-
-                                {active === section && (
-                                    <div className="w-2 h-2 rounded-full bg-white"></div>
+                                <span>{section.label}</span>
+                                {({ isActive }) => (
+                                    <div className={`w-2 h-2 rounded-full ${isActive ? "bg-white" : "bg-transparent"}`}></div>
                                 )}
 
-                            </button>
+                            </NavLink>
 
                         ))}
 

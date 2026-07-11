@@ -6,7 +6,7 @@ const Footer = () => {
     const { homepageData } = useHomepage();
 
     return (
-        <footer className="w-full bg-black/90">
+        <footer className="w-full bg-black/90 z-20 relative">
             <section className="py-10 md:py-15 flex flex-col gap-10 md:gap-15 relative">
                 
                 <div className="bg-black/90 w-10 h-10 rounded-lg absolute right-20 -top-4 flex justify-center items-center hover:scale-105" onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }}>

@@ -1,21 +1,27 @@
-const imageKit = require('@imagekit/nodejs')
+const fs = require('fs/promises')
+const path = require('path')
 
-const client = new imageKit({
-    publicKey: process.env.IMAGEKIT_PRIVATE_KEY
-})
+const uploadDir = path.join(__dirname, '../../../Frontend/src/assets/upload')
+const publicUploadPath = '/src/assets/upload'
 
-async function uploadImage (buffer) {
-    try {
-        const result = await client.files.upload({
-            file: buffer.toString('base64'),
-            fileName: `image_${Date.now()}.jpg`,
-            folder: "/teripay"
-        });
-        return result;
-    } catch (error) {
-        console.error('Error uploading image:', error);
-        throw error;
-    }
+const mimeToExtension = {
+	'image/jpeg': '.jpg',
+	'image/png': '.png',
+	'image/svg+xml': '.svg'
+}
+
+async function uploadImage(buffer, mimetype) {
+	const extension = mimeToExtension[mimetype] || '.jpg'
+	const fileName = `image_${Date.now()}_${Math.round(Math.random() * 1e9)}${extension}`
+	const filePath = path.join(uploadDir, fileName)
+
+	await fs.mkdir(uploadDir, { recursive: true })
+	await fs.writeFile(filePath, buffer)
+
+	return {
+		fileName,
+		relativePath: `${publicUploadPath}/${fileName}`
+	}
 }
 
 module.exports = uploadImage;

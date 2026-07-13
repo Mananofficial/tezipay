@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useHomepage } from '../..//hooks/useHomepage'
 import { useAdminCustom } from '../../hooks/useAdminCustom'
+import { resolveImageUrl } from '../../utils/resolveImageUrl'
 import toast, { Toaster } from 'react-hot-toast';
 import Swal from "sweetalert2";
 
@@ -21,7 +22,10 @@ const Navbar = () => {
 
   useEffect(() => {
     if (homepageData?.navbar) {
-      setNavbar(homepageData.navbar);
+      setNavbar({
+        ...homepageData.navbar,
+        logo: resolveImageUrl(homepageData.navbar.logo)
+      });
     }
   }, [homepageData]);
 
@@ -96,7 +100,7 @@ const Navbar = () => {
 
                   <div className="flex flex-col md:flex-row gap-6 items-center">
                     <img
-                      src={navbar.logo}
+                      src={resolveImageUrl(navbar.logo)}
                       alt="Logo"
                       className="w-36 h-36 object-contain rounded-lg border bg-gray-50"
                     />

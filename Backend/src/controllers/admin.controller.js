@@ -81,8 +81,14 @@ async function uploadImage(req, res) {
     }
 
     try {
-        const result = await uploadImageService(file.buffer)
-        res.status(200).json({ message: 'Image uploaded successfully', url: result.url })
+        const result = await uploadImageService(file.buffer, file.mimetype)
+        const baseUrl = `${req.protocol}://${req.get('host')}`
+
+        res.status(200).json({
+            message: 'Image uploaded successfully',
+            url: `${baseUrl}${result.relativePath}`,
+            path: result.relativePath
+        })
     } catch (err) {
         console.log(err)
         res.status(500).json({ error: 'Failed to upload image' })

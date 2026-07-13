@@ -1,6 +1,7 @@
 import React from 'react'
 import { useHomepage } from '../hooks/useHomepage'
 import { Link } from 'react-router';
+import { resolveImageUrl } from '../utils/resolveImageUrl'
 
 const Footer = () => {
     const { homepageData } = useHomepage();
@@ -20,7 +21,7 @@ const Footer = () => {
                     <div className="mt-2.5">
                         <Link to={"/"}>
                             <img
-                                src={homepageData?.footer?.logo || "./src/assets/teziPay.png"}
+                                src={resolveImageUrl(homepageData?.footer?.logo) || "./src/assets/teziPay.png"}
                                 alt="Logo"
                                 className="w-36 md:w-42.5 mx-auto md:mx-0 cursor-pointer"
                                 onClick={(e) => { e.preventDefault(); window.location.href = "/"; }}

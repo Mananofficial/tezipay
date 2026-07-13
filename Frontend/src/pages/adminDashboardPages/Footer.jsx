@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useHomepage } from '../..//hooks/useHomepage'
 import { useAdminCustom } from '../../hooks/useAdminCustom'
+import { resolveImageUrl } from '../../utils/resolveImageUrl'
 import toast, { Toaster } from 'react-hot-toast';
 import Swal from "sweetalert2";
 
@@ -21,7 +22,10 @@ const Footer = () => {
 
   useEffect(() => {
     if (homepageData?.footer) {
-      setFooter(homepageData.footer)
+      setFooter({
+        ...homepageData.footer,
+        logo: resolveImageUrl(homepageData.footer.logo)
+      })
     }
   }, [homepageData])
 
@@ -98,7 +102,7 @@ const Footer = () => {
 
                       {footer.logo ? (
                         <img
-                          src={footer.logo}
+                          src={resolveImageUrl(footer.logo)}
                           alt="Footer Logo"
                           className="w-40 h-40 rounded-lg border object-contain bg-white"
                         />

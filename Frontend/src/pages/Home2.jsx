@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useHomepage } from '../hooks/useHomepage'
 import { Link } from 'react-router'
+import { resolveImageUrl } from '../utils/resolveImageUrl'
 
 const Home2 = () => {
     const { homepageData, loading } = useHomepage();
@@ -44,7 +45,7 @@ const Home2 = () => {
                         <div className="absolute -bottom-8 left-0 h-32 w-32 rounded-full bg-linear-to-tr from-(--secondary) to-(--primary)"></div>
 
                         <img
-                            src={homepageData?.heroSection.rightImage}
+                            src={resolveImageUrl(homepageData?.heroSection.rightImage)}
                             alt="hero"
                             className="relative z-20 w-72 h-72 rounded-full object-cover"
                         />
@@ -68,7 +69,7 @@ const Home2 = () => {
                     <div className="absolute -bottom-12 left-6 h-48 w-48 rounded-full bg-linear-to-tr from-(--secondary) to-(--primary) z-10"></div>
 
                     <img
-                        src={homepageData?.heroSection.rightImage || "./src/assets/hero.jpg"}
+                        src={resolveImageUrl(homepageData?.heroSection.rightImage) || "./src/assets/hero.jpg"}
                         alt="hero"
                         className="relative z-20 w-120 h-120 rounded-full object-cover select-none"
                     />
@@ -155,7 +156,7 @@ const Home2 = () => {
 
                             <div className="logo rounded-full absolute top-[43%] left-[50.5%] w-[22%] h-[22%] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
                                 <img
-                                    src={homepageData?.blueprint.logo || "./src/assets/logo.png"}
+                                    src={resolveImageUrl(homepageData?.blueprint.logo) || "./src/assets/logo.png"}
                                     alt="Logo"
                                     className="w-full h-full object-contain select-none"
                                 />

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useHomepage } from '../hooks/useHomepage'
 import { Link } from 'react-router'
+import { resolveImageUrl } from '../utils/resolveImageUrl'
 
 const Navbar = () => {
     const { homepageData } = useHomepage();
@@ -12,7 +13,7 @@ const Navbar = () => {
             <div className="container px-5">
                 <nav className='flex h-full items-center justify-between'>
                     <Link to="/" className="mt-2.5">
-                        <img src={homepageData?.navbar?.logo || "./src/assets/logo.png"} alt="Logo" className="w-42.5" onClick={(e) => { e.preventDefault(); window.location.href = "/"; }} />
+                        <img src={resolveImageUrl(homepageData?.navbar?.logo) || "./src/assets/logo.png"} alt="Logo" className="w-42.5" onClick={(e) => { e.preventDefault(); window.location.href = "/"; }} />
                     </Link>
                     <ul className='hidden lg:flex gap-14 text-[18px] font-medium'>
                         {homepageData?.navbar?.navbarLinks?.map((link, index) => (

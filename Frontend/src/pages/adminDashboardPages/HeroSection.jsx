@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useHomepage } from '../..//hooks/useHomepage'
 import { useAdminCustom } from '../../hooks/useAdminCustom'
+import { resolveImageUrl } from '../../utils/resolveImageUrl'
 import toast, { Toaster } from 'react-hot-toast';
 import Swal from "sweetalert2";
 
@@ -25,7 +26,10 @@ const HeroSection = () => {
 
   useEffect(() => {
     if (homepageData?.heroSection) {
-      setHeroSection(homepageData.heroSection)
+      setHeroSection({
+        ...homepageData.heroSection,
+        rightImage: resolveImageUrl(homepageData.heroSection.rightImage)
+      })
     }
   }, [homepageData])
 
@@ -186,7 +190,7 @@ const HeroSection = () => {
 
                 <div className="flex flex-col md:flex-row items-center gap-6">
                   <img
-                    src={heroSection.rightImage}
+                    src={resolveImageUrl(heroSection.rightImage)}
                     alt=""
                     className="w-52 h-52 rounded-lg border object-cover bg-white"
                   />

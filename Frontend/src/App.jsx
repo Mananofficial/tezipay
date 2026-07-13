@@ -5,6 +5,7 @@ import "./index.css"
 import { HomepageProvider } from './contexts/homepage.context'
 import { AdminAuthProvider } from './contexts/adminAuth.context'
 import { AdminCustomProvider } from './contexts/adminCustom.context'
+import { PagesProvider } from './contexts/pages.context'
 
 function App() {
 
@@ -12,7 +13,9 @@ function App() {
     <AdminAuthProvider>
       <AdminCustomProvider>
         <HomepageProvider>
-          <RouterProvider router={router}/>
+          <PagesProvider >
+            <RouterProvider router={router} />
+          </PagesProvider>
         </HomepageProvider>
       </AdminCustomProvider>
     </AdminAuthProvider>

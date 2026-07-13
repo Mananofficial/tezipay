@@ -2,56 +2,18 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import { Link } from 'react-router'
 import Footer from '../components/Footer';
+import { usePages } from '../hooks/usePages';
 
 const SoftPOS = () => {
+    const { pageData, loading } = usePages('soft-pos');
 
-    const cards = [
-        {
-            number: "01",
-            title: "Swift & Seamless",
-            description:
-                "Experience a process faster than contactless 'Card to POS' payments.",
-        },
-        {
-            number: "02",
-            title: "Safe & Secure",
-            description:
-                "Adheres to the highest security standards, utilizing EMV technology and protocols.",
-            active: true,
-        },
-        {
-            number: "03",
-            title: "All-Encompassing Solution",
-            description:
-                "A device-independent solution compatible with any mobile handset equipped with NFC technology.",
-        },
-    ];
-
-    const leftFeatures = [
-        {
-            title: "Universally Compatible",
-            description: "Operates on all phones equipped with an NFC module.",
-        },
-        {
-            title: "Affordable Monthly Fee",
-            description: "Avail of our service through a budget-friendly monthly subscription.",
-        },
-    ];
-
-    const rightFeatures = [
-        {
-            title: "Safe & Secure",
-            description: "Offers a highly secure and dependable mode to accept payments.",
-        },
-        {
-            title: "No Additional Hardware Required",
-            description: "No need for extra devices; your NFC-enabled mobile handset is all you need to accept payments.",
-        },
-        {
-            title: "Perfect for the Mobile Sales Force",
-            description: "Accept payments conveniently on the go.",
-        },
-    ];
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
+            </div>
+        );
+    }
 
     return (
         <main className='bg-(--primaryBackground) mt-10 montserrat-font relative overflow-hidden'>
@@ -73,10 +35,10 @@ const SoftPOS = () => {
 
                 <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left gap-4 lg:gap-6">
 
-                    <h1 className="text-2xl sm:text-3xl lg:text-[40px] font-bold leading-tight lg:leading-17 max-w-xl">Tap-and-Go SoftPOS
+                    <h1 className="text-2xl sm:text-3xl lg:text-[40px] font-bold leading-tight lg:leading-17 max-w-xl">
+                        {pageData?.hero?.heading}
                     </h1>
-                    <p className="text-lg lg:text-[20px] max-w-xl">Effortless Payments, Lightning Speed -
-                        Experience Convenience</p>
+                    <p className="text-lg lg:text-[20px] max-w-xl">{pageData?.hero?.subheading}</p>
                     <div className="relative flex justify-center items-center mt-8 mb-8 lg:hidden">
 
                         <div className="absolute top-[6%] left-[60%] h-[30%] w-[23%] rounded-full bg-linear-to-r from-(--primary)/80 to-(--secondary)"></div>
@@ -84,14 +46,14 @@ const SoftPOS = () => {
                         <div className="absolute top-[60%] left-[10%] h-[50%] w-[40%] rounded-full bg-linear-to-tr from-(--secondary) to-(--primary)"></div>
 
                         <img
-                            src="./src/assets/softpos.png"
+                            src={pageData?.hero?.image || "./src/assets/softpos.png"}
                             alt="Soft POS"
                             className="relative z-20 rounded-full object-cover select-none"
                             style={{ top: '13%', left: '0%', width: '100%', height: '100%' }}
                         />
 
                     </div>
-                    <p className='mt-4 text-base leading-7 max-w-lg text-wrap'>Harness the power of TeziPay to turn your smartphone into an innovative financial tool, accommodating all types of card transactions without physical contact. With just a simple tap on your screen, accepting payments from credit or debit cards becomes a breeze. Embrace this shift towards a more convenient and secure transaction method, increasing operational efficiency while offering an improved customer experience. With TeziPay, you're not just adapting to the new norm of digital transactions; you're staying ahead of it.</p>
+                    <p className='mt-4 text-base leading-7 max-w-lg text-wrap'>{pageData?.hero.description}</p>
 
                     <div className="mt-8 flex gap-4">
                         <Link to="/get-started">
@@ -109,7 +71,7 @@ const SoftPOS = () => {
                     <div className="absolute h-48 w-48 rounded-full bg-linear-to-tr from-(--secondary) to-(--primary) z-10" style={{ top: '70%', left: '6%' }}></div>
 
                     <img
-                        src="./src/assets/softpos.png"
+                        src={pageData?.hero?.image || "./src/assets/softpos.png"}
                         alt="Smart POS"
                         className="relative z-20 rounded-full object-cover select-none"
                         style={{ top: '13%', left: '0%', width: '1020px', height: '500px' }}
@@ -124,16 +86,15 @@ const SoftPOS = () => {
 
                     <div className=" flex flex-col lg:grid lg:grid-cols-2 justify-between gap-8 mb-10 lg:relative left-[-10%] -top-5 lg:w-[110%]">
                         <h2 className="text-[30px] md:text-[34px] lg:text-[38px] leading-[1.15] font-bold w-full lg:scale-110 text-center lg:text-left">
-                            Transform Your Phone
-                            into a Swift POS!
+                            {pageData?.sections[0]?.title}
                         </h2>
                         <p className="text-[#555] leading-8 md:pt-3 text-center md:text-center lg:text-left">
-                            TeziPay Tap and Go: Swift Payments, Seamless Experiences, Unmatched Convenience
+                            {pageData?.sections[0]?.description}
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start justify-center max-w-5xl mx-auto lg:mx-0">
-                        {cards.map((card) => (
+                        {pageData?.sections[0]?.cards?.map((card) => (
                             <div
                                 key={card.number}
                                 className={`group rounded-[28px] p-8 text-center transition-all duration-300 ease-out border-2 cursor-pointer
@@ -197,9 +158,7 @@ const SoftPOS = () => {
 
                     <div className="rounded-t-[55px] rounded-bl-[55px] bg-(--secondary) lg:w-[60%] lg:h-[70%] w-62.5  relative z-0 flex justify-center items-start p-4">
                         <h1 className="md:text-xl lg:text-3xl text-lg font-bold text-white text-center py-10 px-4">
-                            Propel Your
-                            Business into
-                            the Future
+                            {pageData?.title}
                         </h1>
                         <div className="rounded-t-[55px] rounded-bl-[55px] bg-(--primary)/50 w-[45%] h-[50%] absolute bottom-[-10%] right-[-10%] z-0 flex justify-center items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="90%" height="90%" fill="var(--primary)" className="bi bi-arrow-right-short -rotate-45" viewBox="0 0 16 16">
@@ -216,7 +175,7 @@ const SoftPOS = () => {
                             Key Feature
                         </h1>
 
-                        {leftFeatures.map((feature, index) => (
+                        {pageData?.leftFeatures?.map((feature, index) => (
                             <div key={index} className="flex items-center gap-4">
                                 <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
 
@@ -235,7 +194,7 @@ const SoftPOS = () => {
 
                     <div className="flex flex-col lg:justify-start lg:items-start gap-6 lg:gap-4">
 
-                        {rightFeatures.map((feature, index) => (
+                        {pageData?.rightFeatures?.map((feature, index) => (
                             <div key={index} className="flex items-center gap-4">
                                 <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
 
@@ -260,12 +219,12 @@ const SoftPOS = () => {
                     <div className="relative flex w-full max-w-5xl flex-col items-center gap-4 rounded-[40px] sm:rounded-full border-2 border-(--primary) px-6 py-8 sm:p-10 text-center">
 
                         <p className="max-w-3xl text-base sm:text-lg leading-7">
-                            Trust TeziPay to seamlessly elevate your business with Tap-and-Go
+                                {pageData?.cta?.heading}
                         </p>
 
                         <div className="absolute -bottom-7 sm:-bottom-6 rounded-full bg-(--secondary) px-6 py-3 sm:px-8 sm:py-2">
                             <p className="text-sm sm:text-lg font-bold text-white text-center">
-                                For more details, feel free to reach out to +91-9811331229
+                                {pageData?.cta?.description}
                             </p>
                         </div>
                     </div>

@@ -9,7 +9,7 @@ const Navbar = () => {
 
 
     return (
-        <main className='fixed top-0 left-0 z-50 h-20.25 w-full transition-all duration-300 ease-in-out'>
+        <main className='fixed top-0 left-0 z-50 h-20.25 w-full transition-all duration-300 ease-in-out backdrop-blur-2xl'>
             <div className="container px-5">
                 <nav className='flex h-full items-center justify-between'>
                     <Link to="/" className="mt-2.5">

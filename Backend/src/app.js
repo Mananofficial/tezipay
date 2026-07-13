@@ -1,6 +1,7 @@
 const express = require('express')
 const homepageRoutes = require('./routes/homepage.routes')
 const adminRoutes = require('./routes/admin.routes')
+const pageRoutes = require('./routes/page.routes')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const helmet = require('helmet')
@@ -30,6 +31,7 @@ app.use(helmet({
 app.use('/src/assets/upload', express.static(path.join(__dirname, '../../Frontend/src/assets/upload')))
 
 app.use('/api/homepage', homepageRoutes)
+app.use('/api/pages', pageRoutes)
 app.use('/api/admin', adminRoutes)
 
 module.exports = app;

@@ -1,9 +1,25 @@
 import { useContext, useEffect, useState } from "react";
 import { PagesContext } from "../contexts/pages.context";
-import { getPageByKey } from "../services/pages.api";
+import { getPageByKey, updatePageByKey } from "../services/pages.api";
 
 export const usePages = (pageKey) => {
     const { pageData, setPageData, loading, setLoading } = useContext(PagesContext);
+
+    const handleChangePageData = async (pageKey) => {
+        setLoading(true);
+        try {
+            await updatePageByKey(pageKey, payload);
+            return { success: true };
+        } catch (error) {
+            console.error(`Error updating page data for key ${pageKey}:`, error);
+            const data = error.response?.data;
+            const message = data?.error || data?.message || 'Something went wrong. Please try again.';
+            const errors = data?.errors || [];
+            return { success: false, message, errors };
+        } finally {
+            setLoading(false);
+        }
+    }
 
     useEffect(() => {
         const fetchPageData = async () => {
@@ -23,5 +39,5 @@ export const usePages = (pageKey) => {
         fetchPageData();
     }, [pageKey]);
 
-    return { pageData, loading };
+    return { pageData, loading, handleChangePageData };
 }

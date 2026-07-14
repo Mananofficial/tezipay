@@ -1,61 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import { Link } from 'react-router'
 import Footer from '../components/Footer';
+import { usePages } from '../hooks/usePages';
 
-const SmartCard = () => {
+const SmartPOS = () => {
 
-    const cards = [
-        {
-            number: "01",
-            title: "Instant Current / Saving Account",
-            description:
-                "Experience immediate access with TeziPay's Instant Current/Savings Account",
-        },
-        {
-            number: "02",
-            title: "Digital Mobile Banking",
-            description:
-                "Bank on-the-go with TeziPay's efficient, secure Digital Mobile Banking.",
-            active: true,
-        },
-        {
-            number: "03",
-            title: "Instant Virtual Debit Card",
-            description:
-                "Immediate access to funds with Instant Virtual Debit Card",
-        },
-    ];
+    const { pageData, loading } = usePages("smart-card");
 
-    const leftFeatures = [
-        {
-            title: "Secure Transactions",
-            description: "Ensures safety with top-tier security features.",
-        },
-        {
-            title: "Simplified Reporting",
-            description: "Streamlines your financial reporting processes.",
-        },
-        {
-            title: "Convenient and Accessible",
-            description: "Available for use worldwide.",
-        },
-    ];
-
-    const rightFeatures = [
-        {
-            title: "Increased Purchasing Power",
-            description: "Enhances your business's financial flexibility.",
-        },
-        {
-            title: "Easy Expense Tracking",
-            description: "Simplifies business expense management.",
-        },
-        {
-            title: "Flexible Usage",
-            description: "Suitable for varied business expenses.",
-        },
-    ];
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
+            </div>
+        );
+    }
 
     return (
         <main className='bg-(--primaryBackground) mt-10 montserrat-font relative overflow-hidden'>
@@ -77,9 +36,8 @@ const SmartCard = () => {
 
                 <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left gap-4 lg:gap-6">
 
-                    <h1 className="text-2xl sm:text-3xl lg:text-[40px] font-bold leading-tight lg:leading-17 max-w-xl">Business Smart Card
-                    </h1>
-                    <p className="text-lg lg:text-[20px] max-w-xl">Revolutionizing Your Business Transactions</p>
+                    <h1 className="text-2xl sm:text-3xl lg:text-[40px] font-bold leading-tight lg:leading-17 max-w-xl">{pageData?.hero.heading}</h1>
+                    <p className="text-lg lg:text-[20px] max-w-xl">{pageData?.hero.subheading}</p>
                     <div className="relative flex justify-center items-center mt-8 mb-8 lg:hidden">
 
                         <div className="absolute top-[6%] left-[60%] h-[30%] w-[23%] rounded-full bg-linear-to-r from-(--primary)/80 to-(--secondary)"></div>
@@ -87,15 +45,14 @@ const SmartCard = () => {
                         <div className="absolute top-[60%] left-[10%] h-[50%] w-[40%] rounded-full bg-linear-to-tr from-(--secondary) to-(--primary)"></div>
 
                         <img
-                            src="./src/assets/smartpos.png"
+                            src={pageData?.hero.image || "./src/assets/smartpos.png"}
                             alt="Smart POS"
                             className="relative z-20 rounded-full object-cover select-none"
                             style={{ top: '13%', left: '0%', width: '100%', height: '100%' }}
                         />
 
                     </div>
-                    <p className='mt-4 text-base leading-7 max-w-lg text-wrap'>Our corporate card offers increased purchasing power, secure transactions, and easy expense tracking, providing a perfect solution for businesses of all sizes. With the TeziPay Corporate Card, enjoy benefits such as simplified reporting, comprehensive expense management, and excellent customer service. TeziPay Corporate Card provides a flexible, convenient, and secure way to manage your business expenses. Explore the advantages of the TeziPay Corporate Card today, and take the first step towards smarter, more efficient business transactions.
-                    </p>
+                    <p className='mt-4 text-base leading-7 max-w-lg text-wrap'>{pageData?.hero.description}</p>
 
                     <div className="mt-8 flex gap-4">
                         <Link to="/get-started">
@@ -113,7 +70,7 @@ const SmartCard = () => {
                     <div className="absolute h-48 w-48 rounded-full bg-linear-to-tr from-(--secondary) to-(--primary) z-10" style={{ top: '70%', left: '6%' }}></div>
 
                     <img
-                        src="./src/assets/smartcard.png"
+                        src={pageData?.hero.image || "./src/assets/smartpos.png"}
                         alt="Smart POS"
                         className="relative z-20 rounded-full object-cover select-none"
                         style={{ top: '13%', left: '0%', width: '1020px', height: '500px' }}
@@ -128,16 +85,15 @@ const SmartCard = () => {
 
                     <div className=" flex flex-col lg:grid lg:grid-cols-2 justify-between gap-8 mb-10 lg:relative left-[-10%] -top-5 lg:w-[110%]">
                         <h2 className="text-[30px] md:text-[34px] lg:text-[38px] leading-[1.15] font-bold w-full lg:scale-110 text-center lg:text-left">
-                            Effortless, Seamless,
-                            and Smart!
+                            {pageData?.sections[0]?.title}
                         </h2>
                         <p className="text-[#555] leading-8 md:pt-3 text-center md:text-center lg:text-left">
-                            Catalyzing Commerce with Streamlined Transactions
+                            {pageData?.sections[0]?.description}
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start justify-center max-w-5xl mx-auto lg:mx-0">
-                        {cards.map((card) => (
+                        {pageData?.sections[0]?.cards.map((card) => (
                             <div
                                 key={card.number}
                                 className={`group rounded-[28px] p-8 text-center transition-all duration-300 ease-out border-2 cursor-pointer
@@ -201,10 +157,7 @@ const SmartCard = () => {
 
                     <div className="rounded-t-[55px] rounded-bl-[55px] bg-(--secondary) lg:w-[60%] lg:h-[70%] w-62.5  relative z-0 flex justify-center items-start p-4">
                         <h1 className="md:text-xl lg:text-3xl text-lg font-bold text-white text-center py-10 px-4">
-                            Transforming
-                            Your Business
-                            Transactions
-                            with Ease!
+                            {pageData?.title}
                         </h1>
                         <div className="rounded-t-[55px] rounded-bl-[55px] bg-(--primary)/50 w-[45%] h-[50%] absolute bottom-[-10%] right-[-10%] z-0 flex justify-center items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="90%" height="90%" fill="var(--primary)" className="bi bi-arrow-right-short -rotate-45" viewBox="0 0 16 16">
@@ -221,7 +174,7 @@ const SmartCard = () => {
                             Key Feature
                         </h1>
 
-                        {leftFeatures.map((feature, index) => (
+                        {pageData?.leftFeatures.map((feature, index) => (
                             <div key={index} className="flex items-center gap-4">
                                 <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
 
@@ -240,7 +193,7 @@ const SmartCard = () => {
 
                     <div className="flex flex-col lg:justify-start lg:items-start gap-6 lg:gap-4">
 
-                        {rightFeatures.map((feature, index) => (
+                        {pageData?.rightFeatures.map((feature, index) => (
                             <div key={index} className="flex items-center gap-4">
                                 <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
 
@@ -265,12 +218,12 @@ const SmartCard = () => {
                     <div className="relative flex w-full max-w-5xl flex-col items-center gap-4 rounded-[40px] sm:rounded-full border-2 border-(--primary) px-6 py-8 sm:p-10 text-center">
 
                         <p className="max-w-3xl text-base sm:text-lg leading-7">
-                            Unlock the Potential of Seamless Banking with TeziPay Corporate Card
+                            {pageData?.cta.heading}
                         </p>
 
                         <div className="absolute -bottom-7 sm:-bottom-6 rounded-full bg-(--secondary) px-6 py-3 sm:px-8 sm:py-2">
                             <p className="text-sm sm:text-lg font-bold text-white text-center">
-                                For more details, feel free to reach out to +91-9811331229
+                                {pageData?.cta.description}
                             </p>
                         </div>
                     </div>
@@ -284,4 +237,4 @@ const SmartCard = () => {
     )
 }
 
-export default SmartCard
+export default SmartPOS

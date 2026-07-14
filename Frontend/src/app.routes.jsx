@@ -22,6 +22,7 @@ import BookKeeping from "./pages/BookKeeping";
 import InsuranceSolutions from "./pages/InsuranceSolutions";
 import About from "./pages/About";
 import WhyToJoin from "./pages/WhyToJoin";
+import SmartposHeroSection from "./pages/SmartPOS/SmartposHeroSection";
 
 export const router = createBrowserRouter([
     {
@@ -75,6 +76,10 @@ export const router = createBrowserRouter([
             {
                 path: "footer",
                 element: <Footer />
+            },
+            {
+                path: "smart-pos/hero-section",
+                element: <SmartposHeroSection />
             }
         ]
     },

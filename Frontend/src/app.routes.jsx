@@ -23,6 +23,9 @@ import InsuranceSolutions from "./pages/InsuranceSolutions";
 import About from "./pages/About";
 import WhyToJoin from "./pages/WhyToJoin";
 import SmartposHeroSection from "./pages/SmartPOS/SmartposHeroSection";
+import SmartposCardSection from "./pages/SmartPOS/SmartposCardSection";
+import SmartposFeartures from "./pages/SmartPOS/SmartposFeartures";
+import SmartposCta from "./pages/SmartPOS/SmartposCta";
 
 export const router = createBrowserRouter([
     {
@@ -80,6 +83,18 @@ export const router = createBrowserRouter([
             {
                 path: "smart-pos/hero-section",
                 element: <SmartposHeroSection />
+            },
+            {
+                path: "smart-pos/card-section",
+                element: <SmartposCardSection />
+            },
+            {
+                path: "smart-pos/features-section",
+                element: <SmartposFeartures />
+            },
+            {
+                path: "smart-pos/cta-section",
+                element: <SmartposCta />
             }
         ]
     },

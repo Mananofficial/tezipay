@@ -34,7 +34,7 @@ const SmartposCta = () => {
         <>
             <Toaster position="top-right" reverseOrder={false} />
             <main className='flex items-center justify-center h-screen bg-(--primaryBackground)'>
-                <h1 className="text-3xl font-bold">Hero Section</h1>
+                <h1 className="text-3xl font-bold">CTA Section</h1>
                 <form onSubmit={handleSubmit} action="">
                     <input
                         type="text"

@@ -24,8 +24,20 @@ import About from "./pages/About";
 import WhyToJoin from "./pages/WhyToJoin";
 import SmartposHeroSection from "./pages/SmartPOS/SmartposHeroSection";
 import SmartposCardSection from "./pages/SmartPOS/SmartposCardSection";
-import SmartposFeartures from "./pages/SmartPOS/SmartposFeartures";
+import SmartposFeatures from "./pages/SmartPOS/SmartposFeatures";
 import SmartposCta from "./pages/SmartPOS/SmartposCta";
+import SoftposCardSection from "./pages/SoftPOS/SoftposCardSection";
+import SoftposHeroSection from "./pages/SoftPOS/SoftposHeroSection";
+import SoftposFeatures from "./pages/SoftPOS/SoftposFeatures";
+import SoftposCta from "./pages/SoftPOS/SoftposCta";
+import GatewayHeroSection from "./pages/PaymentGateway/GatewayHeroSection";
+import GatewayCardSection from "./pages/PaymentGateway/GatewayCardSection";
+import GatewayFeatures from "./pages/PaymentGateway/GatewayFeatures";
+import GatewayCta from "./pages/PaymentGateway/GatewayCta";
+import SmartCardHeroSection from "./pages/SmartCard/SmartCardHeroSection";
+import SmartCardCardSection from "./pages/SmartCard/SmartCardCardSection";
+import SmartCardFeatures from "./pages/SmartCard/SmartCardFeatures";
+import SmartCardCta from "./pages/SmartCard/SmartCardCta";
 
 export const router = createBrowserRouter([
     {
@@ -90,11 +102,59 @@ export const router = createBrowserRouter([
             },
             {
                 path: "smart-pos/features-section",
-                element: <SmartposFeartures />
+                element: <SmartposFeatures />
             },
             {
                 path: "smart-pos/cta-section",
                 element: <SmartposCta />
+            },
+            {
+                path: "soft-pos/hero-section",
+                element: <SoftposHeroSection />
+            },
+            {
+                path: "soft-pos/card-section",
+                element: <SoftposCardSection />
+            },
+            {
+                path: "soft-pos/features-section",
+                element: <SoftposFeatures />
+            },
+            {
+                path: "soft-pos/cta-section",
+                element: <SoftposCta />
+            },
+            {
+                path: "payment-gateway/hero-section",
+                element: <GatewayHeroSection />
+            },
+            {
+                path: "payment-gateway/card-section",
+                element: <GatewayCardSection />
+            },
+            {
+                path: "payment-gateway/features-section",
+                element: <GatewayFeatures />
+            },
+            {
+                path: "payment-gateway/cta-section",
+                element: <GatewayCta />
+            },
+            {
+                path: "smart-card/hero-section",
+                element: <SmartCardHeroSection />
+            },
+            {
+                path: "smart-card/card-section",
+                element: <SmartCardCardSection />
+            },
+            {
+                path: "smart-card/features-section",
+                element: <SmartCardFeatures />
+            },
+            {
+                path: "smart-card/cta-section",
+                element: <SmartCardCta />
             }
         ]
     },

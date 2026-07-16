@@ -3,14 +3,16 @@ import Sidebar from "./Sidebar";
 
 const AdminDashboardLayout = () => {
   return (
-    <div className="min-h-screen montserrat-font grid grid-cols-1 lg:grid-cols-[250px_1fr] bg-(--primaryBackground)">
-      <aside className="bg-black/90 shadow-lg text-white max-h-screen min-h-screen p-4 flex flex-col gap-4 sticky top-0 left-0 z-50">
-        <h1 className="text-2xl font-bold px-6">Admin Dashboard</h1>
+    <div className="min-h-screen grid lg:grid-cols-[270px_1fr] bg-(--primaryBackground)">
+
+      <aside className="sticky top-0 h-screen bg-[#1b1b1b] border-r border-white/10">
         <Sidebar />
       </aside>
-      <div className="flex-1 min-w-0">
+
+      <main className="min-w-0 overflow-auto">
         <Outlet />
-      </div>
+      </main>
+
     </div>
   );
 };

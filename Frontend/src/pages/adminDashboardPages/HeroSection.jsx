@@ -1,3 +1,4 @@
+import SummernoteEditor from '../../components/SummernoteEditor';
 import React, { useState, useEffect, useRef } from 'react'
 import { useHomepage } from '../..//hooks/useHomepage'
 import { useAdminCustom } from '../../hooks/useAdminCustom'
@@ -94,7 +95,12 @@ const HeroSection = () => {
                 <div className="space-y-5">
                   <div>
                     <label className="font-medium"> Heading </label>
-                    <textarea rows={3} value={heroSection.heading} onChange={(e) => setHeroSection({ ...heroSection, heading: e.target.value })} className="mt-2 w-full border rounded-lg p-3 resize-none" />
+                    <SummernoteEditor
+                      rows={3}
+                      value={heroSection.heading}
+                      onChange={(val) => setHeroSection({ ...heroSection, heading: val })}
+                      className="mt-2 w-full border rounded-lg p-3"
+                    />
                   </div>
 
                   <div>
@@ -102,7 +108,12 @@ const HeroSection = () => {
                       Subheading
                     </label>
 
-                    <textarea rows={5} value={heroSection.subheading} onChange={(e) => setHeroSection({ ...heroSection, subheading: e.target.value })} className="mt-2 w-full border rounded-lg p-3 resize-none" />
+                    <SummernoteEditor
+                      rows={5}
+                      value={heroSection.subheading}
+                      onChange={(val) => setHeroSection({ ...heroSection, subheading: val })}
+                      className="mt-2 w-full border rounded-lg p-3"
+                    />
                   </div>
                 </div>
               </div>

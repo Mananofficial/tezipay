@@ -5,9 +5,9 @@ const api = axios.create({
     withCredentials: true,
 });
 
-export async function updateData({ colors, navbar, heroSection, heroBelowSection, blueprint, note, footer }) { 
+export async function updateData({ favicon, colors, navbar, heroSection, heroBelowSection, blueprint, note, footer }) { 
     try {
-        const response = await api.patch(`/admin/homepage/`, { colors, navbar, heroSection, heroBelowSection, blueprint, note, footer });
+        const response = await api.patch(`/admin/homepage/`, { favicon, colors, navbar, heroSection, heroBelowSection, blueprint, note, footer });
         return response.data.data;
     } catch (error) {
         console.error("Error updating data:", error);

@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { getHomepageData } from "../services/homepage.api";
+import { resolveImageUrl } from "../utils/resolveImageUrl";
 
 export const HomepageContext = createContext();
 
@@ -34,6 +35,19 @@ export const HomepageProvider = ({ children }) => {
         root.style.setProperty("--secondaryBackground", homepageData.colors.secondaryBackground);
         root.style.setProperty("--primaryForeground", homepageData.colors.primaryForeground);
         root.style.setProperty("--secondaryForeground", homepageData.colors.secondaryForeground);
+    }, [homepageData]);
+
+    useEffect(() => {
+        if (!homepageData?.favicon) return;
+        const link = document.querySelector("link[rel*='icon']");
+        if (link) {
+            link.href = resolveImageUrl(homepageData.favicon);
+        } else {
+            const newLink = document.createElement('link');
+            newLink.rel = 'icon';
+            newLink.href = resolveImageUrl(homepageData.favicon);
+            document.head.appendChild(newLink);
+        }
     }, [homepageData]);
 
     return (

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import HTMLContent from '../components/HTMLContent';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useHomepage } from '../hooks/useHomepage'
@@ -26,7 +27,7 @@ const Home = () => {
             <section className='section container flex flex-col lg:flex-row items-center justify-between gap-10"'>
                 <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left gap-4 lg:gap-6">
 
-                    <h1 className="text-4xl sm:text-5xl lg:text-[50px] font-bold leading-tight lg:leading-17 max-w-xl">{homepageData?.heroSection.heading || "Transforming Business Finance for Success"}</h1>
+                    <h1 className="text-4xl sm:text-5xl lg:text-[50px] font-bold leading-tight lg:leading-17 max-w-xl"><HTMLContent content={homepageData?.heroSection.heading || "Transforming Business Finance for Success"} /></h1>
                     <div className="relative flex justify-center items-center mt-8 mb-8 lg:hidden">
 
                         <div className="absolute top-0 right-2 h-24 w-24 rounded-full bg-linear-to-r from-(--primary)/80 to-(--secondary)"></div>
@@ -40,7 +41,7 @@ const Home = () => {
                         />
 
                     </div>
-                    <p className='mt-4 text-base leading-7 max-w-xl'>{homepageData?.heroSection.subheading || "Embrace the ease and efficiency of TeziPay and watch your business thrive."}</p>
+                    <p className='mt-4 text-base leading-7 max-w-xl'><HTMLContent content={homepageData?.heroSection.subheading || "Embrace the ease and efficiency of TeziPay and watch your business thrive."} /></p>
 
                     <div className="mt-8 flex gap-4">
                         <Link to={homepageData?.heroSection.leftButton.url || "/get-started"}>
@@ -68,14 +69,10 @@ const Home = () => {
             <section className="section w-full bg-(--secondaryBackground)">
                 <div className="container flex flex-col items-center justify-center gap-6 text-center">
 
-                    <h1 className="max-w-5xl text-3xl sm:text-4xl lg:text-[45px] font-bold leading-tight lg:leading-10">
-                        {homepageData?.heroBelowSection.title ||
-                            "Empowering MSMEs with Tailored Fintech Solutions"}
+                    <h1 className="max-w-5xl text-3xl sm:text-4xl lg:text-[45px] font-bold leading-tight lg:leading-10"><HTMLContent content={homepageData?.heroBelowSection.title || "Empowering MSMEs with Tailored Fintech Solutions"} />
                     </h1>
 
-                    <p className="max-w-4xl text-base leading-7 px-2 sm:px-6 lg:px-0">
-                        {homepageData?.heroBelowSection.subtitle ||
-                            "At TeziPay, we reshape the financial landscape with innovative, customer-centric fintech solutions. Our tailored banking services empower MSMEs, breaking down barriers and catalyzing growth. Experience the fusion of advanced fintech and personalized service. With TeziPay, accelerate faster, further."}
+                    <p className="max-w-4xl text-base leading-7 px-2 sm:px-6 lg:px-0"><HTMLContent content={homepageData?.heroBelowSection.subtitle || "At TeziPay, we reshape the financial landscape with innovative, customer-centric fintech solutions. Our tailored banking services empower MSMEs, breaking down barriers and catalyzing growth. Experience the fusion of advanced fintech and personalized service. With TeziPay, accelerate faster, further."} />
                     </p>
 
                 </div>
@@ -84,8 +81,7 @@ const Home = () => {
             <section className="section relative py-12 lg:py-16 overflow-x-clip">
                 <div className="container relative mx-auto px-4">
 
-                    <h1 className="text-3xl md:text-4xl lg:text-[45px] leading-tight font-bold text-center">
-                        {homepageData?.blueprint.header || "Your Success, Our Blueprint"}
+                    <h1 className="text-3xl md:text-4xl lg:text-[45px] leading-tight font-bold text-center"><HTMLContent content={homepageData?.blueprint.header || "Your Success, Our Blueprint"} />
                     </h1>
 
                     <div className="absolute right-0 -top-35 w-35 h-35 lg:w-50 lg:h-50 rounded-[74px] bg-linear-to-r from-(--primary)/15 to-(--secondary)/15 pointer-events-none z-20"></div>
@@ -113,8 +109,7 @@ const Home = () => {
                             className="absolute z-10 flex items-center justify-center rounded-full border-4 border-blue-950 text-white text-center font-semibold"
                             style={{ top: "12%", left: "15%", width: "54%", height: "64%" }}
                         >
-                            <p className="max-w-[70%] text-sm md:text-base lg:text-lg">
-                                {homepageData?.blueprint.description}
+                            <p className="max-w-[70%] text-sm md:text-base lg:text-lg"><HTMLContent content={homepageData?.blueprint.description} />
                             </p>
                         </div>
 
@@ -122,8 +117,7 @@ const Home = () => {
                             className="absolute z-10 flex items-center justify-center rounded-full bg-blue-950 text-white text-center font-semibold"
                             style={{ top: "13%", left: "16%", width: "52%", height: "62%" }}
                         >
-                            <p className="max-w-[70%] text-sm md:text-base lg:text-lg">
-                                {homepageData?.blueprint.description}
+                            <p className="max-w-[70%] text-sm md:text-base lg:text-lg"><HTMLContent content={homepageData?.blueprint.description} />
                             </p>
                         </div>
 
@@ -131,8 +125,7 @@ const Home = () => {
                             className="absolute z-20 flex items-center justify-center rounded-full bg-(--secondary) text-white text-center font-semibold px-2"
                             style={{ top: "0%", left: "11%", width: "23%", height: "28%" }}
                         >
-                            <span className="text-base md:text-lg lg:text-xl">
-                                {homepageData?.blueprint.title}
+                            <span className="text-base md:text-lg lg:text-xl"><HTMLContent content={homepageData?.blueprint.title} />
                             </span>
                         </div>
 
@@ -150,8 +143,7 @@ const Home = () => {
                             <ul className="flex flex-col gap-2 md:gap-3">
                                 {homepageData?.blueprint.points.map((point, index) => (
                                     <li key={index} className="flex items-start gap-2 text-white text-xs md:text-sm lg:text-base font-semibold">
-                                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
-                                        {point}
+                                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" /><HTMLContent content={point} />
                                     </li>
                                 ))}
                             </ul>
@@ -184,7 +176,7 @@ const Home = () => {
                             className="absolute z-20 flex items-center justify-center rounded-full bg-(--secondary) text-white text-center font-semibold px-2"
                             style={{ top: "20%", left: "4%", width: "37%", height: "27%" }}
                         >
-                            <span className="text-sm">{homepageData?.blueprint.title}</span>
+                            <span className="text-sm"><HTMLContent content={homepageData?.blueprint.title} /></span>
                         </div>
 
                         <div
@@ -197,8 +189,7 @@ const Home = () => {
                             className="absolute z-10 flex items-center justify-center rounded-full bg-blue-950 text-white text-center"
                             style={{ top: "30%", left: "18%", width: "76%", height: "56%" }}
                         >
-                            <p className="max-w-[78%] text-xs leading-snug">
-                                {homepageData?.blueprint.description}
+                            <p className="max-w-[78%] text-xs leading-snug"><HTMLContent content={homepageData?.blueprint.description} />
                             </p>
                         </div>
 
@@ -209,8 +200,7 @@ const Home = () => {
                             <ul className="flex flex-col gap-1.5">
                                 {homepageData?.blueprint.points.map((point, index) => (
                                     <li key={index} className="flex items-start gap-2 text-white text-xs font-semibold">
-                                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" />
-                                        {point}
+                                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-white/80 shrink-0" /><HTMLContent content={point} />
                                     </li>
                                 ))}
                             </ul>
@@ -230,14 +220,11 @@ const Home = () => {
                 <div className="container flex justify-center">
                     <div className="relative flex w-full max-w-5xl flex-col items-center gap-4 rounded-[40px] sm:rounded-full border-2 border-(--primary) px-6 py-8 sm:p-10 text-center">
 
-                        <p className="max-w-3xl text-base sm:text-lg leading-7">
-                            {homepageData?.note.note ||
-                                "At TeziPay, we understand the unique challenges faced by MSMEs. Our dedicated team is here to provide personalized support and guidance, ensuring that your business thrives in a competitive landscape. Whether you have questions about our services or need assistance with your account, we're just a call away. Reach out to us today and experience the difference of working with a fintech partner that truly cares about your success."}
+                        <p className="max-w-3xl text-base sm:text-lg leading-7"><HTMLContent content={homepageData?.note.note || "At TeziPay, we understand the unique challenges faced by MSMEs. Our dedicated team is here to provide personalized support and guidance, ensuring that your business thrives in a competitive landscape. Whether you have questions about our services or need assistance with your account, we're just a call away. Reach out to us today and experience the difference of working with a fintech partner that truly cares about your success."} />
                         </p>
 
                         <div className="absolute -bottom-7 sm:-bottom-6 rounded-full bg-(--secondary) px-6 py-3 sm:px-8 sm:py-2">
-                            <p className="text-sm sm:text-lg font-bold text-white text-center">
-                                {homepageData?.note.contact || "Call us now +91-9811331229"}
+                            <p className="text-sm sm:text-lg font-bold text-white text-center"><HTMLContent content={homepageData?.note.contact || "Call us now +91-9811331229"} />
                             </p>
                         </div>
 

@@ -1,3 +1,5 @@
+import SummernoteEditor from '../../components/SummernoteEditor';
+import Swal from 'sweetalert2';
 import React, { useState, useEffect, useRef } from 'react'
 import { usePages } from '../../hooks/usePages';
 import { useAdminCustom } from '../../hooks/useAdminCustom';
@@ -19,6 +21,31 @@ const SoftposCta = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validation
+        if (!ctaData.heading || ctaData.heading.replace(/<[^>]*>/g, '').trim() === '') {
+            toast.error("Heading is required.");
+            return;
+        }
+        if (ctaData.description !== undefined && (!ctaData.description || ctaData.description.replace(/<[^>]*>/g, '').trim() === '')) {
+            toast.error("Description is required.");
+            return;
+        }
+
+        // Save Confirmation
+        const confirmSave = await Swal.fire({
+            title: "Save Changes?",
+            text: "Do you want to save the changes?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Yes, Save",
+            cancelButtonText: "Cancel",
+            reverseButtons: true,
+            confirmButtonColor: "#2563eb",
+            cancelButtonColor: "#6b7280",
+        });
+        if (!confirmSave.isConfirmed) return;
+
 
         const result = await handleChangePageData("soft-pos", { cta: ctaData });
 
@@ -60,18 +87,16 @@ const SoftposCta = () => {
                                         Heading
                                     </label>
 
-                                    <input
-                                        type="text"
+                                    <SummernoteEditor 
                                         placeholder="Enter CTA heading"
                                         value={ctaData.heading}
-                                        onChange={(e) =>
-                                            setCtaData({
+                                        onChange={(val) => setCtaData({
                                                 ...ctaData,
-                                                heading: e.target.value,
+                                                heading: val,
                                             })
                                         }
                                         className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                                    />
+                                     />
                                 </div>
 
                                 <div>
@@ -79,18 +104,17 @@ const SoftposCta = () => {
                                         Description
                                     </label>
 
-                                    <textarea
+                                    <SummernoteEditor 
                                         rows={6}
                                         placeholder="Enter CTA description"
                                         value={ctaData.description}
-                                        onChange={(e) =>
-                                            setCtaData({
+                                        onChange={(val) => setCtaData({
                                                 ...ctaData,
-                                                description: e.target.value,
+                                                description: val,
                                             })
                                         }
                                         className="w-full rounded-xl border border-gray-300 px-4 py-3 resize-none outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                                    />
+                                     />
                                 </div>
                             </div>
                         </div>

@@ -1,3 +1,4 @@
+import SummernoteEditor from '../../components/SummernoteEditor';
 import React, { useState, useEffect, useRef } from 'react'
 import { useHomepage } from '../..//hooks/useHomepage'
 import { useAdminCustom } from '../../hooks/useAdminCustom'
@@ -154,16 +155,16 @@ const Footer = () => {
                           Address
                         </label>
 
-                        <textarea
+                        <SummernoteEditor
                           rows={3}
                           value={footer.address}
-                          onChange={(e) =>
+                          onChange={(val) =>
                             setFooter({
                               ...footer,
-                              address: e.target.value,
+                              address: val,
                             })
                           }
-                          className="w-full border rounded-lg p-3 resize-none outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full border rounded-lg p-3"
                         />
 
                       </div>
@@ -174,16 +175,16 @@ const Footer = () => {
                           Logo Description
                         </label>
 
-                        <textarea
+                        <SummernoteEditor
                           rows={3}
                           value={footer.logoBelowText}
-                          onChange={(e) =>
+                          onChange={(val) =>
                             setFooter({
                               ...footer,
-                              logoBelowText: e.target.value,
+                              logoBelowText: val,
                             })
                           }
-                          className="w-full border rounded-lg p-3 resize-none outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full border rounded-lg p-3"
                         />
 
                       </div>

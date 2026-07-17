@@ -4,12 +4,12 @@ const uploadImageService = require('../services/storage.service')
 const jwt = require('jsonwebtoken')
 
 async function updateHomepageData(req, res) {
-    const { colors, navbar, heroSection, heroBelowSection, blueprint, note, footer } = req.body
+    const { favicon, colors, navbar, heroSection, heroBelowSection, blueprint, note, footer } = req.body
 
     try {
         const updatedHomepageData = await homepageModel.findOneAndUpdate(
             {},
-            { $set: { colors, navbar, heroSection, heroBelowSection, blueprint, note, footer } },
+            { $set: { favicon, colors, navbar, heroSection, heroBelowSection, blueprint, note, footer } },
             { returnDocument: 'after' }
         )
         res.status(200).json({

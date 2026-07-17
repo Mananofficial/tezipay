@@ -1,3 +1,4 @@
+import SummernoteEditor from '../../components/SummernoteEditor';
 import React, { useState, useEffect } from "react";
 import { useHomepage } from "../../hooks/useHomepage";
 import { useAdminCustom } from "../../hooks/useAdminCustom";
@@ -82,18 +83,18 @@ const HeroBelow = () => {
                         Title
                       </label>
 
-                      <textarea
+                      <SummernoteEditor
                         id="title"
                         rows={3}
                         placeholder="Enter section title..."
                         value={heroBelowSection.title}
-                        onChange={(e) =>
+                        onChange={(val) =>
                           setHeroBelowSection({
                             ...heroBelowSection,
-                            title: e.target.value,
+                            title: val,
                           })
                         }
-                        className="w-full border rounded-lg p-4 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full border rounded-lg p-4"
                       />
                     </div>
 
@@ -105,18 +106,18 @@ const HeroBelow = () => {
                         Subtitle
                       </label>
 
-                      <textarea
+                      <SummernoteEditor
                         id="subtitle"
                         rows={5}
                         placeholder="Enter section subtitle..."
                         value={heroBelowSection.subtitle}
-                        onChange={(e) =>
+                        onChange={(val) =>
                           setHeroBelowSection({
                             ...heroBelowSection,
-                            subtitle: e.target.value,
+                            subtitle: val,
                           })
                         }
-                        className="w-full border rounded-lg p-4 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full border rounded-lg p-4"
                       />
                     </div>
 

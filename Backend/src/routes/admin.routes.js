@@ -6,7 +6,7 @@ const { adminLoginValidator, homepageUpdateValidator } = require('../validators/
 const multer = require('multer')
 
 const router = Router()
-const allowedImageMimeTypes = new Set(['image/jpeg', 'image/png', 'image/svg+xml'])
+const allowedImageMimeTypes = new Set(['image/jpeg', 'image/png', 'image/svg+xml', 'image/x-icon', 'image/vnd.microsoft.icon'])
 
 const upload = multer({
 	storage: multer.memoryStorage(),
@@ -15,7 +15,7 @@ const upload = multer({
 			return cb(null, true)
 		}
 
-		return cb(new Error('Only JPEG, PNG, and SVG images are allowed'))
+		return cb(new Error('Only JPEG, PNG, SVG and ICO images are allowed'))
 	}
 })
 

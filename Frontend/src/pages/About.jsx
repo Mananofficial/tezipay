@@ -1,4 +1,5 @@
 import React from 'react'
+import HTMLContent from '../components/HTMLContent';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { usePages } from '../hooks/usePages';
@@ -61,13 +62,13 @@ const About = () => {
                         <h1 className="text-2xl font-bold text-(--secondary)">
                             {pageData?.leftFeatures[0].title}
                         </h1>
-                        <p className='font-bold'>{pageData?.leftFeatures[0].description}</p>
+                        <p className='font-bold'><HTMLContent content={pageData?.leftFeatures[0].description} /></p>
                     </div>
                     <div className="flex flex-col justify-start items-end gap-6 col-span-1 lg:col-span-2">
                         <h1 className="text-2xl font-bold text-(--secondary)">
                             {pageData?.rightFeatures[0].title}
                         </h1>
-                        <p className='text-right font-bold'>{pageData?.rightFeatures[0].description}</p>
+                        <p className='text-right font-bold'><HTMLContent content={pageData?.rightFeatures[0].description} /></p>
                     </div>
                     <div className="flex flex-col gap-6 relative">
                         <h1 className="text-6xl font-bold text-(--secondary) absolute top-1 left-1 opacity-40">
@@ -78,7 +79,7 @@ const About = () => {
                         </h1>
                     </div>
                     <div className="flex justify-end items-start gap-6 col-span-1 lg:col-span-2">
-                        <p className='text-right font-bold'>{pageData?.rightFeatures[1].description}</p>
+                        <p className='text-right font-bold'><HTMLContent content={pageData?.rightFeatures[1].description} /></p>
                     </div>
 
                 </div>

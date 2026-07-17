@@ -1,3 +1,5 @@
+import SummernoteEditor from '../../components/SummernoteEditor';
+import Swal from 'sweetalert2';
 import React, { useState, useEffect } from 'react'
 import { usePages } from '../../hooks/usePages';
 import { toast, Toaster } from 'react-hot-toast';
@@ -39,11 +41,25 @@ const SwiftLoanCardSection = () => {
         }));
     };
 
-    const removeCard = (index) => {
+    const removeCard = async (index) => {
         if (sectionData.cards.length === 1) {
             toast.error("At least one card is required.");
             return;
         }
+
+        const confirmDelete = await Swal.fire({
+            title: "Delete Card?",
+            text: "Are you sure you want to delete this card?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, Delete",
+            cancelButtonText: "Cancel",
+            reverseButtons: true,
+            confirmButtonColor: "#ef4444",
+            cancelButtonColor: "#6b7280",
+        });
+        if (!confirmDelete.isConfirmed) return;
+
 
         setSectionData((prev) => ({
             ...prev,
@@ -53,6 +69,52 @@ const SwiftLoanCardSection = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validation
+        if (!sectionData.title || sectionData.title.replace(/<[^>]*>/g, '').trim() === '') {
+            toast.error("Title is required.");
+            return;
+        }
+        if (sectionData.description !== undefined && (!sectionData.description || sectionData.description.replace(/<[^>]*>/g, '').trim() === '')) {
+            toast.error("Description is required.");
+            return;
+        }
+        if (sectionData.subtitle !== undefined && (!sectionData.subtitle || sectionData.subtitle.replace(/<[^>]*>/g, '').trim() === '')) {
+            toast.error("Subtitle is required.");
+            return;
+        }
+        if (sectionData.cards) {
+            for (let i = 0; i < sectionData.cards.length; i++) {
+                const card = sectionData.cards[i];
+                if (!card.number || card.number.replace(/<[^>]*>/g, '').trim() === '') {
+                    toast.error(`Card ${i + 1} Number is required.`);
+                    return;
+                }
+                if (!card.title || card.title.replace(/<[^>]*>/g, '').trim() === '') {
+                    toast.error(`Card ${i + 1} Title is required.`);
+                    return;
+                }
+                if (!card.description || card.description.replace(/<[^>]*>/g, '').trim() === '') {
+                    toast.error(`Card ${i + 1} Description is required.`);
+                    return;
+                }
+            }
+        }
+
+        // Save Confirmation
+        const confirmSave = await Swal.fire({
+            title: "Save Changes?",
+            text: "Do you want to save the changes?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Yes, Save",
+            cancelButtonText: "Cancel",
+            reverseButtons: true,
+            confirmButtonColor: "#2563eb",
+            cancelButtonColor: "#6b7280",
+        });
+        if (!confirmSave.isConfirmed) return;
+
 
         const result = await handleChangePageData("swift-loan", { sections: [sectionData] });
 
@@ -88,18 +150,16 @@ const SwiftLoanCardSection = () => {
                                         Title
                                     </label>
 
-                                    <input
-                                        type="text"
+                                    <SummernoteEditor 
                                         placeholder="Enter section title"
                                         value={sectionData.title}
-                                        onChange={(e) =>
-                                            setSectionData({
+                                        onChange={(val) => setSectionData({
                                                 ...sectionData,
-                                                title: e.target.value,
+                                                title: val,
                                             })
                                         }
                                         className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition"
-                                    />
+                                     />
                                 </div>
 
                                 <div>
@@ -107,18 +167,17 @@ const SwiftLoanCardSection = () => {
                                         Description
                                     </label>
 
-                                    <textarea
+                                    <SummernoteEditor 
                                         rows={5}
                                         placeholder="Enter section description"
                                         value={sectionData.description}
-                                        onChange={(e) =>
-                                            setSectionData({
+                                        onChange={(val) => setSectionData({
                                                 ...sectionData,
-                                                description: e.target.value,
+                                                description: val,
                                             })
                                         }
                                         className="w-full rounded-xl border border-gray-300 px-4 py-3 resize-none outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition"
-                                    />
+                                     />
                                 </div>
                             </div>
                         </div>
@@ -180,12 +239,11 @@ const SwiftLoanCardSection = () => {
                                                     Number
                                                 </label>
 
-                                                <input
-                                                    type="text"
+                                                <SummernoteEditor 
                                                     value={card.number}
-                                                    onChange={(e) => {
+                                                    onChange={(val) => {
                                                         const cards = [...sectionData.cards];
-                                                        cards[index].number = e.target.value;
+                                                        cards[index].number = val;
 
                                                         setSectionData({
                                                             ...sectionData,
@@ -193,7 +251,7 @@ const SwiftLoanCardSection = () => {
                                                         });
                                                     }}
                                                     className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition"
-                                                />
+                                                 />
                                             </div>
 
                                             <div>
@@ -201,12 +259,11 @@ const SwiftLoanCardSection = () => {
                                                     Title
                                                 </label>
 
-                                                <input
-                                                    type="text"
+                                                <SummernoteEditor 
                                                     value={card.title}
-                                                    onChange={(e) => {
+                                                    onChange={(val) => {
                                                         const cards = [...sectionData.cards];
-                                                        cards[index].title = e.target.value;
+                                                        cards[index].title = val;
 
                                                         setSectionData({
                                                             ...sectionData,
@@ -214,7 +271,7 @@ const SwiftLoanCardSection = () => {
                                                         });
                                                     }}
                                                     className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition"
-                                                />
+                                                 />
                                             </div>
 
                                             <div>
@@ -222,12 +279,12 @@ const SwiftLoanCardSection = () => {
                                                     Description
                                                 </label>
 
-                                                <textarea
+                                                <SummernoteEditor 
                                                     rows={4}
                                                     value={card.description}
-                                                    onChange={(e) => {
+                                                    onChange={(val) => {
                                                         const cards = [...sectionData.cards];
-                                                        cards[index].description = e.target.value;
+                                                        cards[index].description = val;
 
                                                         setSectionData({
                                                             ...sectionData,
@@ -235,7 +292,7 @@ const SwiftLoanCardSection = () => {
                                                         });
                                                     }}
                                                     className="w-full rounded-xl border border-gray-300 px-4 py-3 resize-none outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100 transition"
-                                                />
+                                                 />
                                             </div>
                                         </div>
                                     </div>

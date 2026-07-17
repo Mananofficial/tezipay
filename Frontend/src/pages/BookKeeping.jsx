@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import HTMLContent from '../components/HTMLContent';
 import Navbar from '../components/Navbar'
 import { Link } from 'react-router'
 import Footer from '../components/Footer';
@@ -36,8 +37,8 @@ const BookKeeping = () => {
 
                 <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left gap-4 lg:gap-6">
 
-                    <h1 className="text-2xl sm:text-3xl lg:text-[40px] font-bold leading-tight lg:leading-17 max-w-xl">{pageData?.hero.heading}</h1>
-                    <p className="text-lg lg:text-[20px] max-w-xl">{pageData?.hero.subheading}</p>
+                    <h1 className="text-2xl sm:text-3xl lg:text-[40px] font-bold leading-tight lg:leading-17 max-w-xl"><HTMLContent content={pageData?.hero.heading} /></h1>
+                    <p className="text-lg lg:text-[20px] max-w-xl"><HTMLContent content={pageData?.hero.subheading} /></p>
                     <div className="relative flex justify-center items-center mt-8 mb-8 lg:hidden">
 
                         <div className="absolute top-[6%] left-[60%] h-[30%] w-[23%] rounded-full bg-linear-to-r from-(--primary)/80 to-(--secondary)"></div>
@@ -52,7 +53,7 @@ const BookKeeping = () => {
                         />
 
                     </div>
-                    <p className='mt-4 text-base leading-7 max-w-lg text-wrap'>{pageData?.hero.description}</p>
+                    <p className='mt-4 text-base leading-7 max-w-lg text-wrap'><HTMLContent content={pageData?.hero.description} /></p>
 
                     <div className="mt-8 flex gap-4">
                         <Link to="/get-started">

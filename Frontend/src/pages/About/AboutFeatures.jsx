@@ -1,3 +1,5 @@
+import SummernoteEditor from '../../components/SummernoteEditor';
+import Swal from 'sweetalert2';
 import React, { useEffect, useState } from "react";
 import { usePages } from "../../hooks/usePages";
 import { toast, Toaster } from "react-hot-toast";
@@ -62,6 +64,46 @@ const AboutFeatures = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Validation
+        for (let i = 0; i < leftFeatures.length; i++) {
+            const feature = leftFeatures[i];
+            if (!feature.title || feature.title.replace(/<[^>]*>/g, '').trim() === '') {
+                toast.error(`Left Feature ${i + 1} Title is required.`);
+                return;
+            }
+            if (feature.description !== undefined && (!feature.description || feature.description.replace(/<[^>]*>/g, '').trim() === '')) {
+                toast.error(`Left Feature ${i + 1} Description is required.`);
+                return;
+            }
+        }
+
+        for (let i = 0; i < rightFeatures.length; i++) {
+            const feature = rightFeatures[i];
+            if (!feature.title || feature.title.replace(/<[^>]*>/g, '').trim() === '') {
+                toast.error(`Right Feature ${i + 1} Title is required.`);
+                return;
+            }
+            if (feature.description !== undefined && (!feature.description || feature.description.replace(/<[^>]*>/g, '').trim() === '')) {
+                toast.error(`Right Feature ${i + 1} Description is required.`);
+                return;
+            }
+        }
+
+        // Save Confirmation
+        const confirmSave = await Swal.fire({
+            title: "Save Changes?",
+            text: "Do you want to save the changes?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Yes, Save",
+            cancelButtonText: "Cancel",
+            reverseButtons: true,
+            confirmButtonColor: "#2563eb",
+            cancelButtonColor: "#6b7280",
+        });
+        if (!confirmSave.isConfirmed) return;
+
+
         const result = await handleChangePageData("about", {
             leftFeatures,
             rightFeatures,
@@ -113,16 +155,12 @@ const AboutFeatures = () => {
                                                 Title
                                             </label>
 
-                                            <input
-                                                type="text"
+                                            <SummernoteEditor
                                                 placeholder="Enter feature title"
                                                 value={feature.title || ""}
-                                                onChange={(e) =>
-                                                    updateLeftFeature(
-                                                        index,
-                                                        "title",
-                                                        e.target.value
-                                                    )
+                                                onChange={(val) => updateLeftFeature(
+                                                    index,
+                                                    "title", val)
                                                 }
                                                 className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
                                             />
@@ -133,16 +171,13 @@ const AboutFeatures = () => {
                                                 Description
                                             </label>
 
-                                            <textarea
+                                            <SummernoteEditor
                                                 rows={5}
                                                 placeholder="Enter feature description"
                                                 value={feature.description || ""}
-                                                onChange={(e) =>
-                                                    updateLeftFeature(
-                                                        index,
-                                                        "description",
-                                                        e.target.value
-                                                    )
+                                                onChange={(val) => updateLeftFeature(
+                                                    index,
+                                                    "description", val)
                                                 }
                                                 className="w-full rounded-xl border border-gray-300 px-4 py-3 resize-none outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
                                             />
@@ -172,16 +207,12 @@ const AboutFeatures = () => {
                                                 Title
                                             </label>
 
-                                            <input
-                                                type="text"
+                                            <SummernoteEditor
                                                 placeholder="Enter feature title"
                                                 value={feature.title || ""}
-                                                onChange={(e) =>
-                                                    updateRightFeature(
-                                                        index,
-                                                        "title",
-                                                        e.target.value
-                                                    )
+                                                onChange={(val) => updateRightFeature(
+                                                    index,
+                                                    "title", val)
                                                 }
                                                 className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
                                             />
@@ -192,16 +223,13 @@ const AboutFeatures = () => {
                                                 Description
                                             </label>
 
-                                            <textarea
+                                            <SummernoteEditor
                                                 rows={5}
                                                 placeholder="Enter feature description"
                                                 value={feature.description || ""}
-                                                onChange={(e) =>
-                                                    updateRightFeature(
-                                                        index,
-                                                        "description",
-                                                        e.target.value
-                                                    )
+                                                onChange={(val) => updateRightFeature(
+                                                    index,
+                                                    "description", val)
                                                 }
                                                 className="w-full rounded-xl border border-gray-300 px-4 py-3 resize-none outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
                                             />

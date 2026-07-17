@@ -1,4 +1,5 @@
 import React from 'react'
+import HTMLContent from '../components/HTMLContent';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer';
 import { usePages } from '../hooks/usePages';

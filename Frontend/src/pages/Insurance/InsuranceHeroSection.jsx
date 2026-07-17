@@ -1,3 +1,5 @@
+import SummernoteEditor from '../../components/SummernoteEditor';
+import Swal from 'sweetalert2';
 import React, { useState, useEffect, useRef } from 'react'
 import { usePages } from '../../hooks/usePages';
 import { useAdminCustom } from '../../hooks/useAdminCustom';
@@ -22,6 +24,35 @@ const InsuranceHeroSection = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validation
+        if (!heroData.heading || heroData.heading.replace(/<[^>]*>/g, '').trim() === '') {
+            toast.error("Heading is required.");
+            return;
+        }
+        if (heroData.subheading !== undefined && (!heroData.subheading || heroData.subheading.replace(/<[^>]*>/g, '').trim() === '')) {
+            toast.error("Subheading is required.");
+            return;
+        }
+        if (heroData.description !== undefined && (!heroData.description || heroData.description.replace(/<[^>]*>/g, '').trim() === '')) {
+            toast.error("Description is required.");
+            return;
+        }
+
+        // Save Confirmation
+        const confirmSave = await Swal.fire({
+            title: "Save Changes?",
+            text: "Do you want to save the changes?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Yes, Save",
+            cancelButtonText: "Cancel",
+            reverseButtons: true,
+            confirmButtonColor: "#2563eb",
+            cancelButtonColor: "#6b7280",
+        });
+        if (!confirmSave.isConfirmed) return;
+
 
         const result = await handleChangePageData("insurance-solutions", { hero: heroData });
 
@@ -77,17 +108,15 @@ const InsuranceHeroSection = () => {
                                         Heading
                                     </label>
 
-                                    <input
-                                        type="text"
+                                    <SummernoteEditor 
                                         value={heroData.heading}
-                                        onChange={(e) =>
-                                            setHeroData({
+                                        onChange={(val) => setHeroData({
                                                 ...heroData,
-                                                heading: e.target.value,
+                                                heading: val,
                                             })
                                         }
                                         className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                                    />
+                                     />
                                 </div>
 
                                 <div>
@@ -95,17 +124,15 @@ const InsuranceHeroSection = () => {
                                         Subheading
                                     </label>
 
-                                    <input
-                                        type="text"
+                                    <SummernoteEditor 
                                         value={heroData.subheading}
-                                        onChange={(e) =>
-                                            setHeroData({
+                                        onChange={(val) => setHeroData({
                                                 ...heroData,
-                                                subheading: e.target.value,
+                                                subheading: val,
                                             })
                                         }
                                         className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                                    />
+                                     />
                                 </div>
 
                                 <div>
@@ -113,17 +140,16 @@ const InsuranceHeroSection = () => {
                                         Description
                                     </label>
 
-                                    <textarea
+                                    <SummernoteEditor 
                                         rows={6}
                                         value={heroData.description}
-                                        onChange={(e) =>
-                                            setHeroData({
+                                        onChange={(val) => setHeroData({
                                                 ...heroData,
-                                                description: e.target.value,
+                                                description: val,
                                             })
                                         }
                                         className="w-full rounded-xl border border-gray-300 px-4 py-3 resize-none outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                                    />
+                                     />
                                 </div>
                             </div>
                         </div>

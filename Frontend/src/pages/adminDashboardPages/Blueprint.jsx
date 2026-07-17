@@ -1,3 +1,4 @@
+import SummernoteEditor from '../../components/SummernoteEditor';
 import React, { useState, useEffect, useRef } from 'react'
 import { useHomepage } from '../..//hooks/useHomepage'
 import { useAdminCustom } from '../../hooks/useAdminCustom'
@@ -103,16 +104,15 @@ const Blueprint = () => {
                       Header
                     </label>
 
-                    <input
-                      type="text"
+                    <SummernoteEditor
                       value={blueprint.header}
-                      onChange={(e) =>
+                      onChange={(val) =>
                         setBlueprint({
                           ...blueprint,
-                          header: e.target.value,
+                          header: val,
                         })
                       }
-                      className="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border rounded-lg p-3"
                       placeholder="Section Header"
                     />
                   </div>
@@ -122,16 +122,16 @@ const Blueprint = () => {
                       Title
                     </label>
 
-                    <textarea
+                    <SummernoteEditor
                       rows={3}
                       value={blueprint.title}
-                      onChange={(e) =>
+                      onChange={(val) =>
                         setBlueprint({
                           ...blueprint,
-                          title: e.target.value,
+                          title: val,
                         })
                       }
-                      className="w-full border rounded-lg p-3 resize-none outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border rounded-lg p-3"
                       placeholder="Blueprint Title"
                     />
                   </div>
@@ -141,16 +141,16 @@ const Blueprint = () => {
                       Description
                     </label>
 
-                    <textarea
+                    <SummernoteEditor
                       rows={5}
                       value={blueprint.description}
-                      onChange={(e) =>
+                      onChange={(val) =>
                         setBlueprint({
                           ...blueprint,
-                          description: e.target.value,
+                          description: val,
                         })
                       }
-                      className="w-full border rounded-lg p-3 resize-none outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full border rounded-lg p-3"
                       placeholder="Blueprint Description"
                     />
                   </div>

@@ -1,3 +1,5 @@
+import SummernoteEditor from '../../components/SummernoteEditor';
+import Swal from 'sweetalert2';
 import React, { useState, useEffect } from 'react'
 import { usePages } from '../../hooks/usePages';
 import { toast, Toaster } from 'react-hot-toast';
@@ -42,11 +44,25 @@ const SmartposFeatures = () => {
         ]);
     };
 
-    const removeLeftFeature = (index) => {
+    const removeLeftFeature = async (index) => {
         if (leftFeatures.length === 1) {
             toast.error("At least one left feature is required.");
             return;
         }
+
+        const confirmDelete = await Swal.fire({
+            title: "Delete Feature?",
+            text: "Are you sure you want to delete this feature?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, Delete",
+            cancelButtonText: "Cancel",
+            reverseButtons: true,
+            confirmButtonColor: "#ef4444",
+            cancelButtonColor: "#6b7280",
+        });
+        if (!confirmDelete.isConfirmed) return;
+
 
         setLeftFeatures((prev) => prev.filter((_, i) => i !== index));
     };
@@ -61,17 +77,71 @@ const SmartposFeatures = () => {
         ]);
     };
 
-    const removeRightFeature = (index) => {
+    const removeRightFeature = async (index) => {
         if (rightFeatures.length === 1) {
             toast.error("At least one right feature is required.");
             return;
         }
+
+        const confirmDelete = await Swal.fire({
+            title: "Delete Feature?",
+            text: "Are you sure you want to delete this feature?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, Delete",
+            cancelButtonText: "Cancel",
+            reverseButtons: true,
+            confirmButtonColor: "#ef4444",
+            cancelButtonColor: "#6b7280",
+        });
+        if (!confirmDelete.isConfirmed) return;
+
 
         setRightFeatures((prev) => prev.filter((_, i) => i !== index));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validation
+        for (let i = 0; i < leftFeatures.length; i++) {
+            const feature = leftFeatures[i];
+            if (!feature.title || feature.title.replace(/<[^>]*>/g, '').trim() === '') {
+                toast.error(`Left Feature ${i + 1} Title is required.`);
+                return;
+            }
+            if (feature.description !== undefined && (!feature.description || feature.description.replace(/<[^>]*>/g, '').trim() === '')) {
+                toast.error(`Left Feature ${i + 1} Description is required.`);
+                return;
+            }
+        }
+
+        for (let i = 0; i < rightFeatures.length; i++) {
+            const feature = rightFeatures[i];
+            if (!feature.title || feature.title.replace(/<[^>]*>/g, '').trim() === '') {
+                toast.error(`Right Feature ${i + 1} Title is required.`);
+                return;
+            }
+            if (feature.description !== undefined && (!feature.description || feature.description.replace(/<[^>]*>/g, '').trim() === '')) {
+                toast.error(`Right Feature ${i + 1} Description is required.`);
+                return;
+            }
+        }
+
+        // Save Confirmation
+        const confirmSave = await Swal.fire({
+            title: "Save Changes?",
+            text: "Do you want to save the changes?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Yes, Save",
+            cancelButtonText: "Cancel",
+            reverseButtons: true,
+            confirmButtonColor: "#2563eb",
+            cancelButtonColor: "#6b7280",
+        });
+        if (!confirmSave.isConfirmed) return;
+
 
         const result = await handleChangePageData("smart-pos", { leftFeatures: leftFeatures });
 
@@ -109,13 +179,12 @@ const SmartposFeatures = () => {
                                 Section Title
                             </h2>
 
-                            <input
-                                type="text"
+                            <SummernoteEditor 
                                 placeholder="Enter section title"
                                 value={title}
-                                onChange={(e) => setTitle(e.target.value)}
+                                onChange={(val) => setTitle(val)}
                                 className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                            />
+                             />
                         </div>
 
                         <div className="grid xl:grid-cols-2 gap-8">
@@ -177,16 +246,15 @@ const SmartposFeatures = () => {
                                                         Title
                                                     </label>
 
-                                                    <input
-                                                        type="text"
+                                                    <SummernoteEditor 
                                                         value={feature.title}
-                                                        onChange={(e) => {
+                                                        onChange={(val) => {
                                                             const newFeatures = [...leftFeatures];
-                                                            newFeatures[index].title = e.target.value;
+                                                            newFeatures[index].title = val;
                                                             setLeftFeatures(newFeatures);
                                                         }}
                                                         className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                                                    />
+                                                     />
                                                 </div>
 
                                                 <div>
@@ -194,16 +262,16 @@ const SmartposFeatures = () => {
                                                         Description
                                                     </label>
 
-                                                    <textarea
+                                                    <SummernoteEditor 
                                                         rows={4}
                                                         value={feature.description}
-                                                        onChange={(e) => {
+                                                        onChange={(val) => {
                                                             const newFeatures = [...leftFeatures];
-                                                            newFeatures[index].description = e.target.value;
+                                                            newFeatures[index].description = val;
                                                             setLeftFeatures(newFeatures);
                                                         }}
                                                         className="w-full rounded-xl border border-gray-300 px-4 py-3 resize-none outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                                                    />
+                                                     />
                                                 </div>
                                             </div>
                                         </div>
@@ -268,16 +336,15 @@ const SmartposFeatures = () => {
                                                         Title
                                                     </label>
 
-                                                    <input
-                                                        type="text"
+                                                    <SummernoteEditor 
                                                         value={feature.title}
-                                                        onChange={(e) => {
+                                                        onChange={(val) => {
                                                             const newFeatures = [...rightFeatures];
-                                                            newFeatures[index].title = e.target.value;
+                                                            newFeatures[index].title = val;
                                                             setRightFeatures(newFeatures);
                                                         }}
                                                         className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                                                    />
+                                                     />
                                                 </div>
 
                                                 <div>
@@ -285,16 +352,16 @@ const SmartposFeatures = () => {
                                                         Description
                                                     </label>
 
-                                                    <textarea
+                                                    <SummernoteEditor 
                                                         rows={4}
                                                         value={feature.description}
-                                                        onChange={(e) => {
+                                                        onChange={(val) => {
                                                             const newFeatures = [...rightFeatures];
-                                                            newFeatures[index].description = e.target.value;
+                                                            newFeatures[index].description = val;
                                                             setRightFeatures(newFeatures);
                                                         }}
                                                         className="w-full rounded-xl border border-gray-300 px-4 py-3 resize-none outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                                                    />
+                                                     />
                                                 </div>
                                             </div>
                                         </div>

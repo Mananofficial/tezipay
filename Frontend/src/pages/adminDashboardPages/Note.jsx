@@ -1,3 +1,4 @@
+import SummernoteEditor from '../../components/SummernoteEditor';
 import React, { useState, useEffect } from "react";
 import { useHomepage } from "../../hooks/useHomepage";
 import { useAdminCustom } from "../../hooks/useAdminCustom";
@@ -85,18 +86,18 @@ const Note = () => {
                           Note
                         </label>
 
-                        <textarea
+                        <SummernoteEditor
                           id="note"
                           rows={6}
                           placeholder="Enter your note..."
                           value={note.note}
-                          onChange={(e) =>
+                          onChange={(val) =>
                             setNote({
                               ...note,
-                              note: e.target.value,
+                              note: val,
                             })
                           }
-                          className="w-full border rounded-lg p-4 resize-none outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full border rounded-lg p-4"
                         />
                       </div>
 
@@ -108,18 +109,18 @@ const Note = () => {
                           Contact Information
                         </label>
 
-                        <textarea
+                        <SummernoteEditor
                           id="contact"
                           rows={3}
                           placeholder="Email, phone number, address..."
                           value={note.contact}
-                          onChange={(e) =>
+                          onChange={(val) =>
                             setNote({
                               ...note,
-                              contact: e.target.value,
+                              contact: val,
                             })
                           }
-                          className="w-full border rounded-lg p-4 resize-none outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full border rounded-lg p-4"
                         />
                       </div>
 

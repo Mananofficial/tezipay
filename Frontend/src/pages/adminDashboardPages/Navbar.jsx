@@ -9,6 +9,7 @@ const Navbar = () => {
   const { homepageData, loading: homepageLoading } = useHomepage();
   const { loading: updateLoading, handleUpdate, handleImageUpload } = useAdminCustom();
   const fileInputRef = useRef(null);
+  const faviconInputRef = useRef(null);
 
   const [navbar, setNavbar] = useState({
     logo: '',
@@ -19,6 +20,7 @@ const Navbar = () => {
       }
     ],
   });
+  const [favicon, setFavicon] = useState('');
 
   useEffect(() => {
     if (homepageData?.navbar) {
@@ -26,6 +28,9 @@ const Navbar = () => {
         ...homepageData.navbar,
         logo: resolveImageUrl(homepageData.navbar.logo)
       });
+    }
+    if (homepageData?.favicon) {
+      setFavicon(resolveImageUrl(homepageData.favicon));
     }
   }, [homepageData]);
 
@@ -53,6 +58,21 @@ const Navbar = () => {
     }
   };
 
+  const handleFaviconFileChange = async (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    const result = await handleImageUpload(file);
+
+    if (result.success) {
+      setFavicon(result.url);
+      toast.success("Favicon uploaded successfully!");
+    } else {
+      toast.error(result.error?.response?.data?.error || result.error?.message || 'Only JPEG, PNG, SVG and ICO images are allowed.');
+    }
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -70,7 +90,7 @@ const Navbar = () => {
 
     if (!result.isConfirmed) return;
 
-    const response = await handleUpdate({ navbar });
+    const response = await handleUpdate({ navbar, favicon });
 
     if (response.success) {
       toast.success("Navbar updated successfully!");
@@ -92,7 +112,7 @@ const Navbar = () => {
             <h1 className="text-4xl font-bold">Navbar</h1>
 
             <form onSubmit={handleSubmit} className="max-w-4xl flex flex-col gap-6 w-full">
-              <div className="input-group flex gap-4 justify-start items-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
                 <div className="bg-black/6 rounded-xl shadow p-6">
                   <h2 className="text-lg font-semibold mb-5">
                     Website Logo
@@ -119,8 +139,43 @@ const Navbar = () => {
                       </p>
                     </div>
                   </div>
+                  <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,image/svg+xml,.jpg,.jpeg,.png,.svg" className="hidden" onChange={handleFileChange} />
                 </div>
-                <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,image/svg+xml,.jpg,.jpeg,.png,.svg" className="hidden" onChange={handleFileChange} />
+
+                <div className="bg-black/6 rounded-xl shadow p-6">
+                  <h2 className="text-lg font-semibold mb-5">
+                    Website Favicon
+                  </h2>
+
+                  <div className="flex flex-col md:flex-row gap-6 items-center">
+                    {favicon ? (
+                      <img
+                        src={resolveImageUrl(favicon)}
+                        alt="Favicon"
+                        className="w-20 h-20 object-contain rounded-lg border bg-gray-50"
+                      />
+                    ) : (
+                      <div className="w-20 h-20 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400">
+                        No Favicon
+                      </div>
+                    )}
+
+                    <div>
+                      <button
+                        type="button"
+                        onClick={() => faviconInputRef.current.click()}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg transition"
+                      >
+                        Upload New Favicon
+                      </button>
+
+                      <p className="text-gray-500 text-sm mt-3">
+                        ICO, PNG, SVG or JPG recommended.
+                      </p>
+                    </div>
+                  </div>
+                  <input ref={faviconInputRef} type="file" accept="image/x-icon,image/vnd.microsoft.icon,image/jpeg,image/png,image/svg+xml,.ico,.jpg,.jpeg,.png,.svg" className="hidden" onChange={handleFaviconFileChange} />
+                </div>
               </div>
 
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">

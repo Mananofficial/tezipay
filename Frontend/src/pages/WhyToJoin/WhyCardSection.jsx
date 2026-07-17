@@ -1,3 +1,5 @@
+import SummernoteEditor from '../../components/SummernoteEditor';
+import Swal from 'sweetalert2';
 import React, { useEffect, useState } from "react";
 import { usePages } from "../../hooks/usePages";
 import { toast, Toaster } from "react-hot-toast";
@@ -48,11 +50,25 @@ const WhyCardSection = () => {
         }));
     };
 
-    const removeCard = (index) => {
+    const removeCard = async (index) => {
         if (sectionData.cards.length === 1) {
             toast.error("At least one card is required.");
             return;
         }
+
+        const confirmDelete = await Swal.fire({
+            title: "Delete Card?",
+            text: "Are you sure you want to delete this card?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, Delete",
+            cancelButtonText: "Cancel",
+            reverseButtons: true,
+            confirmButtonColor: "#ef4444",
+            cancelButtonColor: "#6b7280",
+        });
+        if (!confirmDelete.isConfirmed) return;
+
 
         setSectionData((prev) => ({
             ...prev,
@@ -76,6 +92,52 @@ const WhyCardSection = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validation
+        if (!sectionData.title || sectionData.title.replace(/<[^>]*>/g, '').trim() === '') {
+            toast.error("Title is required.");
+            return;
+        }
+        if (sectionData.description !== undefined && (!sectionData.description || sectionData.description.replace(/<[^>]*>/g, '').trim() === '')) {
+            toast.error("Description is required.");
+            return;
+        }
+        if (sectionData.subtitle !== undefined && (!sectionData.subtitle || sectionData.subtitle.replace(/<[^>]*>/g, '').trim() === '')) {
+            toast.error("Subtitle is required.");
+            return;
+        }
+        if (sectionData.cards) {
+            for (let i = 0; i < sectionData.cards.length; i++) {
+                const card = sectionData.cards[i];
+                if (!card.number || card.number.replace(/<[^>]*>/g, '').trim() === '') {
+                    toast.error(`Card ${i + 1} Number is required.`);
+                    return;
+                }
+                if (!card.title || card.title.replace(/<[^>]*>/g, '').trim() === '') {
+                    toast.error(`Card ${i + 1} Title is required.`);
+                    return;
+                }
+                if (!card.description || card.description.replace(/<[^>]*>/g, '').trim() === '') {
+                    toast.error(`Card ${i + 1} Description is required.`);
+                    return;
+                }
+            }
+        }
+
+        // Save Confirmation
+        const confirmSave = await Swal.fire({
+            title: "Save Changes?",
+            text: "Do you want to save the changes?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Yes, Save",
+            cancelButtonText: "Cancel",
+            reverseButtons: true,
+            confirmButtonColor: "#2563eb",
+            cancelButtonColor: "#6b7280",
+        });
+        if (!confirmSave.isConfirmed) return;
+
 
         const result = await handleChangePageData("why-to-join", {
             sections: [sectionData],
@@ -121,18 +183,16 @@ const WhyCardSection = () => {
                                         Title
                                     </label>
 
-                                    <input
-                                        type="text"
+                                    <SummernoteEditor 
                                         placeholder="Enter section title"
                                         value={sectionData.title}
-                                        onChange={(e) =>
-                                            setSectionData((prev) => ({
+                                        onChange={(val) => setSectionData((prev) => ({
                                                 ...prev,
-                                                title: e.target.value,
+                                                title: val,
                                             }))
                                         }
                                         className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                                    />
+                                     />
                                 </div>
 
                                 <div>
@@ -140,18 +200,16 @@ const WhyCardSection = () => {
                                         Subtitle
                                     </label>
 
-                                    <input
-                                        type="text"
+                                    <SummernoteEditor 
                                         placeholder="Enter section subtitle"
                                         value={sectionData.subtitle}
-                                        onChange={(e) =>
-                                            setSectionData((prev) => ({
+                                        onChange={(val) => setSectionData((prev) => ({
                                                 ...prev,
-                                                subtitle: e.target.value,
+                                                subtitle: val,
                                             }))
                                         }
                                         className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                                    />
+                                     />
                                 </div>
 
                                 <div>
@@ -159,18 +217,17 @@ const WhyCardSection = () => {
                                         Description
                                     </label>
 
-                                    <textarea
+                                    <SummernoteEditor 
                                         rows={5}
                                         placeholder="Enter section description"
                                         value={sectionData.description}
-                                        onChange={(e) =>
-                                            setSectionData((prev) => ({
+                                        onChange={(val) => setSectionData((prev) => ({
                                                 ...prev,
-                                                description: e.target.value,
+                                                description: val,
                                             }))
                                         }
                                         className="w-full rounded-xl border border-gray-300 px-4 py-3 resize-none outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                                    />
+                                     />
                                 </div>
                             </div>
                         </div>
@@ -235,19 +292,15 @@ const WhyCardSection = () => {
                                                     Card Title
                                                 </label>
 
-                                                <input
-                                                    type="text"
+                                                <SummernoteEditor 
                                                     placeholder="Enter card title"
                                                     value={card.title || ""}
-                                                    onChange={(e) =>
-                                                        updateCard(
+                                                    onChange={(val) => updateCard(
                                                             index,
-                                                            "title",
-                                                            e.target.value
-                                                        )
+                                                            "title", val)
                                                     }
                                                     className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                                                />
+                                                 />
                                             </div>
 
                                             <div>
@@ -255,19 +308,16 @@ const WhyCardSection = () => {
                                                     Card Description
                                                 </label>
 
-                                                <textarea
+                                                <SummernoteEditor 
                                                     rows={5}
                                                     placeholder="Enter card description"
                                                     value={card.description || ""}
-                                                    onChange={(e) =>
-                                                        updateCard(
+                                                    onChange={(val) => updateCard(
                                                             index,
-                                                            "description",
-                                                            e.target.value
-                                                        )
+                                                            "description", val)
                                                     }
                                                     className="w-full rounded-xl border border-gray-300 px-4 py-3 resize-none outline-none transition focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
-                                                />
+                                                 />
                                             </div>
                                         </div>
                                     </div>

@@ -15,6 +15,9 @@ const adminLoginValidator = [
 
 // --- PATCH /api/admin/homepage ---
 const homepageUpdateValidator = [
+    // favicon
+    body('favicon').optional().isString().notEmpty().withMessage('favicon cannot be empty'),
+
     // colors
     body('colors.primary').optional().isString().notEmpty().withMessage('colors.primary cannot be empty').matches(/^#[0-9A-Fa-f]{6}$/).withMessage('colors.primary must be a valid hex color code'),
     body('colors.secondary').optional().isString().notEmpty().withMessage('colors.secondary cannot be empty').matches(/^#[0-9A-Fa-f]{6}$/).withMessage('colors.secondary must be a valid hex color code'),

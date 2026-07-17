@@ -6,10 +6,10 @@ export const useAdminCustom = () => {
     const context = useContext(AdminCustomContext);
     const { loading, setLoading, url, setUrl } = context;
 
-    const handleUpdate = async ({ colors, navbar, heroSection, heroBelowSection, blueprint, note, footer }) => {
+    const handleUpdate = async ({ favicon, colors, navbar, heroSection, heroBelowSection, blueprint, note, footer }) => {
         setLoading(true);
         try {
-            await updateData({ colors, navbar, heroSection, heroBelowSection, blueprint, note, footer });
+            await updateData({ favicon, colors, navbar, heroSection, heroBelowSection, blueprint, note, footer });
             console.log("Data updated successfully");
             return { success: true };
         } catch (error) {

@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useHomepage } from '../hooks/useHomepage'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { resolveImageUrl } from '../utils/resolveImageUrl'
 
 const Navbar = () => {
     const { homepageData } = useHomepage();
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
 
 
     return (
@@ -39,12 +40,14 @@ const Navbar = () => {
                         <ul className="flex flex-col items-center py-6 gap-6 text-lg font-medium">
                             {homepageData?.navbar?.navbarLinks?.map((link, index) => (
                                 <li key={index}>
-                                    <Link
-                                        to={link.url}
-                                        onClick={() => setIsOpen(false)}
+                                    <div
+                                        onClick={() => {
+                                            setIsOpen(false);
+                                            navigate(link.url);
+                                        }}
                                     >
                                         {link.text}
-                                    </Link>
+                                    </div>
                                 </li>
                             ))}
                         </ul>

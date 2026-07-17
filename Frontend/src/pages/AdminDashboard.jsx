@@ -1,203 +1,115 @@
 import React from "react";
 import { Link } from "react-router";
 import {
-  House,
-  CreditCard,
-  Info,
-  Users,
-  Palette,
-  PanelTop,
-  ExternalLink,
-  ArrowRight,
+  House, CreditCard, Info, Users, Palette, PanelTop,
+  ExternalLink, ArrowRight, Smartphone, CircleDollarSign,
+  Briefcase, BookOpen, Shield, HelpCircle, Zap, Settings2,
+  BarChart3, Globe
 } from "lucide-react";
 
+const pages = [
+  { title: "Homepage", description: "Hero, blueprint, notes and homepage sections.", icon: House, color: "#6366f1", bg: "#eef2ff", path: "/admin/dashboard/hero-section" },
+  { title: "Smart POS", description: "Hero, cards, features and CTA sections.", icon: CreditCard, color: "#0ea5e9", bg: "#e0f2fe", path: "/admin/dashboard/smart-pos/hero-section" },
+  { title: "Soft POS", description: "Hero, cards, features and CTA sections.", icon: Smartphone, color: "#8b5cf6", bg: "#ede9fe", path: "/admin/dashboard/soft-pos/hero-section" },
+  { title: "Payment Gateway", description: "Hero, cards, features and CTA sections.", icon: CircleDollarSign, color: "#10b981", bg: "#d1fae5", path: "/admin/dashboard/payment-gateway/hero-section" },
+  { title: "Smart Card", description: "Hero, cards, features and CTA sections.", icon: CreditCard, color: "#f59e0b", bg: "#fef3c7", path: "/admin/dashboard/smart-card/hero-section" },
+  { title: "Payroll", description: "Hero, cards, features and CTA sections.", icon: Briefcase, color: "#ef4444", bg: "#fee2e2", path: "/admin/dashboard/payroll/hero-section" },
+  { title: "Swift Loan", description: "Hero, cards, features and CTA sections.", icon: Zap, color: "#f97316", bg: "#ffedd5", path: "/admin/dashboard/swift-loan/hero-section" },
+  { title: "Bookkeeping", description: "Hero, cards, features and CTA sections.", icon: BookOpen, color: "#06b6d4", bg: "#cffafe", path: "/admin/dashboard/book-keeping/hero-section" },
+  { title: "Insurance", description: "Hero, cards, features and CTA sections.", icon: Shield, color: "#84cc16", bg: "#ecfccb", path: "/admin/dashboard/insurance-solutions/hero-section" },
+  { title: "Why To Join", description: "Hero, cards and CTA sections.", icon: HelpCircle, color: "#ec4899", bg: "#fce7f3", path: "/admin/dashboard/why-to-join/hero-section" },
+  { title: "About", description: "Hero, cards and features sections.", icon: Info, color: "#14b8a6", bg: "#ccfbf1", path: "/admin/dashboard/about/hero-section" },
+];
+
+const quickSettings = [
+  { title: "Website Colors", desc: "Manage global brand colors.", icon: Palette, path: "/admin/dashboard/colors", color: "#6366f1" },
+  { title: "Navbar & Logo", desc: "Update navigation links, logo & favicon.", icon: PanelTop, path: "/admin/dashboard/navbar", color: "#0ea5e9" },
+  { title: "Footer", desc: "Update footer links and social media.", icon: Globe, path: "/admin/dashboard/footer", color: "#10b981" },
+];
+
 const AdminDashboard = () => {
-  const pages = [
-    {
-      title: "Homepage",
-      description: "Manage hero, blueprint, notes and homepage content.",
-      icon: House,
-      path: "/admin/dashboard/hero-section",
-    },
-    {
-      title: "Smart POS",
-      description: "Manage Smart POS hero, cards, features and CTA sections.",
-      icon: CreditCard,
-      path: "/admin/dashboard/smart-pos/hero-section",
-    },
-    {
-      title: "About",
-      description: "Manage the About page hero, cards and feature content.",
-      icon: Info,
-      path: "/admin/dashboard/about/hero-section",
-    },
-    {
-      title: "Why To Join",
-      description: "Manage the Why To Join page hero, cards and CTA content.",
-      icon: Users,
-      path: "/admin/dashboard/why-to-join/hero-section",
-    },
-  ];
-
   return (
-    <main className="py-10 md:py-14">
-      <div className="w-full max-w-7xl mx-auto px-6">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-10">
-          <div>
-            <h1 className="text-4xl font-bold">
-              Dashboard
-            </h1>
-
-            <p className="text-gray-500 mt-2">
-              Manage your website content and customize pages from one place.
-            </p>
-          </div>
-
-          <Link
-            to="/"
-            target="_blank"
-            className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-medium transition"
-          >
-            View Website
-            <ExternalLink size={18} />
-          </Link>
-        </div>
-
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 md:p-8 mb-10">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div>
-              <p className="text-sm font-medium text-blue-600 mb-2">
-                ADMIN PANEL
-              </p>
-
-              <h2 className="text-2xl md:text-3xl font-bold">
-                Welcome to your Content Management Dashboard
-              </h2>
-
-              <p className="text-gray-500 mt-3 max-w-2xl">
-                Select any page below or use the sidebar to update your website
-                content. Changes will be reflected on the website after saving.
-              </p>
-            </div>
-
-            <div className="w-16 h-16 shrink-0 rounded-2xl bg-blue-50 flex items-center justify-center">
-              <PanelTop
-                size={30}
-                className="text-blue-600"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="mb-10">
-          <div className="mb-6">
-            <h2 className="text-2xl font-semibold">
-              Manage Pages
-            </h2>
-
-            <p className="text-gray-500 mt-1">
-              Quickly access and edit your website pages.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {pages.map((page) => {
-              const Icon = page.icon;
-
-              return (
-                <Link
-                  key={page.title}
-                  to={page.path}
-                  className="group bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300 p-6"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
-                      <Icon
-                        size={24}
-                        className="text-blue-600"
-                      />
-                    </div>
-
-                    <ArrowRight
-                      size={20}
-                      className="text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition"
-                    />
-                  </div>
-
-                  <h3 className="text-xl font-semibold mt-6">
-                    {page.title}
-                  </h3>
-
-                  <p className="text-gray-500 mt-2">
-                    {page.description}
-                  </p>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-
+    <div className="admin-page">
+      {/* Top bar */}
+      <div className="admin-topbar">
         <div>
-          <h2 className="text-2xl font-semibold mb-6">
-            Quick Settings
-          </h2>
+          <h1 className="admin-topbar__title">Dashboard</h1>
+          <p className="admin-topbar__sub">Welcome back! Manage your website content from here.</p>
+        </div>
+        <Link to="/" target="_blank" className="admin-topbar__cta">
+          <ExternalLink size={16} />
+          View Website
+        </Link>
+      </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Link
-              to="/admin/dashboard/colors"
-              className="group bg-white rounded-2xl border border-gray-200 p-6 flex items-center justify-between hover:border-blue-200 hover:shadow-md transition"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-11 h-11 rounded-xl bg-gray-100 flex items-center justify-center">
-                  <Palette size={22} />
-                </div>
-
-                <div>
-                  <h3 className="font-semibold">
-                    Website Colors
-                  </h3>
-
-                  <p className="text-sm text-gray-500 mt-1">
-                    Manage global website colors.
-                  </p>
-                </div>
-              </div>
-
-              <ArrowRight
-                size={20}
-                className="text-gray-400 group-hover:translate-x-1 transition"
-              />
-            </Link>
-
-            <Link
-              to="/admin/dashboard/navbar"
-              className="group bg-white rounded-2xl border border-gray-200 p-6 flex items-center justify-between hover:border-blue-200 hover:shadow-md transition"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-11 h-11 rounded-xl bg-gray-100 flex items-center justify-center">
-                  <PanelTop size={22} />
-                </div>
-
-                <div>
-                  <h3 className="font-semibold">
-                    Header & Footer
-                  </h3>
-
-                  <p className="text-sm text-gray-500 mt-1">
-                    Manage global navigation and layout.
-                  </p>
-                </div>
-              </div>
-
-              <ArrowRight
-                size={20}
-                className="text-gray-400 group-hover:translate-x-1 transition"
-              />
-            </Link>
-          </div>
+      {/* Hero banner */}
+      <div className="admin-banner">
+        <div className="admin-banner__content">
+          <span className="admin-banner__badge">
+            <BarChart3 size={13} /> Content Manager
+          </span>
+          <h2 className="admin-banner__title">Content Management System</h2>
+          <p className="admin-banner__desc">
+            Select any page below or use the sidebar navigation to update content. Changes are reflected on your website instantly after saving.
+          </p>
+        </div>
+        <div className="admin-banner__graphic">
+          <Settings2 size={52} strokeWidth={1.2} />
         </div>
       </div>
-    </main>
+
+      {/* Quick settings */}
+      <section className="admin-section">
+        <div className="admin-section__header">
+          <h2 className="admin-section__title">Quick Settings</h2>
+          <p className="admin-section__desc">Global settings that affect the entire website.</p>
+        </div>
+        <div className="admin-quick-grid">
+          {quickSettings.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Link key={item.title} to={item.path} className="admin-quick-card">
+                <span className="admin-quick-card__icon" style={{ background: item.color + "18", color: item.color }}>
+                  <Icon size={20} />
+                </span>
+                <div>
+                  <h3 className="admin-quick-card__title">{item.title}</h3>
+                  <p className="admin-quick-card__desc">{item.desc}</p>
+                </div>
+                <ArrowRight size={16} className="admin-quick-card__arrow" />
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* All pages */}
+      <section className="admin-section">
+        <div className="admin-section__header">
+          <h2 className="admin-section__title">Manage Pages</h2>
+          <p className="admin-section__desc">Click any card to start editing that page's content.</p>
+        </div>
+        <div className="admin-pages-grid">
+          {pages.map((page) => {
+            const Icon = page.icon;
+            return (
+              <Link key={page.title} to={page.path} className="admin-page-card">
+                <div className="admin-page-card__top">
+                  <span className="admin-page-card__icon" style={{ background: page.bg, color: page.color }}>
+                    <Icon size={22} />
+                  </span>
+                  <span className="admin-page-card__arrow">
+                    <ArrowRight size={16} />
+                  </span>
+                </div>
+                <h3 className="admin-page-card__title">{page.title}</h3>
+                <p className="admin-page-card__desc">{page.description}</p>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+    </div>
   );
 };
 

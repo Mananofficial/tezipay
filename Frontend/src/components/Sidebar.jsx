@@ -1,35 +1,48 @@
 import { sidebarConfig } from "../config/sidebarConfig";
 import SidebarGroup from "./SidebarGroup";
 import { useAdminAuth } from "../hooks/useAdminAuth";
+import { Link } from "react-router";
+import { LogOut, LayoutDashboard, ExternalLink } from "lucide-react";
 
 const Sidebar = () => {
   const { handleAdminLogout } = useAdminAuth();
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="sidebar">
 
-      <div className="shrink-0 border-b border-white/10 px-6 py-5">
-        <h1 className="text-3xl font-bold text-white">
-          Admin Dashboard
-        </h1>
+      <div className="sidebar__header">
+        <Link to="/admin/dashboard" className="sidebar__brand">
+          <div>
+            <p className="sidebar__brand-sub">Admin Panel</p>
+          </div>
+        </Link>
       </div>
 
-      <div className="flex-1 overflow-y-auto sidebar-scroll p-4">
-        <div className="space-y-4">
+      <nav className="sidebar__nav sidebar-scroll">
+        <p className="sidebar__section-label">Navigation</p>
+        <div className="sidebar__groups">
           {sidebarConfig.map((group) => (
-            <SidebarGroup
-              key={group.title}
-              {...group}
-            />
+            <SidebarGroup key={group.title} {...group} />
           ))}
         </div>
-      </div>
+      </nav>
 
-      <div className="shrink-0 border-t border-white/10 p-4 bg-[#1b1b1b]">
+      <div className="sidebar__footer">
+        <a
+          href="/"
+          target="_blank"
+          rel="noreferrer"
+          className="sidebar__footer-link"
+        >
+          <ExternalLink size={15} />
+          View Website
+        </a>
+
         <button
           onClick={handleAdminLogout}
-          className="w-full rounded-xl bg-red-950 py-3 font-semibold text-white transition hover:bg-red-800"
+          className="sidebar__logout"
         >
+          <LogOut size={15} />
           Logout
         </button>
       </div>

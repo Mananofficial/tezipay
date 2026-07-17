@@ -78,7 +78,7 @@ const SmartCardFeatures = () => {
 
         const response = await handleChangePageData("smart-card", { rightFeatures: rightFeatures });
 
-        const titleResponse = await handleChangePageData("smart-card", title);
+        const titleResponse = await handleChangePageData("smart-card", { title: title });
 
         if (titleResponse.success && result.success && response.success) {
             toast.success("All features updated successfully!");

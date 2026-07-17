@@ -78,7 +78,7 @@ const GatewayFeatures = () => {
 
         const response = await handleChangePageData("payment-gateway", { rightFeatures: rightFeatures });
 
-        const titleResponse = await handleChangePageData("payment-gateway", title);
+        const titleResponse = await handleChangePageData("payment-gateway", { title: title });
 
         if (titleResponse.success && result.success && response.success) {
             toast.success("All features updated successfully!");

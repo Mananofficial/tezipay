@@ -78,7 +78,7 @@ const SoftposFeatures = () => {
 
         const response = await handleChangePageData("soft-pos", { rightFeatures: rightFeatures });
 
-        const titleResponse = await handleChangePageData("soft-pos", title);
+        const titleResponse = await handleChangePageData("soft-pos", { title: title });
 
         if (titleResponse.success && result.success && response.success) {
             toast.success("All features updated successfully!");

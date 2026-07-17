@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { usePages } from '../../hooks/usePages';
 import { toast, Toaster } from 'react-hot-toast';
-import { useAdminCustom } from '../../hooks/useAdminCustom';
 
 const SmartposFeatures = () => {
     const { pageData, loading, handleChangePageData } = usePages("smart-pos");
@@ -78,7 +77,7 @@ const SmartposFeatures = () => {
 
         const response = await handleChangePageData("smart-pos", { rightFeatures: rightFeatures });
 
-        const titleResponse = await handleChangePageData("smart-pos", title);
+        const titleResponse = await handleChangePageData("smart-pos", { title: title });
 
         if (titleResponse.success && result.success && response.success) {
             toast.success("All features updated successfully!");

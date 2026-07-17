@@ -158,6 +158,10 @@ const footerSchema = {
 
 
 const homepageSchema = new mongoose.Schema({
+    favicon: {
+        type: String,
+        required: true
+    },
     colors: colorSchema,
     navbar: navbarSchema,
     heroSection: heroSectionSchema,

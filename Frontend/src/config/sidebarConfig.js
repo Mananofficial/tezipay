@@ -6,6 +6,7 @@ import {
     CircleDollarSign,
     Info,
     Smartphone,
+    Briefcase,
 } from "lucide-react";
 
 export const sidebarConfig = [
@@ -151,21 +152,132 @@ export const sidebarConfig = [
     },
 
     {
+        title: "Payroll",
+        icon: Briefcase,
+        sections: [
+            {
+                label: "Hero Section",
+                path: "/admin/dashboard/payroll/hero-section",
+            },
+            {
+                label: "Card Section",
+                path: "/admin/dashboard/payroll/card-section",
+            },
+            {
+                label: "Features",
+                path: "/admin/dashboard/payroll/features-section",
+            },
+            {
+                label: "CTA",
+                path: "/admin/dashboard/payroll/cta-section",
+            },
+        ],
+    },
+
+    {
+        title: "Swift Loan",
+        icon: CreditCard,
+        sections: [
+            {
+                label: "Hero Section",
+                path: "/admin/dashboard/swift-loan/hero-section",
+            },
+            {
+                label: "Card Section",
+                path: "/admin/dashboard/swift-loan/card-section",
+            },
+            {
+                label: "Features",
+                path: "/admin/dashboard/swift-loan/features-section",
+            },
+            {
+                label: "CTA",
+                path: "/admin/dashboard/swift-loan/cta-section",
+            },
+        ],
+    },
+
+    {
+        title: "Bookkeeping",
+        icon: CreditCard,
+        sections: [
+            {
+                label: "Hero Section",
+                path: "/admin/dashboard/book-keeping/hero-section",
+            },
+            {
+                label: "Card Section",
+                path: "/admin/dashboard/book-keeping/card-section",
+            },
+            {
+                label: "Features",
+                path: "/admin/dashboard/book-keeping/features-section",
+            },
+            {
+                label: "CTA",
+                path: "/admin/dashboard/book-keeping/cta-section",
+            },
+        ],
+    },
+
+    {
+        title: "Insurance Solutions",
+        icon: CreditCard,
+        sections: [
+            {
+                label: "Hero Section",
+                path: "/admin/dashboard/insurance-solutions/hero-section",
+            },
+            {
+                label: "Card Section",
+                path: "/admin/dashboard/insurance-solutions/card-section",
+            },
+            {
+                label: "Features",
+                path: "/admin/dashboard/insurance-solutions/features-section",
+            },
+            {
+                label: "CTA",
+                path: "/admin/dashboard/insurance-solutions/cta-section",
+            },
+        ],
+    },
+
+    {
+        title: "Why To Join",
+        icon: Info,
+        sections: [
+            {
+                label: "Hero",
+                path: "/admin/dashboard/why-to-join/hero-section",
+            },
+            {
+                label: "Card Section",
+                path: "/admin/dashboard/why-to-join/card-section",
+            },
+            {
+                label: "CTA",
+                path: "/admin/dashboard/why-to-join/cta-section",
+            }
+        ],
+    },
+
+    {
         title: "About",
         icon: Info,
         sections: [
             {
                 label: "Hero",
-                path: "/admin/dashboard/about/hero",
+                path: "/admin/dashboard/about/hero-section",
             },
             {
-                label: "Mission",
-                path: "/admin/dashboard/about/mission",
+                label: "Card Section",
+                path: "/admin/dashboard/about/card-section",
             },
             {
-                label: "Timeline",
-                path: "/admin/dashboard/about/timeline",
-            },
+                label: "Features",
+                path: "/admin/dashboard/about/features-section",
+            }
         ],
     },
 ];

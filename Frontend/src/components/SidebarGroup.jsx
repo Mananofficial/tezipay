@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router";
 
 const SidebarGroup = ({ title, icon, sections }) => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
     const Icon = icon;
 
     return (

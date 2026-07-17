@@ -38,6 +38,28 @@ import SmartCardHeroSection from "./pages/SmartCard/SmartCardHeroSection";
 import SmartCardCardSection from "./pages/SmartCard/SmartCardCardSection";
 import SmartCardFeatures from "./pages/SmartCard/SmartCardFeatures";
 import SmartCardCta from "./pages/SmartCard/SmartCardCta";
+import PayrollHeroSection from "./pages/Payroll/PayrollHeroSection";
+import PayrollCardSection from "./pages/Payroll/PayrollCardSection";
+import PayrollFeatures from "./pages/Payroll/PayrollFeatures";
+import PayrollCta from "./pages/Payroll/PayrollCta";
+import SwiftLoanHeroSection from "./pages/SwiftLoan/SwiftLoanHeroSection";
+import SwiftLoanCardSection from "./pages/SwiftLoan/SwiftLoanCardSection";
+import SwiftLoanFeatures from "./pages/SwiftLoan/SwiftLoanFeatures";
+import SwiftLoanCta from "./pages/SwiftLoan/SwiftLoanCta";
+import BookkeepingHeroSection from "./pages/Bookkeeping/BookkeepingHeroSection";
+import BookkeepingCardSection from "./pages/Bookkeeping/BookkeepingCardSection";
+import BookkeepingFeatures from "./pages/Bookkeeping/BookkeepingFeatures";
+import BookkeepingCta from "./pages/Bookkeeping/BookkeepingCta";
+import InsuranceHeroSection from "./pages/Insurance/InsuranceHeroSection";
+import InsuranceCardSection from "./pages/Insurance/InsuranceCardSection";
+import InsuranceFeatures from "./pages/Insurance/InsuranceFeatures";
+import InsuranceCta from "./pages/Insurance/InsuranceCta";
+import WhyHeroSection from "./pages/WhyToJoin/WhyHeroSection";
+import WhyCardSection from "./pages/WhyToJoin/WhyCardSection";
+import WhyCta from "./pages/WhyToJoin/WhyCta";
+import AboutHeroSection from "./pages/About/AboutHeroSection";
+import AboutCardSection from "./pages/About/AboutCardSection";
+import AboutFeatures from "./pages/About/AboutFeatures";
 
 export const router = createBrowserRouter([
     {
@@ -155,7 +177,96 @@ export const router = createBrowserRouter([
             {
                 path: "smart-card/cta-section",
                 element: <SmartCardCta />
+            },
+            {
+                path: "payroll/hero-section",
+                element: <PayrollHeroSection />
+            },
+            {
+                path: "payroll/card-section",
+                element: <PayrollCardSection />
+            },
+            {
+                path: "payroll/features-section",
+                element: <PayrollFeatures />
+            },
+            {
+                path: "payroll/cta-section",
+                element: <PayrollCta />
+            },
+            {
+                path: "swift-loan/hero-section",
+                element: <SwiftLoanHeroSection />
+            },
+            {
+                path: "swift-loan/card-section",
+                element: <SwiftLoanCardSection />
+            },
+            {
+                path: "swift-loan/features-section",
+                element: <SwiftLoanFeatures />
+            },
+            {
+                path: "swift-loan/cta-section",
+                element: <SwiftLoanCta />
+            },
+            {
+                path: "book-keeping/hero-section",
+                element: <BookkeepingHeroSection />
+            },
+            {
+                path: "book-keeping/card-section",
+                element: <BookkeepingCardSection />
+            },
+            {
+                path: "book-keeping/features-section",
+                element: <BookkeepingFeatures />
+            },
+            {
+                path: "book-keeping/cta-section",
+                element: <BookkeepingCta />
+            },
+            {
+                path: "insurance-solutions/hero-section",
+                element: <InsuranceHeroSection />
+            },
+            {
+                path: "insurance-solutions/card-section",
+                element: <InsuranceCardSection />
+            },
+            {
+                path: "insurance-solutions/features-section",
+                element: <InsuranceFeatures />
+            },
+            {
+                path: "insurance-solutions/cta-section",
+                element: <InsuranceCta />
+            },
+            {
+                path: "why-to-join/hero-section",
+                element: <WhyHeroSection />
+            },
+            {
+                path: "why-to-join/card-section",
+                element: <WhyCardSection />
+            },
+            {
+                path: "why-to-join/cta-section",
+                element: <WhyCta />
+            },
+            {
+                path: "about/hero-section",
+                element: <AboutHeroSection />
+            },
+            {
+                path: "about/card-section",
+                element: <AboutCardSection />
+            },
+            {
+                path: "about/features-section",
+                element: <AboutFeatures />
             }
+
         ]
     },
     {

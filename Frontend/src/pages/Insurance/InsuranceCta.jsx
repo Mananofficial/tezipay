@@ -22,7 +22,6 @@ const InsuranceCta = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validation
         if (!ctaData.heading || ctaData.heading.replace(/<[^>]*>/g, '').trim() === '') {
             toast.error("Heading is required.");
             return;
@@ -32,7 +31,6 @@ const InsuranceCta = () => {
             return;
         }
 
-        // Save Confirmation
         const confirmSave = await Swal.fire({
             title: "Save Changes?",
             text: "Do you want to save the changes?",

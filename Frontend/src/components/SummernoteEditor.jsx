@@ -3,16 +3,10 @@ import React, { useEffect, useRef } from "react";
 const SummernoteEditor = ({ value, onChange, placeholder, className, rows = 4 }) => {
     const textareaRef = useRef(null);
     const isUpdatingRef = useRef(false);
-
-    // Always keep a ref to the LATEST onChange prop.
-    // The Summernote callback is set up once on mount ([] deps), so without this
-    // ref it would capture a stale closure of onChange from the first render —
-    // when all state fields are still empty — causing every keystroke to wipe
-    // the other fields back to their initial empty values.
     const onChangeRef = useRef(onChange);
     useEffect(() => {
         onChangeRef.current = onChange;
-    }); // no deps → runs after every render, keeping the ref fresh
+    });
 
     useEffect(() => {
         const $textarea = window.$(textareaRef.current);
@@ -34,8 +28,6 @@ const SummernoteEditor = ({ value, onChange, placeholder, className, rows = 4 })
             callbacks: {
                 onChange: (contents) => {
                     if (!isUpdatingRef.current) {
-                        // Call through the ref so we always invoke the
-                        // latest onChange prop, not the stale initial one.
                         onChangeRef.current(contents);
                     }
                 }
@@ -48,7 +40,7 @@ const SummernoteEditor = ({ value, onChange, placeholder, className, rows = 4 })
         return () => {
             $textarea.summernote('destroy');
         };
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         const $textarea = window.$(textareaRef.current);

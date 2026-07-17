@@ -93,7 +93,7 @@ const WhyCardSection = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validation
+        
         if (!sectionData.title || sectionData.title.replace(/<[^>]*>/g, '').trim() === '') {
             toast.error("Title is required.");
             return;
@@ -124,7 +124,7 @@ const WhyCardSection = () => {
             }
         }
 
-        // Save Confirmation
+        
         const confirmSave = await Swal.fire({
             title: "Save Changes?",
             text: "Do you want to save the changes?",

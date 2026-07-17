@@ -85,22 +85,40 @@ const Colors = () => {
                   {field.label}
                 </label>
 
-                <input
-                  id={field.name}
-                  type="color"
-                  value={colors[field.name]}
-                  onChange={(e) =>
-                    setColors({
-                      ...colors,
-                      [field.name]: e.target.value,
-                    })
-                  }
-                  className="hidden"
-                />
+                <div style={{ position: 'relative' }}>
+                  <label
+                    htmlFor={field.name}
+                    className="cursor-pointer block"
+                  >
+                    <div
+                      className="w-full h-16 rounded-lg border shadow-inner"
+                      style={{ backgroundColor: colors[field.name] }}
+                    />
+                  </label>
 
-                <label htmlFor={field.name} className="cursor-pointer block">
-                  <div className="w-full h-16 rounded-lg border shadow-inner" style={{ backgroundColor: colors[field.name] }} />
-                </label>
+                  <input
+                    id={field.name}
+                    type="color"
+                    value={colors[field.name]}
+                    onChange={(e) =>
+                      setColors({
+                        ...colors,
+                        [field.name]: e.target.value,
+                      })
+                    }
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '1px',
+                      opacity: 0,
+                      cursor: 'pointer',
+                      border: 'none',
+                      padding: 0,
+                    }}
+                  />
+                </div>
 
                 <input
                   type="text"

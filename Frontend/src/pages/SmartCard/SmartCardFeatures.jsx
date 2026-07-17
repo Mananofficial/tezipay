@@ -104,7 +104,7 @@ const SmartCardFeatures = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validation
+        
         for (let i = 0; i < leftFeatures.length; i++) {
             const feature = leftFeatures[i];
             if (!feature.title || feature.title.replace(/<[^>]*>/g, '').trim() === '') {
@@ -129,7 +129,7 @@ const SmartCardFeatures = () => {
             }
         }
 
-        // Save Confirmation
+        
         const confirmSave = await Swal.fire({
             title: "Save Changes?",
             text: "Do you want to save the changes?",

@@ -6,11 +6,9 @@ const SidebarGroup = ({ title, icon, sections }) => {
     const location = useLocation();
     const Icon = icon;
 
-    // Auto-open group if one of its sections is currently active
     const isGroupActive = sections.some(s => location.pathname === s.path);
     const [open, setOpen] = useState(isGroupActive);
 
-    // Re-evaluate when route changes
     useEffect(() => {
         if (isGroupActive) setOpen(true);
     }, [location.pathname]);

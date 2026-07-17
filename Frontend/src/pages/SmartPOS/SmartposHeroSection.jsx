@@ -25,7 +25,7 @@ const SmartposHeroSection = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validation
+        
         if (!heroData.heading || heroData.heading.replace(/<[^>]*>/g, '').trim() === '') {
             toast.error("Heading is required.");
             return;
@@ -39,7 +39,7 @@ const SmartposHeroSection = () => {
             return;
         }
 
-        // Save Confirmation
+        
         const confirmSave = await Swal.fire({
             title: "Save Changes?",
             text: "Do you want to save the changes?",

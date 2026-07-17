@@ -4,13 +4,19 @@ const uploadImageService = require('../services/storage.service')
 const jwt = require('jsonwebtoken')
 
 async function updateHomepageData(req, res) {
-    const { favicon, colors, navbar, heroSection, heroBelowSection, blueprint, note, footer } = req.body
-
     try {
+        const updateFields = {}
+        const fields = ['favicon', 'colors', 'navbar', 'heroSection', 'heroBelowSection', 'blueprint', 'note', 'footer']
+        fields.forEach(field => {
+            if (req.body[field] !== undefined) {
+                updateFields[field] = req.body[field]
+            }
+        })
+
         const updatedHomepageData = await homepageModel.findOneAndUpdate(
             {},
-            { $set: { favicon, colors, navbar, heroSection, heroBelowSection, blueprint, note, footer } },
-            { returnDocument: 'after' }
+            { $set: updateFields },
+            { returnDocument: 'after', new: true }
         )
         res.status(200).json({
             message: 'Homepage data updated successfully',

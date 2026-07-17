@@ -25,13 +25,26 @@ async function updatePageData(req, res) {
 	const payload = req.body
 
 	try {
+		const updateObj = { pageKey }
+		
+		Object.keys(payload).forEach(key => {
+			if (payload[key] === undefined) return;
+			
+			if (payload[key] !== null && typeof payload[key] === 'object' && !Array.isArray(payload[key])) {
+				Object.keys(payload[key]).forEach(subKey => {
+					if (payload[key][subKey] !== undefined) {
+						updateObj[`${key}.${subKey}`] = payload[key][subKey]
+					}
+				})
+			} else {
+				updateObj[key] = payload[key]
+			}
+		})
+
 		const updatedPageData = await pageModel.findOneAndUpdate(
 			{ pageKey },
 			{
-				$set: {
-					pageKey,
-					...payload
-				}
+				$set: updateObj
 			},
 			{
 				new: true,

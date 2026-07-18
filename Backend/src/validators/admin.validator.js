@@ -25,6 +25,11 @@ const homepageUpdateValidator = [
     body('colors.secondaryForeground').optional().isString().notEmpty().withMessage('colors.secondaryForeground cannot be empty').matches(/^#[0-9A-Fa-f]{6}$/).withMessage('colors.secondaryForeground must be a valid hex color code'),
 
     body('navbar.logo').optional().isString().notEmpty().withMessage('navbar.logo cannot be empty'),
+    body('navbar.navDropdown').optional().isArray().withMessage('navbar.navDropdown must be an array'),
+    body('navbar.navDropdown.*.text').optional().isString().notEmpty().withMessage('Each dropdown needs text'),
+    body('navbar.navDropdown.*.links').optional().isArray().withMessage('Dropdown links must be an array'),
+    body('navbar.navDropdown.*.links.*.text').optional().isString().notEmpty().withMessage('Dropdown link needs text'),
+    body('navbar.navDropdown.*.links.*.url').optional().isString().notEmpty().withMessage('Dropdown link needs a url'),
     body('navbar.navbarLinks').optional().isArray().withMessage('navbar.navbarLinks must be an array'),
     body('navbar.navbarLinks.*.text').optional().isString().notEmpty().withMessage('Each navbar link needs text'),
     body('navbar.navbarLinks.*.url').optional().isString().notEmpty().withMessage('Each navbar link needs a url'),

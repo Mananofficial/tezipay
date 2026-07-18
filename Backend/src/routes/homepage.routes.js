@@ -5,6 +5,4 @@ const router = Router()
 
 router.get('/', homepageController.getHomepageData)
 
-// router.post('/', homepageController.createHomepageData)
-
 module.exports = router

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { PagesContext } from "../contexts/pages.context";
 import { getPageByKey, updatePageByKey } from "../services/pages.api";
 
@@ -19,20 +19,20 @@ export const usePages = (pageKey) => {
     }
 
     useEffect(() => {
+        setPageData(null);
+        setLoading(true);
+
         const fetchPageData = async () => {
-            setLoading(true);
             try {
                 const data = await getPageByKey(pageKey);
                 setPageData(data);
-                return { success: true };
             } catch (error) {
                 console.error(`Error fetching page data for key ${pageKey}:`, error);
-                throw error;
-                return { success: false };
             } finally {
                 setLoading(false);
             }
         };
+
         fetchPageData();
     }, [pageKey]);
 

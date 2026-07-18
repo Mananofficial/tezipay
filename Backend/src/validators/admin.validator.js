@@ -15,10 +15,8 @@ const adminLoginValidator = [
 
 // --- PATCH /api/admin/homepage ---
 const homepageUpdateValidator = [
-    // favicon
     body('favicon').optional().isString().notEmpty().withMessage('favicon cannot be empty'),
 
-    // colors
     body('colors.primary').optional().isString().notEmpty().withMessage('colors.primary cannot be empty').matches(/^#[0-9A-Fa-f]{6}$/).withMessage('colors.primary must be a valid hex color code'),
     body('colors.secondary').optional().isString().notEmpty().withMessage('colors.secondary cannot be empty').matches(/^#[0-9A-Fa-f]{6}$/).withMessage('colors.secondary must be a valid hex color code'),
     body('colors.primaryBackground').optional().isString().notEmpty().withMessage('colors.primaryBackground cannot be empty').matches(/^#[0-9A-Fa-f]{6}$/).withMessage('colors.primaryBackground must be a valid hex color code'),
@@ -26,13 +24,11 @@ const homepageUpdateValidator = [
     body('colors.primaryForeground').optional().isString().notEmpty().withMessage('colors.primaryForeground cannot be empty').matches(/^#[0-9A-Fa-f]{6}$/).withMessage('colors.primaryForeground must be a valid hex color code'),
     body('colors.secondaryForeground').optional().isString().notEmpty().withMessage('colors.secondaryForeground cannot be empty').matches(/^#[0-9A-Fa-f]{6}$/).withMessage('colors.secondaryForeground must be a valid hex color code'),
 
-    // navbar
     body('navbar.logo').optional().isString().notEmpty().withMessage('navbar.logo cannot be empty'),
     body('navbar.navbarLinks').optional().isArray().withMessage('navbar.navbarLinks must be an array'),
     body('navbar.navbarLinks.*.text').optional().isString().notEmpty().withMessage('Each navbar link needs text'),
     body('navbar.navbarLinks.*.url').optional().isString().notEmpty().withMessage('Each navbar link needs a url'),
 
-    // heroSection
     body('heroSection.heading').optional().isString().notEmpty(),
     body('heroSection.subheading').optional().isString().notEmpty(),
     body('heroSection.leftButton.text').optional().isString().notEmpty(),
@@ -41,11 +37,9 @@ const homepageUpdateValidator = [
     body('heroSection.rightButton.url').optional().isString().notEmpty(),
     body('heroSection.rightImage').optional().isString().notEmpty(),
 
-    // heroBelowSection
     body('heroBelowSection.title').optional().isString().notEmpty(),
     body('heroBelowSection.subtitle').optional().isString().notEmpty(),
 
-    // blueprint
     body('blueprint.header').optional().isString().notEmpty(),
     body('blueprint.title').optional().isString().notEmpty(),
     body('blueprint.description').optional().isString().notEmpty(),
@@ -53,11 +47,9 @@ const homepageUpdateValidator = [
     body('blueprint.points.*').optional().isString().notEmpty().withMessage('Each blueprint point must be non-empty text'),
     body('blueprint.image').optional().isString().notEmpty(),
 
-    // note
     body('note.note').optional().isString().notEmpty(),
     body('note.contact').optional().isString().notEmpty(),
 
-    // footer
     body('footer.logo').optional().isString().notEmpty(),
     body('footer.address').optional().isString().notEmpty(),
     body('footer.logoBelowText').optional().isString().notEmpty(),

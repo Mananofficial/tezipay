@@ -32,6 +32,24 @@ const navbarSchema = {
         type: String,
         required: true
     },
+    navDropdown: [
+        {
+            text: {
+                type: String,
+                required: true
+            },
+            links: [{
+                text: {
+                    type: String,
+                    required: true
+                },
+                url: {
+                    type: String,
+                    required: true
+                }
+            }]
+        }
+    ],
     navbarLinks: [{
         text: {
             type: String,

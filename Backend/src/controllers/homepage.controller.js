@@ -15,27 +15,7 @@ async function getHomepageData(req, res) {
     }
 }
 
-// async function createHomepageData(req, res) {
-//     const { colors, navbar, heroSection, heroBelowSection, blueprint, note, footer } = req.body
-
-//     const newHomepageData = await homepageModel.create({
-//         colors,
-//         navbar,
-//         heroSection,
-//         heroBelowSection,
-//         blueprint,
-//         note,
-//         footer
-//     })
-
-//     res.status(201).json({
-//         message: 'Homepage data created successfully',
-//         data: newHomepageData
-//     })
-// }
-
 
 module.exports = {
-    getHomepageData, 
-    // createHomepageData,
+    getHomepageData
 }

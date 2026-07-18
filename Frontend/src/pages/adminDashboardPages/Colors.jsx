@@ -122,6 +122,10 @@ const Colors = () => {
 
                 <input
                   type="text"
+                  minLength={7}
+                  maxLength={7}
+                  pattern="^#[0-9A-Fa-f]{6}$"
+                  title="Hex color code must start with # followed by 6 hex characters (e.g., #ffffff)"
                   value={colors[field.name]}
                   onChange={(e) =>
                     setColors({
@@ -130,6 +134,7 @@ const Colors = () => {
                     })
                   }
                   className="mt-4 w-full border rounded-lg px-3 py-2"
+                  required
                 />
               </div>
             ))}

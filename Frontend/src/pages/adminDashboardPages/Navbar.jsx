@@ -242,10 +242,13 @@ const AdminNavbar = () => {
                           <label className="block text-sm font-semibold text-gray-600 mb-1">Dropdown Label</label>
                           <input
                             type="text"
+                            minLength={1}
+                            maxLength={50}
                             value={dropdown.text}
                             placeholder="e.g. Services"
                             onChange={(e) => updateDropdownTitle(dIdx, e.target.value)}
                             className="border p-2 rounded-lg w-full"
+                            required
                           />
                         </div>
                         <button
@@ -263,17 +266,23 @@ const AdminNavbar = () => {
                           <div key={lIdx} className="flex items-center gap-3">
                             <input
                               type="text"
+                              minLength={1}
+                              maxLength={100}
                               value={link.text}
                               placeholder="Link text"
                               onChange={(e) => updateDropdownLink(dIdx, lIdx, 'text', e.target.value)}
                               className="border p-2 rounded-lg flex-1"
+                              required
                             />
                             <input
                               type="text"
+                              minLength={1}
+                              maxLength={255}
                               value={link.url}
                               placeholder="URL (e.g. /smart-pos)"
                               onChange={(e) => updateDropdownLink(dIdx, lIdx, 'url', e.target.value)}
                               className="border p-2 rounded-lg flex-1"
+                              required
                             />
                             <button
                               type="button"
@@ -330,6 +339,8 @@ const AdminNavbar = () => {
                         <input
                           className="border p-2 rounded-lg w-full text-sm"
                           type="text"
+                          minLength={1}
+                          maxLength={100}
                           placeholder="Label (e.g. About)"
                           value={link.text}
                           onChange={(e) => {
@@ -337,10 +348,13 @@ const AdminNavbar = () => {
                             newLinks[index] = { ...newLinks[index], text: e.target.value };
                             setNavbar(prev => ({ ...prev, navbarLinks: newLinks }));
                           }}
+                          required
                         />
                         <input
                           className="border p-2 rounded-lg w-full text-sm"
                           type="text"
+                          minLength={1}
+                          maxLength={255}
                           placeholder="URL (e.g. /about)"
                           value={link.url}
                           onChange={(e) => {
@@ -348,6 +362,7 @@ const AdminNavbar = () => {
                             newLinks[index] = { ...newLinks[index], url: e.target.value };
                             setNavbar(prev => ({ ...prev, navbarLinks: newLinks }));
                           }}
+                          required
                         />
                       </div>
                       <button

@@ -128,6 +128,8 @@ const HeroSection = () => {
                     <input
                       className="w-full border rounded-lg p-3"
                       placeholder="Button Text"
+                      minLength={1}
+                      maxLength={100}
                       value={heroSection.leftButton.text}
                       onChange={(e) =>
                         setHeroSection({
@@ -138,11 +140,14 @@ const HeroSection = () => {
                           }
                         })
                       }
+                      required
                     />
 
                     <input
                       className="w-full border rounded-lg p-3"
                       placeholder="Button URL"
+                      minLength={1}
+                      maxLength={255}
                       value={heroSection.leftButton.url}
                       onChange={(e) =>
                         setHeroSection({
@@ -153,6 +158,7 @@ const HeroSection = () => {
                           }
                         })
                       }
+                      required
                     />
                   </div>
                 </div>
@@ -165,6 +171,8 @@ const HeroSection = () => {
                     <input
                       className="w-full border rounded-lg p-3"
                       placeholder="Button Text"
+                      minLength={1}
+                      maxLength={100}
                       value={heroSection.rightButton.text}
                       onChange={(e) =>
                         setHeroSection({
@@ -175,10 +183,13 @@ const HeroSection = () => {
                           }
                         })
                       }
+                      required
                     />
                     <input
                       className="w-full border rounded-lg p-3"
                       placeholder="Button URL"
+                      minLength={1}
+                      maxLength={255}
                       value={heroSection.rightButton.url}
                       onChange={(e) =>
                         setHeroSection({
@@ -189,6 +200,7 @@ const HeroSection = () => {
                           }
                         })
                       }
+                      required
                     />
                   </div>
                 </div>

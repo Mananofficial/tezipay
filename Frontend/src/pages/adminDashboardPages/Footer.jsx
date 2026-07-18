@@ -208,6 +208,8 @@ const Footer = () => {
 
                         <input
                           type="text"
+                          minLength={5}
+                          maxLength={300}
                           value={footer.facebookLink}
                           onChange={(e) =>
                             setFooter({
@@ -216,6 +218,7 @@ const Footer = () => {
                             })
                           }
                           className="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500"
+                          required
                         />
                       </div>
 
@@ -226,6 +229,8 @@ const Footer = () => {
 
                         <input
                           type="text"
+                          minLength={5}
+                          maxLength={300}
                           value={footer.twitterLink}
                           onChange={(e) =>
                             setFooter({
@@ -234,6 +239,7 @@ const Footer = () => {
                             })
                           }
                           className="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500"
+                          required
                         />
                       </div>
 
@@ -244,6 +250,8 @@ const Footer = () => {
 
                         <input
                           type="text"
+                          minLength={5}
+                          maxLength={300}
                           value={footer.youtubeLink}
                           onChange={(e) =>
                             setFooter({
@@ -252,6 +260,7 @@ const Footer = () => {
                             })
                           }
                           className="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500"
+                          required
                         />
                       </div>
 
@@ -262,6 +271,8 @@ const Footer = () => {
 
                         <input
                           type="text"
+                          minLength={5}
+                          maxLength={300}
                           value={footer.instagramLink}
                           onChange={(e) =>
                             setFooter({
@@ -270,6 +281,7 @@ const Footer = () => {
                             })
                           }
                           className="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500"
+                          required
                         />
                       </div>
 

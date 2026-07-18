@@ -22,7 +22,7 @@ const About = () => {
             </header>
 
             <section
-                className="relative w-full h-[60vh] sm:h-[70vh] lg:h-[90vh] bg-center bg-cover bg-no-repeat"
+                className="relative w-full h-[60vh] sm:h-[70vh] lg:h-screen bg-center bg-cover bg-no-repeat"
                 style={{
                     backgroundImage: `url(${pageData?.hero?.backgroundImage})`,
                 }}

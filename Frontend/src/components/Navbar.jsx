@@ -106,11 +106,6 @@ const Navbar = () => {
                 {isOpen && (
                     <div className="lg:hidden absolute left-0 top-20 w-full bg-white border-b border-gray-100 shadow-xl max-h-[80vh] overflow-y-auto z-50">
                         <ul className="flex flex-col py-5 gap-1 px-4">
-                            <li>
-                                <Link to="/" onClick={() => setIsOpen(false)} className="block py-2.5 px-3 rounded-lg text-gray-800 font-semibold hover:bg-gray-50 hover:text-(--primary)">
-                                    Home
-                                </Link>
-                            </li>
 
                             {navDropdowns.map((dropdown, dIdx) => (
                                 <li key={dIdx} className="flex flex-col">
@@ -148,16 +143,8 @@ const Navbar = () => {
                                 </li>
                             ))}
 
-                            {staticLinks.slice(1).map((link, idx) => (
-                                <li key={idx}>
-                                    <Link to={link.url} onClick={() => setIsOpen(false)} className="block py-2.5 px-3 rounded-lg text-gray-800 font-semibold hover:bg-gray-50 hover:text-(--primary)">
-                                        {link.text}
-                                    </Link>
-                                </li>
-                            ))}
-
                             {(homepageData?.navbar?.navbarLinks || [])
-                                .filter(link => !dropdownUrls.includes(link.url) && !staticLinks.some(s => s.url === link.url))
+                                .filter(link => !dropdownUrls.includes(link.url))
                                 .map((link, idx) => (
                                     <li key={idx}>
                                         <Link to={link.url} onClick={() => setIsOpen(false)} className="block py-2.5 px-3 rounded-lg text-gray-800 font-semibold hover:bg-gray-50 hover:text-(--primary)">

@@ -3,9 +3,14 @@ import HTMLContent from '../components/HTMLContent';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { usePages } from '../hooks/usePages';
+import AOS from 'aos';
 
 const About = () => {
     const { pageData, loading } = usePages("about");
+    AOS.init({
+        duration: 1000,
+        once: true,
+    });
 
     if (loading || !pageData) {
         return (
@@ -26,6 +31,7 @@ const About = () => {
                 style={{
                     backgroundImage: `url(${pageData?.hero?.backgroundImage})`,
                 }}
+                data-aos="fade-up"
             >
                 <div className="relative z-10 h-full max-w-337.5 mx-auto px-6 sm:px-10 lg:px-20 flex items-center">
                     <h1 className="max-w-xl font-bold leading-tight text-4xl sm:text-5xl lg:text-7xl">
@@ -44,10 +50,10 @@ const About = () => {
                             />
                         ))}
                     </div>
-                    <h1 className="text-4xl font-bold w-full min-w-50 mt-5 relative z-10 left-20">
+                    <h1 className="text-4xl font-bold w-full min-w-50 mt-5 relative z-10 left-20" data-aos="fade-right">
                         {pageData?.sections?.[0]?.title}
                     </h1>
-                    <div className="box bg-(--primary)/6 rounded-4xl py-10 px-0 sm:px-10 lg:px-20 border border-black/10 relative">
+                    <div className="box bg-(--primary)/6 rounded-4xl py-10 px-0 sm:px-10 lg:px-20 border border-black/10 relative" data-aos="fade-left"> 
                         <p className="text-lg leading-relaxed font-semibold ">
                             {pageData?.sections?.[0]?.description}
                         </p>
@@ -58,19 +64,19 @@ const About = () => {
 
             <section className="section">
                 <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10 items-center">
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-6" data-aos="fade-up">
                         <h1 className="text-2xl font-bold text-(--secondary)">
                             {pageData?.leftFeatures?.[0]?.title}
                         </h1>
                         <p className='font-bold'><HTMLContent content={pageData?.leftFeatures?.[0]?.description} /></p>
                     </div>
-                    <div className="flex flex-col justify-start items-end gap-6 col-span-1 lg:col-span-2">
+                    <div className="flex flex-col justify-start items-end gap-6 col-span-1 lg:col-span-2" data-aos="fade-up">
                         <h1 className="text-2xl font-bold text-(--secondary)">
                             {pageData?.rightFeatures?.[0]?.title}
                         </h1>
                         <p className='text-right font-bold'><HTMLContent content={pageData?.rightFeatures?.[0]?.description} /></p>
                     </div>
-                    <div className="flex flex-col gap-6 relative">
+                    <div className="flex flex-col gap-6 relative" data-aos="fade-up">
                         <h1 className="text-6xl font-bold text-(--secondary) absolute top-1 left-1 opacity-40">
                             {pageData?.leftFeatures?.[1]?.title}
                         </h1>
@@ -78,7 +84,7 @@ const About = () => {
                             {pageData?.leftFeatures?.[1]?.title}
                         </h1>
                     </div>
-                    <div className="flex justify-end items-start gap-6 col-span-1 lg:col-span-2">
+                    <div className="flex justify-end items-start gap-6 col-span-1 lg:col-span-2" data-aos="fade-up">
                         <p className='text-right font-bold'><HTMLContent content={pageData?.rightFeatures?.[1]?.description} /></p>
                     </div>
 

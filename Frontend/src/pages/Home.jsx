@@ -5,10 +5,11 @@ import Footer from '../components/Footer'
 import { useHomepage } from '../hooks/useHomepage'
 import { Link } from 'react-router'
 import { resolveImageUrl } from '../utils/resolveImageUrl'
+import AOS from 'aos';
 
 const Home = () => {
     const { homepageData, loading } = useHomepage();
-
+    AOS.init();
     if (loading) {
         return (
             <div>
@@ -21,13 +22,19 @@ const Home = () => {
 
     return (
         <main className='bg-(--primaryBackground) mt-20 montserrat-font'>
-            <header>
+            <header
+                data-aos="fade-in"
+                data-aos-offset="200"
+                data-aos-duration="1000"
+            >
                 <Navbar props={homepageData?.navbar} />
             </header>
             <section className='section container flex flex-col lg:flex-row items-center justify-between gap-10"'>
                 <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left gap-4 lg:gap-6">
 
-                    <h1 className="text-4xl sm:text-5xl lg:text-[50px] font-bold leading-tight lg:leading-17 max-w-xl"><HTMLContent content={homepageData?.heroSection.heading || "Transforming Business Finance for Success"} /></h1>
+                    <h1 className="text-4xl sm:text-5xl lg:text-[50px] font-bold leading-tight lg:leading-17 max-w-xl" data-aos="fade-right" data-aos-offset="200" data-aos-duration="1000">
+                        <HTMLContent content={homepageData?.heroSection.heading || "Transforming Business Finance for Success"} />
+                    </h1>
                     <div className="relative flex justify-center items-center mt-8 mb-8 lg:hidden">
 
                         <div className="absolute top-0 right-2 h-24 w-24 rounded-full bg-linear-to-r from-(--primary)/80 to-(--secondary)"></div>
@@ -41,24 +48,34 @@ const Home = () => {
                         />
 
                     </div>
-                    <p className='mt-4 text-base leading-7 max-w-xl'><HTMLContent content={homepageData?.heroSection.subheading || "Embrace the ease and efficiency of TeziPay and watch your business thrive."} /></p>
+                    <p className='mt-4 text-base leading-7 max-w-xl' data-aos="fade-right" data-aos-offset="200" data-aos-duration="1000">
+                        <HTMLContent content={homepageData?.heroSection.subheading || "Embrace the ease and efficiency of TeziPay and watch your business thrive."} />
+                    </p>
 
                     <div className="mt-8 flex gap-4">
-                        <Link to={homepageData?.heroSection.leftButton.url || "/get-started"}>
-                            <button className='primary-button'>{homepageData?.heroSection.leftButton.text || "Get Started"}</button>
+                        <Link to={homepageData?.heroSection.leftButton.url || "/get-started"} >
+                            <button className='primary-button' data-aos="fade-up" data-aos-duration="1000" data-aos-offset="-200">
+                                {homepageData?.heroSection.leftButton.text || "Get Started"}
+                            </button>
                         </Link>
                         <Link to={homepageData?.heroSection.rightButton.url || "/contact-us"}>
-                            <button className='secondary-button'>{homepageData?.heroSection.rightButton.text || "Contact Us"}</button>
+                            <button className='secondary-button' data-aos="fade-up" data-aos-duration="1000" data-aos-offset="-200">
+                                {homepageData?.heroSection.rightButton.text || "Contact Us"}
+                            </button>
                         </Link>
                     </div>
                 </div>
 
                 <div className="relative hidden lg:flex w-1/2 justify-center items-center">
-                    <div className="absolute -top-8 right-12 h-36 w-36 rounded-full bg-linear-to-r from-(--primary)/80 to-(--secondary) z-10"></div>
+                    <div className="absolute -top-8 right-12 h-36 w-36 rounded-full bg-linear-to-r from-(--primary)/80 to-(--secondary) z-10" data-aos="zoom-in"
+                        data-aos-duration="1000"></div>
 
-                    <div className="absolute -bottom-12 left-6 h-48 w-48 rounded-full bg-linear-to-tr from-(--secondary) to-(--primary) z-10"></div>
+                    <div className="absolute -bottom-12 left-6 h-48 w-48 rounded-full bg-linear-to-tr from-(--secondary) to-(--primary) z-10" data-aos="zoom-in"
+                        data-aos-duration="1000"></div>
 
                     <img
+                        data-aos="zoom-out"
+                        data-aos-duration="1000"
                         src={resolveImageUrl(homepageData?.heroSection.rightImage) || "./src/assets/hero.jpg"}
                         alt="hero"
                         className="relative z-20 w-120 h-120 rounded-full object-cover select-none"
@@ -69,10 +86,12 @@ const Home = () => {
             <section className="section w-full bg-(--secondaryBackground)">
                 <div className="container flex flex-col items-center justify-center gap-6 text-center">
 
-                    <h1 className="max-w-5xl text-3xl sm:text-4xl lg:text-[45px] font-bold leading-tight lg:leading-10"><HTMLContent content={homepageData?.heroBelowSection.title || "Empowering MSMEs with Tailored Fintech Solutions"} />
+                    <h1 className="max-w-5xl text-3xl sm:text-4xl lg:text-[45px] font-bold leading-tight lg:leading-10" data-aos="fade-up" data-aos-duration="1000" data-aos-offset="200"
+                        data-aos-anchor-placement="top-bottom"><HTMLContent content={homepageData?.heroBelowSection.title || "Empowering MSMEs with Tailored Fintech Solutions"} />
                     </h1>
 
-                    <p className="max-w-4xl text-base leading-7 px-2 sm:px-6 lg:px-0"><HTMLContent content={homepageData?.heroBelowSection.subtitle || "At TeziPay, we reshape the financial landscape with innovative, customer-centric fintech solutions. Our tailored banking services empower MSMEs, breaking down barriers and catalyzing growth. Experience the fusion of advanced fintech and personalized service. With TeziPay, accelerate faster, further."} />
+                    <p className="max-w-4xl text-base leading-7 px-2 sm:px-6 lg:px-0" data-aos="fade-up"
+                        data-aos-anchor-placement="top-bottom" data-aos-duration="1000"><HTMLContent content={homepageData?.heroBelowSection.subtitle || "At TeziPay, we reshape the financial landscape with innovative, customer-centric fintech solutions. Our tailored banking services empower MSMEs, breaking down barriers and catalyzing growth. Experience the fusion of advanced fintech and personalized service. With TeziPay, accelerate faster, further."} />
                     </p>
 
                 </div>
@@ -84,8 +103,8 @@ const Home = () => {
                     <h1 className="text-3xl md:text-4xl lg:text-[45px] leading-tight font-bold text-center"><HTMLContent content={homepageData?.blueprint.header || "Your Success, Our Blueprint"} />
                     </h1>
 
-                    <div className="absolute right-0 -top-35 w-35 h-35 lg:w-50 lg:h-50 rounded-[74px] bg-linear-to-r from-(--primary)/15 to-(--secondary)/15 pointer-events-none z-20"></div>
-                    <div className="absolute -right-10 -top-38 z-20 w-30 h-30 lg:w-45 lg:h-45 rounded-[74px] bg-linear-to-tr from-(--primary)/10 to-(--secondary)/30 pointer-events-none"></div>
+                    <div className="absolute right-0 -top-35 w-35 h-35 lg:w-50 lg:h-50 rounded-[74px] bg-linear-to-r from-(--primary)/15 to-(--secondary)/15 pointer-events-none z-20" data-aos="zoom-in-down" data-aos-duration="1000"></div>
+                    <div className="absolute -right-10 -top-38 z-20 w-30 h-30 lg:w-45 lg:h-45 rounded-[74px] bg-linear-to-tr from-(--primary)/10 to-(--secondary)/30 pointer-events-none" data-aos="zoom-in-up" data-aos-duration="1000"></div>
                     <img
                         src="./src/assets/griddot.png"
                         alt=""
@@ -108,8 +127,11 @@ const Home = () => {
                         <div
                             className="absolute z-10 flex items-center justify-center rounded-full border-4 border-blue-950 text-white text-center font-semibold"
                             style={{ top: "12%", left: "15%", width: "54%", height: "64%" }}
+                            data-aos="zoom-in"
+                            data-aos-duration="1000"
                         >
-                            <p className="max-w-[70%] text-sm md:text-base lg:text-lg"><HTMLContent content={homepageData?.blueprint.description} />
+                            <p className="max-w-[70%] text-sm md:text-base lg:text-lg">
+                                <HTMLContent content={homepageData?.blueprint.description} />
                             </p>
                         </div>
 
@@ -124,6 +146,8 @@ const Home = () => {
                         <div
                             className="absolute z-20 flex items-center justify-center rounded-full bg-(--secondary) text-white text-center font-semibold px-2"
                             style={{ top: "0%", left: "11%", width: "23%", height: "28%" }}
+                            data-aos="fade-down-right"
+                            data-aos-duration="1000"
                         >
                             <span className="text-base md:text-lg lg:text-xl"><HTMLContent content={homepageData?.blueprint.title} />
                             </span>
@@ -132,6 +156,8 @@ const Home = () => {
                         <div
                             className="absolute z-20 flex items-center justify-center rounded-full bg-(--primary) text-white text-center font-semibold text-xs md:text-sm"
                             style={{ top: "12%", left: "54%", width: "13%", height: "16%" }}
+                            data-aos="fade-down-left"
+                            data-aos-duration="1000"
                         >
                             Know more
                         </div>
@@ -139,6 +165,8 @@ const Home = () => {
                         <div
                             className="absolute z-20 rounded-[40px] md:rounded-[60px] bg-(--secondary) px-4 md:px-6 py-4 md:py-6"
                             style={{ top: "55%", left: "2%", width: "47%" }}
+                            data-aos="fade-up-right"
+                            data-aos-duration="1000"
                         >
                             <ul className="flex flex-col gap-2 md:gap-3">
                                 {homepageData?.blueprint.points.map((point, index) => (
@@ -150,10 +178,12 @@ const Home = () => {
                         </div>
 
                         <img
-                        src={resolveImageUrl(homepageData?.blueprint.image) || "./src/assets/hero.jpg"}
+                            src={resolveImageUrl(homepageData?.blueprint.image) || "./src/assets/hero.jpg"}
                             alt="hero"
                             className="absolute z-10 rounded-full object-cover"
                             style={{ top: "46%", left: "55%", width: "40%", height: "48%" }}
+                            data-aos="fade-up-left"
+                            data-aos-duration="1000"
                         />
                     </div>
 
@@ -220,11 +250,13 @@ const Home = () => {
                 <div className="container flex justify-center">
                     <div className="relative flex w-full max-w-5xl flex-col items-center gap-4 rounded-[40px] sm:rounded-full border-2 border-(--primary) px-6 py-8 sm:p-10 text-center">
 
-                        <p className="max-w-3xl text-base sm:text-lg leading-7"><HTMLContent content={homepageData?.note.note || "At TeziPay, we understand the unique challenges faced by MSMEs. Our dedicated team is here to provide personalized support and guidance, ensuring that your business thrives in a competitive landscape. Whether you have questions about our services or need assistance with your account, we're just a call away. Reach out to us today and experience the difference of working with a fintech partner that truly cares about your success."} />
+                        <p className="max-w-3xl text-base sm:text-lg leading-7" data-aos="zoom-in" data-aos-duration="1000">
+                            <HTMLContent content={homepageData?.note.note || "At TeziPay, we understand the unique challenges faced by MSMEs. Our dedicated team is here to provide personalized support and guidance, ensuring that your business thrives in a competitive landscape. Whether you have questions about our services or need assistance with your account, we're just a call away. Reach out to us today and experience the difference of working with a fintech partner that truly cares about your success."} />
                         </p>
 
                         <div className="absolute -bottom-7 sm:-bottom-6 rounded-full bg-(--secondary) px-6 py-3 sm:px-8 sm:py-2">
-                            <p className="text-sm sm:text-lg font-bold text-white text-center"><HTMLContent content={homepageData?.note.contact || "Call us now +91-9811331229"} />
+                            <p className="text-sm sm:text-lg font-bold text-white text-center">
+                                <HTMLContent content={homepageData?.note.contact || "Call us now +91-9811331229"} />
                             </p>
                         </div>
 

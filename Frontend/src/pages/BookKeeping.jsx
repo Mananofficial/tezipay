@@ -4,10 +4,16 @@ import Navbar from '../components/Navbar'
 import { Link } from 'react-router'
 import Footer from '../components/Footer';
 import { usePages } from '../hooks/usePages';
+import AOS from 'aos';
 
 const BookKeeping = () => {
 
     const { pageData, loading } = usePages("book-keeping");
+
+    AOS.init({
+        duration: 1000,
+        once: true
+    });
 
     if (loading || !pageData) {
         return (
@@ -25,10 +31,10 @@ const BookKeeping = () => {
             <section className='max-w-337.5 w-full mx-auto px-10 py-16 lg:px-20 lg:py-20 flex flex-col lg:flex-row items-center justify-between gap-10 relative'>
                 {/* decore */}
                 <div className="absolute h-328 w-328 rounded-full bg-(--primary)/14 z-10"
-                    style={{ top: '-110%', right: '-60%' }}></div>
+                    style={{ top: '-110%', right: '-60%' }} data-aos="fade-up"></div>
 
                 <div className="hidden lg:block absolute h-93 w-93 rounded-full bg-(--primary)/14 z-10"
-                    style={{ top: '10%', left: '-28%' }}>
+                    style={{ top: '10%', left: '-28%' }} data-aos="fade-up">
                     <div className="absolute h-30 w-30 rounded-full bg-(--primary)/14 z-10"
                         style={{ bottom: '-4%', right: '-4%' }}></div>
 
@@ -37,16 +43,20 @@ const BookKeeping = () => {
 
                 <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left gap-4 lg:gap-6">
 
-                    <h1 className="text-2xl sm:text-3xl lg:text-[40px] font-bold leading-tight lg:leading-17 max-w-xl"><HTMLContent content={pageData?.hero?.heading} /></h1>
-                    <p className="text-lg lg:text-[20px] max-w-xl"><HTMLContent content={pageData?.hero?.subheading} /></p>
+                    <h1 className="text-2xl sm:text-3xl lg:text-[40px] font-bold leading-tight lg:leading-17 max-w-xl" data-aos="fade-up">
+                        <HTMLContent content={pageData?.hero?.heading} />
+                    </h1>
+                    <p className="text-lg lg:text-[20px] max-w-xl" data-aos="fade-up"> 
+                        <HTMLContent content={pageData?.hero?.subheading} />
+                    </p>
                     <div className="relative flex justify-center items-center mt-8 mb-8 lg:hidden">
 
-                        <div className="absolute top-[6%] left-[60%] h-[30%] w-[23%] rounded-full bg-linear-to-r from-(--primary)/80 to-(--secondary)"></div>
+                        <div className="absolute top-[6%] left-[60%] h-[30%] w-[23%] rounded-full bg-linear-to-r from-(--primary)/80 to-(--secondary)" data-aos="fade-up"></div>
 
                         <div className="absolute top-[60%] left-[10%] h-[50%] w-[40%] rounded-full bg-linear-to-tr from-(--secondary) to-(--primary)"></div>
 
                         <img
-                            src={pageData?.hero?.image || "./src/assets/smartpos.png"}
+                            src={pageData?.hero?.image || "./src/assets/smartpos.png"}  
                             alt="Smart POS"
                             className="relative z-20 rounded-full object-cover select-none"
                             style={{ top: '13%', left: '0%', width: '100%', height: '100%' }}
@@ -55,7 +65,7 @@ const BookKeeping = () => {
                     </div>
                     <p className='mt-4 text-base leading-7 max-w-lg text-wrap'><HTMLContent content={pageData?.hero?.description} /></p>
 
-                    <div className="mt-8 flex gap-4">
+                    <div className="mt-8 flex gap-4" data-aos="fade-up" data-aos-offset="-100">
                         <Link to="/get-started">
                             <button className='primary-button'>Get Started</button>
                         </Link>

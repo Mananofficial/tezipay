@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.3.2",
     "alias": "^0.0.5",
+    "aos": "^3.0.0-beta.6",
     "axios": "^1.18.1",
     "lucide-react": "^1.24.0",
     "radix-ui": "^1.6.2",

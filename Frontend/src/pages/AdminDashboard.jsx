@@ -30,7 +30,6 @@ const quickSettings = [
 const AdminDashboard = () => {
   return (
     <div className="admin-page">
-      {/* Top bar */}
       <div className="admin-topbar">
         <div>
           <h1 className="admin-topbar__title">Dashboard</h1>
@@ -42,7 +41,6 @@ const AdminDashboard = () => {
         </Link>
       </div>
 
-      {/* Hero banner */}
       <div className="admin-banner">
         <div className="admin-banner__content">
           <span className="admin-banner__badge">
@@ -58,7 +56,6 @@ const AdminDashboard = () => {
         </div>
       </div>
 
-      {/* Quick settings */}
       <section className="admin-section">
         <div className="admin-section__header">
           <h2 className="admin-section__title">Quick Settings</h2>
@@ -83,7 +80,6 @@ const AdminDashboard = () => {
         </div>
       </section>
 
-      {/* All pages */}
       <section className="admin-section">
         <div className="admin-section__header">
           <h2 className="admin-section__title">Manage Pages</h2>

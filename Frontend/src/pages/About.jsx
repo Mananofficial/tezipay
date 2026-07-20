@@ -33,7 +33,7 @@ const About = () => {
                 }}
                 data-aos="fade-up"
             >
-                <div className="relative z-10 h-full max-w-[1350px] mx-auto px-5 sm:px-8 lg:px-20 flex items-center">
+                <div className="relative z-10 h-full max-w-337.5 mx-auto px-5 sm:px-8 lg:px-20 flex items-center">
                     <h1 className="max-w-xs sm:max-w-xl lg:max-w-3xl font-bold leading-tight text-3xl sm:text-5xl lg:text-7xl">
                         {pageData?.hero?.heading}
                     </h1>

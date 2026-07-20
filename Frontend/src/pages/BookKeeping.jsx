@@ -17,10 +17,10 @@ const BookKeeping = () => {
 
     if (loading || !pageData) {
         return (
-            <div className="flex justify-center items-center h-screen">
-                <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
+            <div className="h-screen flex items-center justify-center bg-(--primaryBackground)">
+                <div className="rounded-full h-20 w-20 bg-(--primary) animate-ping"></div>
             </div>
-        );
+        )
     }
 
     return (
@@ -43,48 +43,52 @@ const BookKeeping = () => {
 
                 <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left gap-4 lg:gap-6">
 
-                    <h1 className="text-2xl sm:text-3xl lg:text-[40px] font-bold leading-tight lg:leading-17 max-w-xl" data-aos="fade-up">
+                    <h1 className="text-2xl sm:text-3xl lg:text-[40px] font-bold leading-tight lg:leading-17 max-w-xl" data-aos="fade-up" data-aos-delay="100">
                         <HTMLContent content={pageData?.hero?.heading} />
                     </h1>
-                    <p className="text-lg lg:text-[20px] max-w-xl" data-aos="fade-up"> 
+                    <p className="text-lg lg:text-[20px] max-w-xl" data-aos="fade-up" data-aos-delay="200">
                         <HTMLContent content={pageData?.hero?.subheading} />
                     </p>
                     <div className="relative flex justify-center items-center mt-8 mb-8 lg:hidden">
 
-                        <div className="absolute top-[6%] left-[60%] h-[30%] w-[23%] rounded-full bg-linear-to-r from-(--primary)/80 to-(--secondary)" data-aos="fade-up"></div>
+                        <div className="absolute top-[6%] left-[60%] h-[30%] w-[23%] rounded-full bg-linear-to-r from-(--primary)/80 to-(--secondary)" data-aos="fade-up" data-aos-delay="300"></div>
 
-                        <div className="absolute top-[60%] left-[10%] h-[50%] w-[40%] rounded-full bg-linear-to-tr from-(--secondary) to-(--primary)"></div>
+                        <div className="absolute top-[60%] left-[10%] h-[50%] w-[40%] rounded-full bg-linear-to-tr from-(--secondary) to-(--primary)" data-aos="fade-up" data-aos-delay="400"></div>
 
                         <img
-                            src={pageData?.hero?.image || "./src/assets/smartpos.png"}  
+                            src={pageData?.hero?.image || "./src/assets/smartpos.png"}
                             alt="Smart POS"
                             className="relative z-20 rounded-full object-cover select-none"
                             style={{ top: '13%', left: '0%', width: '100%', height: '100%' }}
+                            data-aos="zoom-in"
+                            data-aos-delay="300"
                         />
 
                     </div>
-                    <p className='mt-4 text-base leading-7 max-w-lg text-wrap'><HTMLContent content={pageData?.hero?.description} /></p>
+                    <p className='mt-4 text-base leading-7 max-w-lg text-wrap' data-aos="fade-up" data-aos-delay="300"><HTMLContent content={pageData?.hero?.description} /></p>
 
-                    <div className="mt-8 flex gap-4" data-aos="fade-up" data-aos-offset="-100">
-                        <Link to="/get-started">
+                    <div className="mt-8 flex gap-4" data-aos="fade-up" data-aos-delay="400" data-aos-offset="-100">
+                        <Link to="/why-to-join">
                             <button className='primary-button'>Get Started</button>
                         </Link>
-                        <Link to="/contact-us">
+                        <Link to="/about">
                             <button className='secondary-button'>Contact Us</button>
                         </Link>
                     </div>
                 </div>
 
                 <div className="relative hidden lg:flex w-1/2 justify-center items-center">
-                    <div className="absolute h-36 w-36 rounded-full bg-linear-to-r from-(--primary)/80 to-(--secondary) z-10" style={{ top: '68%', left: '72%' }}></div>
+                    <div className="absolute h-36 w-36 rounded-full bg-linear-to-r from-(--primary)/80 to-(--secondary) z-10" style={{ top: '68%', left: '72%' }} data-aos="fade-up" data-aos-delay="200"></div>
 
-                    <div className="absolute h-48 w-48 rounded-full bg-linear-to-tr from-(--secondary) to-(--primary) z-10" style={{ top: '70%', left: '6%' }}></div>
+                    <div className="absolute h-48 w-48 rounded-full bg-linear-to-tr from-(--secondary) to-(--primary) z-10" style={{ top: '70%', left: '6%' }} data-aos="fade-up" data-aos-delay="300"></div>
 
                     <img
                         src={pageData?.hero?.image || "./src/assets/smartpos.png"}
                         alt="Smart POS"
                         className="relative z-20 rounded-full object-cover select-none"
                         style={{ top: '13%', left: '0%', width: '1020px', height: '500px' }}
+                        data-aos="zoom-in"
+                        data-aos-delay="200"
                     />
 
 
@@ -95,27 +99,29 @@ const BookKeeping = () => {
                 <div className="w-full md:max-w-3xl lg:max-w-5xl mx-auto bg-(--primary)/10 rounded-3xl px-8 py-12 lg:px-16 lg:py-14 lg:h-115 relative">
 
                     <div className=" flex flex-col lg:grid lg:grid-cols-2 justify-between gap-8 mb-10 lg:relative left-[-10%] -top-5 lg:w-[110%]">
-                        <h2 className="text-[30px] md:text-[34px] lg:text-[38px] leading-[1.15] font-bold w-full lg:scale-110 text-center lg:text-left">
+                        <h2 className="text-[30px] md:text-[34px] lg:text-[38px] leading-[1.15] font-bold w-full lg:scale-110 text-center lg:text-left" data-aos="fade-right" data-aos-delay="100">
                             {pageData?.sections?.[0]?.title}
                         </h2>
-                        <p className="text-[#555] leading-8 md:pt-3 text-center md:text-center lg:text-left">
+                        <p className="text-[#555] leading-8 md:pt-3 text-center md:text-center lg:text-left" data-aos="fade-left" data-aos-delay="200">
                             {pageData?.sections?.[0]?.description}
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start justify-center max-w-5xl mx-auto lg:mx-0">
-                        {pageData?.sections?.[0]?.cards?.map((card) => (
+                        {pageData?.sections?.[0]?.cards?.map((card, index) => (
                             <div
                                 key={card.number}
                                 className={`group rounded-[28px] p-8 text-center transition-all duration-300 ease-out border-2 cursor-pointer
-                                    ${card.active
+                            ${card.active
                                         ? "bg-white border-transparent shadow-xl z-10"
                                         : `
-                                    bg-white border-transparent shadow-xl
-                                    lg:bg-transparent lg:shadow-none
-                                    lg:hover:bg-white lg:hover:rounded-[28px]
-                                    lg:hover:shadow-xl lg:hover:-translate-y-4
-                                    lg:hover:z-10`}`}
+                            bg-white border-transparent shadow-xl
+                            lg:bg-transparent lg:shadow-none
+                            lg:hover:bg-white lg:hover:rounded-[28px]
+                            lg:hover:shadow-xl lg:hover:-translate-y-4
+                            lg:hover:z-10`}`}
+                                data-aos="fade-up"
+                                data-aos-delay={100 + (index * 100)}
                             >
                                 <h1 className="text-2xl lg:text-3xl font-bold text-(--primary) mb-3">
                                     {card.number}
@@ -125,14 +131,14 @@ const BookKeeping = () => {
                                 </h2>
                                 <p
                                     className={`text-sm text-[#666] mt-4 leading-6 overflow-hidden transition-all duration-300 ease-out
-                                    ${card.active
+                            ${card.active
                                             ? "max-h-40 opacity-100"
                                             : `
-                                    max-h-40 opacity-100
-                                    lg:max-h-0 lg:opacity-0
-                                    lg:group-hover:max-h-40
-                                    lg:group-hover:opacity-100
-                                    lg:group-hover:mt-4 `}`}
+                            max-h-40 opacity-100
+                            lg:max-h-0 lg:opacity-0
+                            lg:group-hover:max-h-40
+                            lg:group-hover:opacity-100
+                            lg:group-hover:mt-4 `}`}
                                 >
                                     {card.description}
                                 </p>
@@ -155,6 +161,8 @@ const BookKeeping = () => {
                     src="./src/assets/greyCircle.png"
                     alt=""
                     className="absolute top-16 -right-20 w-100 h-auto pointer-events-none select-none"
+                    data-aos="fade-left"
+                    data-aos-delay="200"
                 />
                 <div className="absolute right-[-20%] top-[80%] grid grid-cols-20 gap-3 opacity-30 z-0">
                     {[...Array(600)].map((_, i) => (
@@ -164,7 +172,7 @@ const BookKeeping = () => {
                         />
                     ))}
                 </div>
-                <div className="flex gap-6 lg:gap-8 items-center justify-center max-w-5xl mx-auto lg:mb-0 mb-10 z-10">
+                <div className="flex gap-6 lg:gap-8 items-center justify-center max-w-5xl mx-auto lg:mb-0 mb-10 z-10" data-aos="fade-right" data-aos-delay="100">
 
                     <div className="rounded-t-[55px] rounded-bl-[55px] bg-(--secondary) lg:w-[60%] lg:h-[70%] w-62.5  relative z-0 flex justify-center items-start p-4">
                         <h1 className="md:text-xl lg:text-3xl text-lg font-bold text-white text-center py-10 px-4">
@@ -181,12 +189,12 @@ const BookKeeping = () => {
 
                     <div className="flex flex-col lg:justify-start lg:items-start gap-6 lg:gap-4">
 
-                        <h1 className="text-3xl lg:text-5xl font-bold text-(--primary)/40">
+                        <h1 className="text-3xl lg:text-5xl font-bold text-(--primary)/40" data-aos="fade-up" data-aos-delay="200">
                             Key Feature
                         </h1>
 
                         {pageData?.leftFeatures?.map((feature, index) => (
-                            <div key={index} className="flex items-center gap-4">
+                            <div key={index} className="flex items-center gap-4" data-aos="fade-right" data-aos-delay={300 + (index * 100)}>
                                 <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
 
                                 <div>
@@ -205,7 +213,7 @@ const BookKeeping = () => {
                     <div className="flex flex-col lg:justify-start lg:items-start gap-6 lg:gap-4">
 
                         {pageData?.rightFeatures?.map((feature, index) => (
-                            <div key={index} className="flex items-center gap-4">
+                            <div key={index} className="flex items-center gap-4" data-aos="fade-left" data-aos-delay={300 + (index * 100)}>
                                 <div className="w-1.5 h-20 bg-(--primary) rounded-full"></div>
 
                                 <div>
@@ -226,13 +234,13 @@ const BookKeeping = () => {
 
             <section className="section pb-20 flex justify-center items-center">
                 <div className="container flex justify-center">
-                    <div className="relative flex w-full max-w-5xl flex-col items-center gap-4 rounded-[40px] sm:rounded-full border-2 border-(--primary) px-6 py-8 sm:p-10 text-center">
+                    <div className="relative flex w-full max-w-5xl flex-col items-center gap-4 rounded-[40px] sm:rounded-full border-2 border-(--primary) px-6 py-8 sm:p-10 text-center" data-aos="zoom-in" data-aos-delay="100">
 
-                        <p className="max-w-3xl text-base sm:text-lg leading-7">
+                        <p className="max-w-3xl text-base sm:text-lg leading-7" data-aos="fade-up" data-aos-delay="200">
                             {pageData?.cta?.heading}
                         </p>
 
-                        <div className="absolute -bottom-7 sm:-bottom-6 rounded-full bg-(--secondary) px-6 py-3 sm:px-8 sm:py-2">
+                        <div className="absolute -bottom-7 sm:-bottom-6 rounded-full bg-(--secondary) px-6 py-3 sm:px-8 sm:py-2" data-aos="fade-up" data-aos-delay="300">
                             <p className="text-sm sm:text-lg font-bold text-white text-center">
                                 {pageData?.cta?.description}
                             </p>

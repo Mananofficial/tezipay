@@ -10,12 +10,10 @@ import AOS from 'aos';
 const Home = () => {
     const { homepageData, loading } = useHomepage();
     AOS.init();
-    if (loading) {
+    if (loading || !homepageData) {
         return (
-            <div>
-                <div className="flex justify-center items-center h-screen">
-                    <div className="rounded-full h-20 w-20 bg-(--primary) animate-ping"></div>
-                </div>
+            <div className="h-screen flex items-center justify-center bg-(--primaryBackground)">
+                <div className="rounded-full h-20 w-20 bg-(--primary) animate-ping"></div>
             </div>
         )
     }

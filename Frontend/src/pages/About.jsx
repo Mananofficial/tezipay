@@ -14,10 +14,10 @@ const About = () => {
 
     if (loading || !pageData) {
         return (
-            <div className="flex justify-center items-center h-screen">
-                <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
+            <div className="h-screen flex items-center justify-center bg-(--primaryBackground)">
+                <div className="rounded-full h-20 w-20 bg-(--primary) animate-ping"></div>
             </div>
-        );
+        )
     }
 
     return (
@@ -27,22 +27,22 @@ const About = () => {
             </header>
 
             <section
-                className="relative w-full h-[60vh] sm:h-[70vh] lg:h-screen bg-center bg-cover bg-no-repeat"
+                className="relative w-full h-[55vh] sm:h-[65vh] lg:h-screen bg-center bg-cover bg-no-repeat"
                 style={{
                     backgroundImage: `url(${pageData?.hero?.backgroundImage})`,
                 }}
                 data-aos="fade-up"
             >
-                <div className="relative z-10 h-full max-w-337.5 mx-auto px-6 sm:px-10 lg:px-20 flex items-center">
-                    <h1 className="max-w-xl font-bold leading-tight text-4xl sm:text-5xl lg:text-7xl">
+                <div className="relative z-10 h-full max-w-[1350px] mx-auto px-5 sm:px-8 lg:px-20 flex items-center">
+                    <h1 className="max-w-xs sm:max-w-xl lg:max-w-3xl font-bold leading-tight text-3xl sm:text-5xl lg:text-7xl">
                         {pageData?.hero?.heading}
                     </h1>
                 </div>
             </section>
 
-            <section className="section">
-                <div className="max-w-4xl mx-auto flex flex-row items-start justify-center relative">
-                    <div className="absolute left-[-30%] top-[-40%] grid grid-cols-20 gap-3 opacity-30 z-0">
+            <section className="py-16 sm:py-20 px-5 sm:px-8 lg:px-20 overflow-hidden">
+                <div className="max-w-6xl mx-auto relative flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
+                    <div className="absolute hidden lg:grid left-[-18%] top-[-25%] grid-cols-20 gap-3 opacity-30 z-0">
                         {[...Array(600)].map((_, i) => (
                             <span
                                 key={i}
@@ -50,51 +50,76 @@ const About = () => {
                             />
                         ))}
                     </div>
-                    <h1 className="text-4xl font-bold w-full min-w-50 mt-5 relative z-10 left-20" data-aos="fade-right">
-                        {pageData?.sections?.[0]?.title}
-                    </h1>
-                    <div className="box bg-(--primary)/6 rounded-4xl py-10 px-0 sm:px-10 lg:px-20 border border-black/10 relative" data-aos="fade-left"> 
-                        <p className="text-lg leading-relaxed font-semibold ">
+
+                    <div
+                        className="relative z-10 lg:w-1/3"
+                        data-aos="fade-right"
+                    >
+                        <h1 className="text-3xl sm:text-4xl font-bold">
+                            {pageData?.sections?.[0]?.title}
+                        </h1>
+                    </div>
+
+                    <div
+                        className="relative lg:w-2/3 bg-(--primary)/6 rounded-3xl lg:rounded-4xl border border-black/10 p-6 sm:p-8 lg:p-12"
+                        data-aos="fade-left"
+                    >
+                        <p className="text-base sm:text-lg leading-relaxed font-semibold">
                             {pageData?.sections?.[0]?.description}
                         </p>
-                        <div className="rounded-4xl bg-(--primary)/8 w-[50%] h-[30%] absolute -bottom-10 -right-6 border border-black/10"></div>
+
+                        <div className="hidden lg:block rounded-4xl bg-(--primary)/8 w-1/2 h-1/3 absolute -bottom-8 -right-6 border border-black/10" />
                     </div>
                 </div>
             </section>
 
-            <section className="section">
-                <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10 items-center">
-                    <div className="flex flex-col gap-6" data-aos="fade-up">
-                        <h1 className="text-2xl font-bold text-(--secondary)">
+            <section className="py-16 sm:py-20 px-5 sm:px-8 lg:px-20">
+                <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start">
+                    <div className="flex flex-col gap-5" data-aos="fade-up">
+                        <h1 className="text-2xl sm:text-3xl font-bold text-(--secondary)">
                             {pageData?.leftFeatures?.[0]?.title}
                         </h1>
-                        <p className='font-bold'><HTMLContent content={pageData?.leftFeatures?.[0]?.description} /></p>
-                    </div>
-                    <div className="flex flex-col justify-start items-end gap-6 col-span-1 lg:col-span-2" data-aos="fade-up">
-                        <h1 className="text-2xl font-bold text-(--secondary)">
-                            {pageData?.rightFeatures?.[0]?.title}
-                        </h1>
-                        <p className='text-right font-bold'><HTMLContent content={pageData?.rightFeatures?.[0]?.description} /></p>
-                    </div>
-                    <div className="flex flex-col gap-6 relative" data-aos="fade-up">
-                        <h1 className="text-6xl font-bold text-(--secondary) absolute top-1 left-1 opacity-40">
-                            {pageData?.leftFeatures?.[1]?.title}
-                        </h1>
-                        <h1 className="text-6xl font-bold text-(--secondary)">
-                            {pageData?.leftFeatures?.[1]?.title}
-                        </h1>
-                    </div>
-                    <div className="flex justify-end items-start gap-6 col-span-1 lg:col-span-2" data-aos="fade-up">
-                        <p className='text-right font-bold'><HTMLContent content={pageData?.rightFeatures?.[1]?.description} /></p>
+                        <div className="font-bold text-base sm:text-lg leading-relaxed">
+                            <HTMLContent content={pageData?.leftFeatures?.[0]?.description} />
+                        </div>
                     </div>
 
+                    <div
+                        className="flex flex-col gap-5 lg:items-end lg:text-right col-span-1 lg:col-span-2"
+                        data-aos="fade-up"
+                    >
+                        <h1 className="text-2xl sm:text-3xl font-bold text-(--secondary)">
+                            {pageData?.rightFeatures?.[0]?.title}
+                        </h1>
+                        <div className="font-bold text-base sm:text-lg leading-relaxed">
+                            <HTMLContent content={pageData?.rightFeatures?.[0]?.description} />
+                        </div>
+                    </div>
+
+                    <div className="relative pt-6" data-aos="fade-up">
+                        <h1 className="relative text-5xl sm:text-6xl font-bold text-(--secondary)">
+                            {pageData?.leftFeatures?.[1]?.title}
+                        </h1>
+
+                        <h1 className="absolute top-7 left-2 text-5xl sm:text-6xl font-bold text-(--secondary) opacity-20 select-none w-full">
+                            {pageData?.leftFeatures?.[1]?.title}
+                        </h1>
+                    </div>
+
+                    <div
+                        className="col-span-1 lg:col-span-2 flex lg:justify-end"
+                        data-aos="fade-up"
+                    >
+                        <div className="font-bold text-base sm:text-lg leading-relaxed lg:text-right max-w-3xl">
+                            <HTMLContent content={pageData?.rightFeatures?.[1]?.description} />
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <footer>
                 <Footer />
             </footer>
-
         </main>
     )
 }

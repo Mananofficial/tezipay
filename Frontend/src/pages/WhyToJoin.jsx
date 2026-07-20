@@ -27,7 +27,7 @@ const WhyToJoin = () => {
                     backgroundImage: `url(${pageData?.hero?.backgroundImage})`,
                 }}
             >
-                <div className="relative z-10 h-full max-w-[1350px] mx-auto px-5 sm:px-8 lg:px-20 flex items-center justify-center lg:justify-end">
+                <div className="relative z-10 h-full max-w-337.5 mx-auto px-5 sm:px-8 lg:px-20 flex items-center justify-center lg:justify-end">
                     <h1
                         className="max-w-xs sm:max-w-lg lg:max-w-2xl text-center lg:text-right font-bold leading-tight text-3xl sm:text-5xl lg:text-6xl"
                         data-aos="fade-left"
@@ -93,7 +93,7 @@ const WhyToJoin = () => {
                 <div className="max-w-6xl mx-auto flex justify-center">
                     <div
                         data-aos="zoom-in-up"
-                        className="relative w-full max-w-5xl flex flex-col items-center rounded-[32px] sm:rounded-full border-2 border-(--primary) px-6 sm:px-10 lg:px-14 py-10 sm:py-12 text-center"
+                        className="relative w-full max-w-5xl flex flex-col items-center rounded-4xl sm:rounded-full border-2 border-(--primary) px-6 sm:px-10 lg:px-14 py-10 sm:py-12 text-center"
                     >
                         <div className="absolute -top-6 sm:-top-7 rounded-full bg-(--secondary) px-5 sm:px-8 py-2 sm:py-3">
                             <p className="text-sm sm:text-lg font-bold text-white">
